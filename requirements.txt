@@ -1,0 +1,16 @@
+# Used for LaTeX Sympy solver
+latex2sympy2
+Flask
+
+# Used for tests
+pytest
+
+# Packages needed for project
+numpy
+pandas
+openpyxl
+jinja2
+matplotlib
+statsmodels
+linearmodels
+scipy
