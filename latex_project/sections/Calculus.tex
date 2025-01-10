@@ -1,0 +1,40 @@
+\section{Fractional Calculus}\label{s:calculus}
+In order to obtain the expression as mentioned in section \ref{s:intro}, some advanced tools are required. We can find this in the field of fractional calculus.
+We define the following:
+\begin{definition}
+    Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \(D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\).
+\end{definition}
+In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In our case, we are interested in instances where  \(\alpha \in \mathbb{Q_{\geq 0}}\).
+
+It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a function. A derivative of negative order is simply an integral of positive order. This is defined as follows:
+\begin{definition}
+    Let \(J\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \(I^{\alpha} f(x) = \int f(x) dx^{\alpha}\).
+\end{definition}
+
+A lot of different definition have been used to compute a fractional derivative. In this paper, we will focus on the following fractional derivatives:
+\begin{definition}
+    The Riemann-Louville fractional derivative of order \(\alpha\) is defined as:
+    \begin{equation}
+        D^{\alpha} f(x) =  \frac{d^{n}}{dx^{n}} D_{x}^{-(n - \alpha)} f(x) = \frac{d^{n}}{dx^{n}} I_{x}^{n - \alpha} f(x) = \frac{1}{\Gamma(\alpha)}  \int_{0}^{x} (x-t)^{\alpha-1} f(t) dt
+    \end{equation}
+    Where \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function, see section \ref{s:appendices}.
+   
+\end{definition}
+A modification of the Riemann-Louville derivative is the Caputo derivative, which is defined as follows:
+\begin{definition}
+    The Caputo fractional derivative of order \(\alpha\) is defined as:
+    \begin{equation}
+        D^{\alpha} f(x) = \frac{1}{\Gamma(n-\alpha)}  \int_{0}^{x} (x-t)^{n-\alpha-1} f(t) dt
+    \end{equation}
+    Where, again \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function.
+    
+\end{definition}
+
+Lastly, we will define the Riesz derivative, which is defined as follows:
+\begin{definition}
+    The Riesz fractional derivative of order \(\alpha\) is defined as:
+    \begin{equation}
+        D^{\alpha} f(x) = -\int_{-\infty}^{\infty} |\xi|^{\alpha} \hat{f}(\xi) e^{2\pi i  x \xi} d\xi
+    \end{equation}
+    Where \(\hat{f}(\xi)\) is the Fourier transform of \(f(x)\).
+\end{definition}
