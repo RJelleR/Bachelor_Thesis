@@ -124,58 +124,12 @@ Keywords might be given.
 \bigskip\noindent
 \textbf{Keywords:} Fractional moments, Moment Generating Function.
 
-\section{Introduction}\label{s:intro}
-We prefer and recommend that you use LaTeX for preparing your
-bachelor thesis.
-This paper contains a set of instructions to get the required formats and styles.
-Please follow the guidelines herein when preparing your thesis.
-The easiest way to write your thesis using LaTeX that complies with the
-requirements is to edit the source file, \texttt{template-and-guide.tex,}
-for this document. In case you choose for an alternative document preparation system
-(for instance Microsoft Word), be sure to obtain the same formats and styles.
-And make sure that you can export your document to pdf format.
+\include{sections/Introduction}
+
 
 \section{General Guidelines}\label{s:general}
-\subsection{Article Style}
-The thesis is prepared in LaTeX using an article style, e.g., standard
-LaTeX article style
+\include{sections/Calculus}
 
-\verb+\documentclass[a4paper,11pt]{article}+.
-
-\noindent
-The source file (the \texttt{.tex} version) is typeset using \texttt{pdflatex},
-or \texttt{xelatex} which allows you to use graphics file formats 
-\texttt{pdf, jpg, png, eps}
-by including the \texttt{graphicx} package.
-
-\subsection{Language}
-We prefer that you prepare your thesis in English (UK or US), but we allow Dutch.
-Please carefully check the spelling of words before you submit your thesis.
-There are spell checkers for LaTeX as well.
-Some examples of software which supports spell checking are
-TexnicCenter, TexMaker, TeXShop, and WinEdt.
-
-\subsection{Font Specification and Spacing}
-The thesis should be set in the Times New Roman font using a 11-point font size.
-These settings are obtained by the option 11pt (in \texttt{documentclass})
-and by the package \texttt{times}.
-The thesis should be single spaced which you may increase slightly by a factor 1.1:
-
-\verb+\renewcommand{\baselinestretch}{1.1}+.
-
-\subsection{Margins}
-The thesis is printed on A4 paper.
-The text area is 15.0 cm wide and the 23.7 cm high, centered, which means that
-all margins are 3 cm. This is simply obtained by
-
-\verb+\usepackage[margin=3cm]{geometry}+.
-
-\subsection{Footnotes}
-Do not use footnotes; instead incorporate such material into the text
-directly or parenthetically.
-
-\subsection{Page Numbers}
-The pages are numbered except the front page.
 
 \subsection{Formatting the Front Page}
 The front page just contains
@@ -655,6 +609,7 @@ but before any appendices and the references. The section heading is not numbere
 \newpage
 \appendix
 
+\include{sections/Appendices}
 \section{Appendix}\label{s:app1}
 Place any appendices after the acknowledgments, starting on a new page.
 The appendices are numbered
