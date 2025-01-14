@@ -4,37 +4,115 @@ We define the following:
 \begin{definition}
     Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \(D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\).
 \end{definition}
-In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In our case, we are interested in instances where  \(\alpha \in \mathbb{Q_{\geq 0}}\).
+In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In our case, we are interested in instances where  \(\alpha \in \mathbb{Q}, \alpha \geq 0\).
 
 It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a function. A derivative of negative order is simply an integral of positive order. This is defined as follows:
 \begin{definition}
-    Let \(J\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \(I^{\alpha} f(x) = \int f(x) dx^{\alpha}\).
+    Let \(I\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \((I^{\alpha} f) (x) = \frac{1}{(n-1)!}\int (x-t)^{n-1} f(t) dt\).
+\end{definition}
+
+Combining the previous two definition, we can obtain the following definition.
+\begin{definition}\label{d: differintegral}
+    The differintegral operator is defined as
+    \begin{equation}
+        R^\alpha f(x) = \begin{cases}
+            I^{|\alpha|} f(x) & \text{if } \alpha < 0 \\
+            D^\alpha f(x) & \text{if } \alpha > 0 \\
+            f(x) & \text{if } \alpha = 0
+        \end{cases}
+        \end{equation}
 \end{definition}
 
 A lot of different definition have been used to compute a fractional derivative. In this paper, we will focus on the following fractional derivatives:
 \begin{definition}
-    The Riemann-Louville fractional derivative of order \(\alpha\) is defined as:
+    The Riemann-Liouville fractional derivative of order \(\alpha\) is defined as:
     \begin{equation}
-        D^{\alpha} f(x) =  \frac{d^{n}}{dx^{n}} D_{x}^{-(n - \alpha)} f(x) = \frac{d^{n}}{dx^{n}} I_{x}^{n - \alpha} f(x) = \frac{1}{\Gamma(\alpha)}  \int_{0}^{x} (x-t)^{\alpha-1} f(t) dt
+        D^{\alpha} f(x) =  \frac{d^{n}}{dx^{n}} D_{x}^{-(n - \alpha)} f(x) = \frac{d^{n}}{dx^{n}} I_{x}^{n - \alpha} f(x) = \frac{d^n}{dx^n} \frac{1}{\Gamma(n -\alpha)}  \int_{0}^{x} (x-t)^{n - \alpha-1} f(t) dt
     \end{equation}
     Where \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function, see section \ref{s:appendices}.
+    
+    \begin{remark}\label{r: integer}
+        For values \(\alpha \in \mathbb{N}, n = \alpha\), so \(\Gamma(n - \alpha) = \Gamma(0)\), which is undefined. Thus for \(\alpha \in \mathbb{N}\), including the value \(0\), we simply define: \(D^\alpha f(x) = \frac{d^\alpha}{dx^\alpha} f(x)\)
+    \end{remark}
    
 \end{definition}
-A modification of the Riemann-Louville derivative is the Caputo derivative, which is defined as follows:
-\begin{definition}
-    The Caputo fractional derivative of order \(\alpha\) is defined as:
+A modification of the Riemann-Liouville derivative is the Caputo-Fabrizio derivative, which is defined as follows:
+\begin{definition}\label{d: CF}
+    The Caputo-Fabrizio fractional derivative of order \(\alpha, \alpha \in [0,1)\) is defined as:
     \begin{equation}
-        D^{\alpha} f(x) = \frac{1}{\Gamma(n-\alpha)}  \int_{0}^{x} (x-t)^{n-\alpha-1} f(t) dt
+        D^{\alpha} f(x) = \frac{1}{1 - \alpha}  \int_{0}^{x} \exp(\frac{-\alpha}{1 - \alpha}(x-t)) f'(t) dt
     \end{equation}
-    Where, again \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function.
+    
     
 \end{definition}
 
-Lastly, we will define the Riesz derivative, which is defined as follows:
+Lastly, we will define the Grünwald-Letnikov derivative, which is defined as follows:
 \begin{definition}
-    The Riesz fractional derivative of order \(\alpha\) is defined as:
+    The Grünwald-Letnikov fractional derivative of order \(\alpha\) is defined as:
     \begin{equation}
-        D^{\alpha} f(x) = -\int_{-\infty}^{\infty} |\xi|^{\alpha} \hat{f}(\xi) e^{2\pi i  x \xi} d\xi
+        D^\alpha f(x) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} f(x - k h)
     \end{equation}
-    Where \(\hat{f}(\xi)\) is the Fourier transform of \(f(x)\).
+   Where \(\binom{\alpha}{k}\) is the binomial coefficient, see section \ref{s:appendices}.
 \end{definition}
+
+\begin{proposition} 
+    The fractional derivatives above adhere to the following properties:
+    \begin{enumerate}[(i)]
+        \item Linearity: Let \(f(x), g(x)\) be functions and \(a, b, x \in \mathbb{R}\). Then we have that \(D^{\alpha} (a f(x) + b g(x)) = a D^{\alpha} f(x) + b D^{\alpha} g(x)\).
+        \item \(D^{\alpha} f(x)\) for \(\alpha = 0, = f(x)\) 
+        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = D^\alpha(D^\beta f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for \ref{d: CF}, this only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
+    \end{enumerate}
+        
+    
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item We will proof for the Riemann-Liouville derivative, the proof for the Caputo-Fabrizio derivative is very similar and the Grünwald-Letnikov derivative is a direct consequence of the linearity of the sum.
+        \[ D^{\alpha} (a f(x) + b g(x)) = \frac{d^n}{dx^n}\frac{1}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} (a f(t) + b g(t)) dt \]
+     
+        \[= \frac{d^n}{dx^n}(\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt) \] Where we simply split the integral and put the constants in front.
+        \[= \frac{d^n}{dx^n}\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{d^n}{dx^n} \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt \] As the regular derivative operator is just linear.
+        \[ = a D^{\alpha} f(x) + b D^{\alpha} g(x) \]
+        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, so just the function \(f(x)\). But for these derivatives, a little bit more effort is needed to prove this rather obvious fact.
+        \newline 
+        For the Grünwald-Letnikov derivative we get: \[D^0 f(x) = \lim_{h \to 0} \frac{1}{h^0} \sum_{k=0}^\infty (-1)^k \binom{0}{k} f(x - k h)
+        = \lim_{h \to 0} \frac{1}{1} \sum_{k=0}^\infty (-1)^k \frac{0!}{k!(0- k)!} f(x - k h).\] The factorial Identity of the binomial coefficient only holds for \(0 \leq k \leq \alpha\). Since \(\alpha = 0\) and k is always a positive integer lesser or equal to \(\alpha, k = 0\). Thus, we get:
+        \[ = \lim_{h \to 0} \sum_{k=0}^\infty (-1)^0 \frac{0!}{0!(0- 0)!} f(x - 0 h) = \lim_{h \to 0} f(x - 0 h) = f(x).\]
+        \newline
+        For the Caputo-Fabrizio derivative, we get the following:
+        \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp(\frac{0}{1 -0}(x-t)) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x).\]
+        \newline
+        Finally, for the Riemann-Liouville derivative, we can simply make use of \ref{d: differintegral} and \ref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \(D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\).
+
+        \item The proof for the Riemann-Liouville derivative is given by \cite{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \cite{losada15}.For the Grünwald-Letnikov derivative, we get:
+        \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k}(  \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh))\]
+        \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the dubble sums: 
+        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \ref{s:appendices} to obtain:
+        \[ = \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty (-1)^m \binom{\alpha + \beta}{m} f(x - mh) = D^{\alpha + \beta} f(x).\]
+        It can be shown in an exactly similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
+
+        
+    \end{enumerate}
+\end{proof}
+
+We will now provide a few numerical examples of these fractional derivatives. For simplicity, we will let \(a = 0\):
+\begin{example}
+    \begin{enumerate}[(i)]
+        \item 
+    
+    \[D^{\frac{3}{2}}_{RL}(c) = \frac{d^2}{dx^2} \frac{1}{\Gamma(2 - \frac{3}{2})}  \int_{0}^{x} (x-t)^{2 - \frac{3}{2}-1} c dt\]
+    \[= \frac{d^2}{dx^2} \frac{c}{\sqrt{\pi}}  \int_{0}^{x} (x-t)^{- \frac{1}{2}} dt = \frac{d^2}{dx^2} \frac{-2c}{\sqrt{\pi}} \sqrt{x - t} \Big|_{0}^{x}\]
+    \[= \frac{d^2}{dx^2} \frac{2c \sqrt{x}}{\sqrt{\pi}} = \frac{-c}{2\pi(x)^\frac{3}{2}} \neq 0.\] As stated, the fractional of a constant is not equal to zero when using the Riemann-Liouville derivative, this is also the case for the Grünwald-Letnikov derivative, but not for the Caputo-Fabrizio derivative.
+    \item \[D^{\frac{1}{2}}_{CF}(\frac{x}{2}) = \frac{1}{1 - \frac{1}{2}}  \int_{0}^{x} \exp(\frac{-\frac{1}{2}}{1 - \frac{1}{2}}(x-t)) \frac{1}{2} dt = \int_{0}^{x} \exp(t - x) dt\]
+    \[ =  \exp(t - x) \Big|_{0}^{x} = 1 - \exp(- x).\]
+    For \(x \geq 0\), this expression is equal to the CDF of the exponential distribution with \(\lambda = 1\). A remarkble result.
+    \item We will compute another famous result with the Riemann-Liouville derivative:
+    \[D^{\frac{1}{2}}_{RL}(x) = \frac{d}{dx} \frac{1}{\Gamma(1 - \frac{1}{2})}  \int_{0}^{x} (x-t)^{1 - \frac{1}{2}-1} t dt\]
+    Let \( u = x - t\), such that \(\frac{du}{dt} = -1, dt = -du\):
+    \[=  \frac{d}{dx} \frac{1}{\sqrt{\pi}} \int_{0}^{x} (u)^{-\frac{1}{2}} (u - x) du =  \frac{d}{dx} \frac{1}{\sqrt{\pi}}(\int_{0}^{x} \sqrt{u} du - x\int_{0}^{x} \frac{1}{\sqrt{u}} du)\]
+    \[ = \frac{d}{dx} \frac{1}{\sqrt{\pi}}(\frac{2u^\frac{3}{2}}{3} - 2 x u^\frac{1}{2} \Big|_{0}^{x}) = \frac{d}{dx} \frac{1}{\sqrt{\pi}}(\frac{2(x - t)^\frac{3}{2}}{3} - 2 x (x - t)^\frac{1}{2} \Big|_{0}^{x})\]
+    \[=  \frac{d}{dx} \frac{-1}{\sqrt{\pi}}(\frac{2}{3}x^\frac{3}{2} - 2x^\frac{3}{2} = \frac{d}{dx} \frac{\frac{4}{3}x^\frac{2}{3}}{\sqrt{\pi}})\]
+    \[ = \frac{2\sqrt{x}}{\sqrt{\pi}}.\]
+    \end{enumerate}
+\end{example}
