@@ -1,1 +1,29 @@
-\section{Appendices}\label{s:appendices}
+\section{Relevant functions and Identities}\label{s:appendices}
+We define the (Euler-)Gamma function as follows:
+\begin{definition}\label{d: eg}
+    for \(\Re(z) > 0\), we have the following: \(\Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt\)
+\end{definition}
+
+The Gamma function can be seen as an extension of the factorial function, for non-integers. This function is defined for complex numbers and all there subsets (so also real numbers), as long as the condition above holds. For positive integers values \(z\), we have the following identity: \(\Gamma(z) = (z - 1)!\)
+Other important identities are: 
+\begin{itemize}
+    \item \(\Gamma(z + 1) = z \Gamma(z)\)
+    \item \(\Gamma(2) = \Gamma(1) = 1\)
+    \item \(\Gamma(\frac{1}{2}) = \sqrt{\pi}\)
+\end{itemize}
+
+\begin{definition}\label{d: ff}
+    The falling factorial is defined as follows: \((x)_n = \prod_{k = 0}^{n - 1} (x - k)\), which is a polynomial
+\end{definition}
+\begin{definition}
+    For \(0 \leq k \leq n\), the Binomial Coefficient is defined as follows: \(\binom{n}{k}\), where \(n, k \in \mathbb{N}\).
+\end{definition}
+We can derive the following factorial identity, which is convenient to work with analytically: \(\binom{n}{k} = \frac{n!}{k! (n - k)!}\).
+For numerically computing expressions containing the Binomial Coefficient, the following identity is computationally more efficient: \(\binom{n}{k} = \frac{(n)_k}{k!}\). With \((n)_k\) as in \ref{d: ff}.
+Since we have established in \ref{d: eg} that \(\Gamma(z) = (z - 1)!\), we can rewrite our factorial identify to:
+\[\binom{n}{k} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)} = \frac{n}{k}\frac{\Gamma(n)}{\Gamma(k) \cdot \Gamma(n - k + 1)}\]
+
+\begin{definition}
+    Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\].
+\end{definition}
+A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer (\cite{askey75}).
