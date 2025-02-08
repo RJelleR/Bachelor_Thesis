@@ -9,6 +9,7 @@
 \usepackage{enumerate}
 \usepackage{boxedminipage}
 \usepackage{url}
+\usepackage{hyperref}
 %\usepackage[dutch]{babel} % when you write in dutch
 
 \usepackage{dcolumn}
@@ -29,25 +30,25 @@
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}
-\numberwithin{theorem}{section}
+\numberwithin{theorem}{subsection}
 \newtheorem{corollary}{Corollary}
-\numberwithin{corollary}{section}
+\numberwithin{corollary}{subsection}
 \newtheorem{proposition}{Proposition}
-\numberwithin{proposition}{section}
+\numberwithin{proposition}{subsection}
 \newtheorem{lemma}{Lemma}
-\numberwithin{lemma}{section}
+\numberwithin{lemma}{subsection}
 \newtheorem{assumption}{Assumption}
-\numberwithin{assumption}{section}
+\numberwithin{assumption}{subsection}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}
-\numberwithin{definition}{section}
+\numberwithin{definition}{subsection}
 \newtheorem{example}{Example}
-\numberwithin{example}{section}
+\numberwithin{example}{subsection}
 \newtheorem{remark}{Remark}
-\numberwithin{remark}{section}
+\numberwithin{remark}{subsection}
 \newtheorem{notation}{Notation}
-\numberwithin{notation}{section}
+\numberwithin{notation}{subsection}
 
 %%%%%%%%%%%%algorithms %%%%%%%%%%%%%%%%%%%
 \usepackage{algorithm}
@@ -136,476 +137,13 @@ Keywords might be given.
 \include{sections/Introduction}
 
 
-\section{General Guidelines}\label{s:general}
+
 \include{sections/Calculus}
+\include{sections/Moments}
 
 
-\subsection{Formatting the Front Page}
-The front page just contains
-\begin{itemize}
-\setlength\itemsep{-1mm}
-\item
-Title of the thesis.
-\item
-Author (your name and student number).
-\item
-Date.
-\item
-References or logo(s) of
-\begin{itemize}
-\item
-VU University.
-\item
-School of Business and Economics.
-\item
-Department of Econometrics and Operations Research.
-\end{itemize}
-\item
-Master Thesis.
-\item
-Thesis Committee and its members.
-\end{itemize}
 
 
-\section{Mathematics}
-\subsection{Mathematical Expressions in Text and in Displays}
-Display only the most important equations, and number only the
-displayed equations that are explicitly referenced in the text.
-To conserve space, simple mathematical expressions such as
-$\bar Y = n^{-1} \sum_{i=1}^n Y_i$ may be incorporated into the text.
-Mathematical expressions that are more complicated or that must be
-referenced later should be displayed, as in
-\[
-s^2 = \frac 1 {n-1} \sum_{i=1}^n (Y_i - \bar Y)^2.
-\]
-
-If a display is referenced in the text, then enclose the equation number
-in parentheses and place it flush with the right-hand margin of the
-column. This is automatically obtained by the \texttt{equation} environment
-accompanied by the \verb+\label+ command.
-For example, the quadratic equation has the general form
-
-\begin{equation} \label{eq:quadratic}
-ax^2 + bx + c = 0, \mbox{ where } a \ne 0.
-\end{equation}
-
-In the text, each reference to an equation number should also be enclosed in
-parentheses by using \verb+\eqref{<labelgiven>}+.
-For example, the solution to \eqref{eq:quadratic} is given
-in \eqref{eq:quadraticsol} in Appendix \ref{app:quadratic}.
-
-If the equation is at the end of a sentence, then you should end the equation
-with a period. If the sentence in question continues beyond the equation,
-then you should end the equation with the appropriate
-punctuation---that is, a comma, semicolon, or no punctuation mark.
-
-\subsection{Symbols, Commands, Environments, Etc}
-See
-
-\url{https://en.wikibooks.org/wiki/LaTeX/Mathematics}
-
-\noindent
-and
-
-\url{https://en.wikibooks.org/wiki/LaTeX/Advanced_Mathematics}.
-
-
-\subsection{Definitions, Theorems, Etc.}
-Definitions, theorems, propositions, etc. should be formatted
-using the \texttt{amsthm} package.
-Number these items separately and sequentially. Examples are given below
-
-\begin{definition}
-In colloquial New Zealand English, the term \textit{dopey mongrel} is used
-to refer to someone who has exhibited less than stellar intelligence.
-\end{definition}
-
-\begin{theorem}\label{t:delete}
-If a proceedings editor from New Zealand accidentally deletes his draft of
-the author kit shortly after completing it, he would be considered to be a dopey mongrel.
-\end{theorem}
-\begin{proof}
-The proof follows by the principle of contradiction.
-Suppose the editor is not a dopey mongrel, then he is smart enough to save
-the author kit.
-\end{proof}
-
-\begin{corollary}
-One of the proceedings editors is a dopey mongrel.
-\end{corollary}
-\begin{proof}
-This follows immediately from Theorem \ref{t:delete}.
-\end{proof}
-
-\section{Figures and Tables}
-\label{sec:graphics}
-Figures and tables should be centered within the text and should not
-extend beyond the right and left margins of the paper.
-Figures and tables can make use of color.
-However, try to select colors that can be differentiated when printing
-in black and white in consideration of vast majority of people
-using such printers.
-Figures and tables are numbered sequentially, but separately,
-using arabic numerals.
-
-\subsection{Tables}
-Each table should appear in the document after the paragraph in which the
-table is first referenced. However, if the table is getting split across
-pages, it is okay to include it after a few paragraphs from its first reference.
-One-line captions are centered, while multiline captions are left justified.
-The captions appear \textit{above} the table. See Tables \ref{tab:first} and
-\ref{tab:second} for examples.
-
-\begin{table}[H]
-\caption{Table captions appear above the table, and if they are longer
-than one line they are left justified. Captions are written using normal
-sentences with full punctuation. It is fine to have multiple-sentence
-captions that help to explain the table.}
-\label{tab:first}
-\medskip
-\centering
-\begin{tabular}{rll}
-\hline
-Creature & IQ & Diet\\ \hline
-dog & 70 & anything\\
-cat & 75 & almost nothing\\
-human & 60 & ice cream \\
-dolphin & 120 & fish fillet\\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-\centering
-\caption{Counting in Maori.}
-\label{tab:second}
-\medskip
-\begin{tabular}{r|l}
-English & Maori \\ \hline
-one & tahi \\
-two & rua \\
-three & toru \\
-four & wha \\
-\hline
-\end{tabular}
-\end{table}
-
-\begin{table}[H]
-  \centering
-  \caption{Alternative table aligning columns}
-  \label{tab:alt}
-  \medskip
-  \begin{tabular}{r|d3d5}
-       & \multicolumn{1}{c}{2012} & \multicolumn{1}{c}{2013} \\
-    \hline
-    Mean & 1.23 & 1.23456 \\
-    Variance & 13454.4 & 3435.456 \\
-    \hline
-  \end{tabular}
-
-  \medskip
-  \parbox{100mm}{\small Note: Alternatively, place a longer explanation
-  as a note at the bottom of the table, allowing the caption to be more
-  concise. This table uses explicit alignment of the numbers in the
-  columns, using either 3 or 5 decimals.}
-\end{table}
-
-
-\subsection{Figures}
-Each figure should appear in the document after the paragraph in which
-the figure is first referenced. One-line captions are centered,
-while multiline captions are left justified. Figure captions appear
-below the figure. 
-To include figures you use package \texttt{graphicx}, and in the document the
-command
-
-\verb+\includegraphics{<graphs/graphicfilename>}+.
-
-The graphicfilename usually does not have to include an extension;
-PdfLaTeX would search for extensions it recognises. In general, it is
-advisable to keep your graphs in a separate directory, to avoid clogging
-up your LaTeX directory.
-
-If the graph is scaled correctly, one should be able to use a
-
-\verb+\includegraphics[width=\textwidth]{<graphs/graphicfilename>}+
-
-to ensure that the graph fills the width of the paper.
-
-
-
-
-\noindent
-
-
-
-\subsection{References to Tables and Figures}
-References to tables and figures identified by number are capitalized.
-For example, ``We see in Table \ref{tab:second} that...'' and
-``We see in the previous table that...'' are both correct.
-Be sure to use the \verb+\label+
-command within the figure or table environment and refer to the
-associated figure or table using \verb+Table \ref{<labelgiven>}+.
-Please do not use hard coded figure/table numbers.
-This is error prone.
-
-\subsection{Graphics Formats}
-As graphics files in your document you use \texttt{.jpg}, \texttt{.png}, 
-\texttt{.pdf}, or \texttt{.eps} files.
-But there are tools to convert these formats into one another.
-The main difference between the formats is how they store the images and how
-well suited they are for specific graphics. In general we can
-choose between bitmap and vector graphics.
-Bitmap graphics are well suited for photographies (jpg is very common here)
-or for screenshots (png is a lossless encoding (in contrast to jpg),
-and is thus better suited for all those cases where you have sharp edges in your graphics).
-Vector graphics are the encoding to be chosen for all kinds of drawings
-(diagrams, charts, ...). In contrast to bitmap formats, they can be scaled
-to any size without any loss of sharpness. This makes it possible to
-read such graphics even if two pages are printed on one sheet of paper,
-or if the documents are read electronically.
-
-So what to choose for your Latex document? As a rule of thumb you should
-always prefer pdf and eps. In general these two encodings can contain both,
-bitmap and vector graphics. But there is no need (and no use) to convert
-your bitmaps to any of these.
-
-You include figures via the \verb+\includegraphics+ command.
-You must use the \texttt{pdflatex} or \texttt{xelatex} command to generate
-your pdf file, as was done with this file.
-
-\section{Algorithms}
-Typeset algorithms by using the \texttt{algorithmic} environment of the
-\texttt{algorithm} package.
-The command \verb+\begin{algorithmic}+ can be given the optional argument of a
-positive integer, which if given will cause line numbering to occur at multiples
-of that integer. E.g. \verb+\begin{algorithmic}[5]+ will enter the algorithmic
-environment and number every fifth line. Below is an example of typesetting a
-basic algorithm (remember to add the
-
-\verb+\usepackage{algorithm,algorithmic}+
-
-\noindent
-statement to your document preamble). The pseudocode is centered by using the
-\texttt{minipage} environment.
-
-{\small
-\begin{verbatim}
-\begin{center}
-\begin{minipage}{10cm}
-\begin{algorithm}[H]
-\caption{Polar Method for Normal Random Numbers}
-\begin{algorithmic}[1]
-\REPEAT
-   \STATE $U_1\sim {\sf U}(0,1)$ \COMMENT{Generate uniform on $(0,1)$}
-   \STATE $U_2\sim {\sf U}(0,1)$
-   \STATE $V_1 \gets 2U_1 -1$ \COMMENT{Uniform on $(-1,1)$}
-   \STATE $V_2 \gets 2U_2 -1$
-   \STATE $W \gets V_1^2 + V_2^2$
-\UNTIL {$W < 1$}
-\STATE \textbf{return} $V_1\,\sqrt{(-2\,\ln(W)/W}$
-\end{algorithmic}
-\end{algorithm}
-\end{minipage}
-\end{center}
-\end{verbatim}
-}
-
-\noindent
-This produces
-
-\begin{center}
-\begin{minipage}{10cm}
-\begin{algorithm}[H]
-\caption{Polar Method for Normal Random Numbers}
-\begin{algorithmic}[1]
-\REPEAT
-   \STATE $U_1\sim {\sf U}(0,1)$ \COMMENT{Generate uniform on $(0,1)$}
-   \STATE $U_2\sim {\sf U}(0,1)$
-   \STATE $V_1 \gets 2U_1 -1$ \COMMENT{Uniform on $(-1,1)$}
-   \STATE $V_2 \gets 2U_2 -1$
-   \STATE $W \gets V_1^2 + V_2^2$
-\UNTIL {$W < 1$}
-\STATE \textbf{return} $V_1\,\sqrt{(-2\,\ln(W)/W}$
-\end{algorithmic}
-\end{algorithm}
-\end{minipage}
-\end{center}
-
-\section{Bibliography Management}
-Managing your bibliography requires two specifications:
-the citation style in your document,
-and the style of the reference list at the end of the thesis.
-
-\subsection{Citing a Reference}
-To cite a reference in the text, use the author-date method. Thus,
-\citet{ross06} could also be cited parenthetically \citep{ross06}.
-For a work with three or more authors, use an abbreviated form.
-For example, a work by Evans, Keith and Kroese would be cited in
-one of the following ways:
-\citet{evkekro07} or \citep{evkekro07}.
-
-Parenthetical citations are enclosed in parentheses $(~)$, not square brackets $[~]$.
-The items in a series of such citations are usually separated by commas.
-If an item in the series of parenthetical citations contains punctuation 
-because (for example) it refers to a work with three or more coauthors, 
-then all items should be separated by semicolons.
-
-The following is a list of correct forms of citations:
-\begin{itemize}
-\setlength\itemsep{-1mm}
-\item Brown and Edwards (1993),
-\item (Brown and Edwards 1993),
-\item (Brown and Edwards, 1993),
-\item Brown and Edwards (1993), Smith (1997),
-\item (Brown and Edwards 1993; Smith 1997; Brown et al. 1997).
-\item (Brown and Edwards, 1993; Smith, 1997; Brown et al., 1997).
-\end{itemize}
-
-\subsection{List of References}
-Place the list of references after the appendices.
-The section heading is \textbf{References}, and it is not numbered.
-List only references that are cited in the text.
-Arrange the references in alphabetical order (chronologically for a
-particular author or group of authors); do not number the references.
-Give complete references without abbreviations.
-To identify multiple references by the same authors and year, append a
-lower case letter to the year of publication; for example, 1984a and 1984b.
-
-Use hanging indentation to distinguish individual entries.
-Do not insert additional space between references.
-
-The bibliographic style for a journal article is: \\
-$<$Surname of first author$>$, $<$First author initials$>$,
-$<$Initials and surnames of other authors$>$ ($<$year$>$).
-$<$Article title$>$. $<${\em Journal Name in
-Headline Italics}$>$ $<$Volume number$>$, $<$page numbers$>$.
-
-The article title may come between quotes but this is not required.
-The format for other types of reference can be inferred from the
-examples in the references, which include:
-\begin{itemize}
-\setlength\itemsep{-1mm}
-\item a technical report \citep{chi89},
-\item a proceedings article \citep{evkekro07},
-\item a journal article \citep{alon},
-\item a book by 2 authors \citep{asmus07},
-\item a chapter in a book \citep{asrub1},
-\item an unpublished thesis or dissertation \citep{garvels00},
-\item a document available on the web \citep{sudoku}.
-\end{itemize}
-
-\subsection{BibTeX}
-These formats are obtained by creating a BibTeX database for all your references.
-A BibTeX database is stored as a \texttt{.bib} file.
-It is a plain text file, and so can be viewed and edited easily.
-One benefit of using BibTeX is that bibliography formatting and
-referencing can be greatly simplified: the correct citation and
-reference list style is automatically created.
-How the BibTeX items are entered in the \texttt{bib} file will be
-explained in section \ref{ss:bibtex}.
-
-Once you have created the
-\texttt{bib} file with your references it needs to be included
-in your document.
-
-\subsection{Biblatex Package}
-Advise is to use the \texttt{biblatex} package. It is a reimplementation of the
-classic BibTeX providing modern bibliographic facilities such as
-advanced name disambiguation, smart crossref data inheritance,
-configurable sorting schemes, dynamic datasource modification, etc.
-The prerequisite is that you need to use Biber to process your \texttt{bib}
-files. Older TeX distributions do not have Biber included, you need to check this
-or you find out when you cannot run your \texttt{bib} files using the
-\texttt{biblatex} package.
-In that case, see next section for the classic BibTeX implementation.
-
-\begin{itemize}
-\item
-In the preamble you put
-
-\begin{verbatim}
-\usepackage[natbib,
-            style=authoryear,
-            maxcitenames=2,
-            maxbibnames=99,
-            hyperref,
-            backend=biber]{biblatex}
-\addbibresource{bib/<bibfilename>.bib}
-\end{verbatim}
-
-\item
-At the end of your document, where the reference list is supposed to come you
-put
-
-\verb+\printbibliography+
-
-\item
-In your document, wherever you need
-to cite a reference you put \verb+\citet{<bibentrykey>}+ (for the author name(s)
-followed by the year in parentheses), or
-\verb+\citep{<bibentrykey>}+
-to get the entire citation in parentheses.
-\end{itemize}
-
-\subsection{Classic BibTeX}
-In case Biber does not work in your TeX distribution.
-Use the \texttt{natbib} bibliography style with \texttt{chicago} citation style.
-
-\begin{itemize}
-\item
-In the preamble you put
-
-\verb+\usepackage{natbib}+.
-
-\item
-At the end of your document, where the reference list is supposed to come you
-put
-
-\begin{verbatim}
-\bibliographystyle{chicago}
-\bibliography{bib/<bibfilename>.bib}
-\end{verbatim}
-
-\item
-Citations are \verb+\citet{<bibentrykey>}+ (for the author name(s)
-followed by the year in parentheses), or
-\verb+\citep{<bibentrykey>}+
-to get the entire citation in parentheses.
-\end{itemize}
-
-\subsection{BibTeX Entries}\label{ss:bibtex}
-See the \texttt{EORthesis.bib} file available in Canvas,
-or use the templates that you can find, e.g.,
-
-\url{https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management}
-
-\noindent
-and
-
-\url{https://en.wikipedia.org/wiki/BibTeX}.
-
-\subsection{Compilation}
-You need to obtain the final pdf version of document with correct citations and reference
-list.
-
-\begin{enumerate}[(a).]
-\item
-In case you use Biblatex, you run consecutively
-\texttt{pdflatex, biber, pdflatex}. In stead of
-\texttt{pdflatex}, you might also run \texttt{xelatex}.
-\item
-In case you use classic BibTeX, you run consecutively
-\texttt{pdflatex, bibtex, pdflatex, pdflatex}. In stead of
-\texttt{pdflatex}, you might also run \texttt{xelatex}.
-\end{enumerate}
-
-\subsection{Example}
-In \citet{asmus07} we see that they mention \citep{blitzstein10},
-and after some more comments of \citet{asrub1}, we know that
-\citet{evkekro07} have published the same results
-as we can find in \citep{alon,garvels00,ross06},
-however in a more general context.
 
 \section{Conclusion}\label{s:con}
 The conclusion summarizes the results of your research.
@@ -627,16 +165,6 @@ The appendices contain material that you would like to share with the
 reader but that would hinder the flow of reading. For instance long
 proofs of theorems, code of algorithms, data, etc.
 
-\section{Appendix}\label{s:app2}
-You might give more appendices. For instance Appendix \ref{s:app1} for
-proofs, Appendix \ref{s:app2} for data.
-
-\section{Appendix}\label{app:quadratic}
-The solution to \eqref{eq:quadratic} has the form
-
-\begin{equation} \label{eq:quadraticsol}
-x = \frac{-b \pm \sqrt{b^2-4ac}}{2a} \quad\text{if}\;\; a \ne 0.
-\end{equation}
 
 %\printbibliography
 % or in case of classic bibtex:

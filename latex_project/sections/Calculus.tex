@@ -1,5 +1,6 @@
 \section{Fractional Calculus}\label{s:calculus}
-In order to obtain the expression as mentioned in section \ref{s:intro}, some advanced tools are required. We can find this in the field of fractional calculus.
+\subsection{Fractional derivatives}
+In order to obtain the expression as mentioned in section \autoref{s:intro}, some advanced tools are required. We can find this in the field of fractional calculus.
 We define the following:
 \begin{definition}
     Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \(D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\).
@@ -29,7 +30,7 @@ A lot of different definition have been used to compute a fractional derivative.
     \begin{equation}
         D^{\alpha} f(x) =  \frac{d^{n}}{dx^{n}} D_{x}^{-(n - \alpha)} f(x) = \frac{d^{n}}{dx^{n}} I_{x}^{n - \alpha} f(x) = \frac{d^n}{dx^n} \frac{1}{\Gamma(n -\alpha)}  \int_{0}^{x} (x-t)^{n - \alpha-1} f(t) dt
     \end{equation}
-    Where \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function, see section \ref{s:appendices}.
+    Where \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function, see section \autoref{s:appendices}.
     
     \begin{remark}\label{r: integer}
         For values \(\alpha \in \mathbb{N}, n = \alpha\), so \(\Gamma(n - \alpha) = \Gamma(0)\), which is undefined. Thus for \(\alpha \in \mathbb{N}\), including the value \(0\), we simply define: \(D^\alpha f(x) = \frac{d^\alpha}{dx^\alpha} f(x)\)
@@ -52,7 +53,7 @@ Lastly, we will define the Grünwald-Letnikov derivative, which is defined as fo
     \begin{equation}
         D^\alpha f(x) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} f(x - k h)
     \end{equation}
-   Where \(\binom{\alpha}{k}\) is the binomial coefficient, see section \ref{s:appendices}.
+   Where \(\binom{\alpha}{k}\) is the binomial coefficient, see section \autoref{s:appendices}.
 \end{definition}
 
 \begin{proposition} 
@@ -60,7 +61,7 @@ Lastly, we will define the Grünwald-Letnikov derivative, which is defined as fo
     \begin{enumerate}[(i)]
         \item Linearity: Let \(f(x), g(x)\) be functions and \(a, b, x \in \mathbb{R}\). Then we have that \(D^{\alpha} (a f(x) + b g(x)) = a D^{\alpha} f(x) + b D^{\alpha} g(x)\).
         \item \(D^{\alpha} f(x)\) for \(\alpha = 0, = f(x)\) 
-        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = D^\alpha(D^\beta f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for \ref{d: CF}, this only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
+        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = D^\alpha(D^\beta f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for \autoref{d: CF}, this only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
     \end{enumerate}
         
     
@@ -83,12 +84,12 @@ Lastly, we will define the Grünwald-Letnikov derivative, which is defined as fo
         For the Caputo-Fabrizio derivative, we get the following:
         \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp(\frac{0}{1 -0}(x-t)) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x).\]
         \newline
-        Finally, for the Riemann-Liouville derivative, we can simply make use of \ref{d: differintegral} and \ref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \(D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\).
+        Finally, for the Riemann-Liouville derivative, we can simply make use of \autoref{d: differintegral} and \autoref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \(D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\).
 
         \item The proof for the Riemann-Liouville derivative is given by \cite{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \cite{losada15}.For the Grünwald-Letnikov derivative, we get:
         \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k}(  \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh))\]
         \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the dubble sums: 
-        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \ref{s:appendices} to obtain:
+        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \autoref{s:appendices} to obtain:
         \[ = \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty (-1)^m \binom{\alpha + \beta}{m} f(x - mh) = D^{\alpha + \beta} f(x).\]
         It can be shown in an exactly similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
 
@@ -116,3 +117,5 @@ We will now provide a few numerical examples of these fractional derivatives. Fo
     \[ = \frac{2\sqrt{x}}{\sqrt{\pi}}.\]
     \end{enumerate}
 \end{example}
+\subsection{Complex derivatives}
+WIP
