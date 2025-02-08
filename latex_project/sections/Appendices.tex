@@ -1,11 +1,11 @@
-\section{Relevant functions and Identities}\label{s:appendices}
+\section{(Appendix): Relevant functions and Identities}\label{s:appendices}
 We define the (Euler-)Gamma function as follows:
 \begin{definition}\label{d: eg}
     for \(\Re(z) > 0\), we have the following: \(\Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt\)
 \end{definition}
 
 The Gamma function can be seen as an extension of the factorial function, for non-integers. This function is defined for complex numbers and all there subsets (so also real numbers), as long as the condition above holds. For positive integers values \(z\), we have the following identity: \(\Gamma(z) = (z - 1)!\)
-Other important identities are: 
+Other important identities, not necessarily for \(z\) an integer, are: 
 \begin{itemize}
     \item \(\Gamma(z + 1) = z \Gamma(z)\)
     \item \(\Gamma(2) = \Gamma(1) = 1\)
@@ -27,3 +27,68 @@ Since we have established in \ref{d: eg} that \(\Gamma(z) = (z - 1)!\), we can r
     Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\].
 \end{definition}
 A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer (\cite{askey75}).
+
+For the interchange-ability of derivatives and integrals and sums, we can apply the following two theorems:
+
+\begin{theorem}
+    Leibnitz's Rule:
+    Let \(f(x, \theta), a(\theta), b(\theta)\) be differentiable with respect to \(\theta\), then we have that:
+    \[ \frac{d}{d\theta} \int_{a(\theta)}^{b(\theta)} f(x, \theta) dx = f(b(\theta), \theta) \frac{d b(\theta)}{d\theta} - f(a(\theta), \theta) \frac{d a(\theta)}{d\theta} + \int_{a(\theta)}^{b(\theta)} \frac{\partial f(x, \theta) }{\partial \theta} dx.\] For the special case, where \(a(\theta), b(\theta)\) are constant we have that: 
+    \[\frac{d}{d\theta} \int_{a}^{b} f(x, \theta) dx =  \int_{a}^{b} \frac{ \partial f(x, \theta)}{ \partial d\theta}.\]
+\end{theorem}
+
+For the interchange-ability of derivatives and summations, the following theorem has been given by \cite{casella2002}:
+\begin{theorem}
+    Suppose that the series \(\sum_{x = 0}^{\infty} h(\theta, x)\) converges for all \(\theta\) in an interval \((a, b)\) of real numbers and 
+    
+    \begin{enumerate}[(i)]
+        \item \(\frac{\partial h(\theta, x)}{\partial \theta}\) is continuous for all \(x\)
+        \item \(\sum_{x = 0}^{\infty} \frac{\partial h(\theta, x)}{\partial \theta}\) converges uniformly on every closed bounded subinterval of \((a, b)\)
+    \end{enumerate}
+    Then:
+    \[
+    \frac{d}{d \theta} \left( \sum_{x = 0}^{\infty} h(\theta, x) \right) = \sum_{x = 0}^{\infty} \frac{\partial h(\theta, x)}{\partial \theta}
+    \]
+    
+   
+\end{theorem}
+\newpage
+\section{(Appendix): Proofs}\label{s:app_B}
+\begin{proof}
+    Theorem \ref{t: negative}:
+Suppose for the moment that \( X \) is a positive random variable. Since \( x f(x) \) is integrable for \( x > 0 \), we have:
+
+\[
+E(X) = \int_0^\infty x \, dF(x) = \int_0^\infty \int_0^\infty e^{tx} \, dt \, dF(x).
+\]
+
+We can interchange the order of integration as follows:
+
+\[
+E(X) = \int_0^\infty e^{tx} \, dF(x) \, dt = \int_0^\infty M_X(-t) \, dt.
+\]
+
+The interchange of the order of integration is subject to \( E(e^{-tX}) \) being integrable from \( t = 0 \) to \( t = \infty \).
+
+Finally, by substituting \( X^{-1} \) for \( X \), we find:
+
+\[
+E(X^{-1}) = \int_0^\infty M_X^{-1}(-t) \, dt.
+\]
+
+There are two natural ways to generalize (1) to \( E(X^{-1}) \); one way gives:
+
+\[
+E(X^{-n}) = \int_0^\infty \int_0^\infty \cdots \int_0^\infty M_X(-t_n) \, dt_n \cdots dt_2 dt_1, \tag{2}
+\]
+
+while the second way gives:
+
+\[
+E(X^{-n}) = \frac{1}{\Gamma(n)} \int_0^\infty t^{n-1} M_X(-t) \, dt.
+\]
+\cite{cressie1981}
+\end{proof}
+\newpage
+\section{Appendix C }\label{s: app_C}
+TODO: ADD TABLE OF COMMON DISTRIBUTIONS + SUPPORT, MGF, ETC.

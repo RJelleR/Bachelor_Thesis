@@ -1,0 +1,168 @@
+\section{Moments}
+Now that we have defined the required techniques to compute fractional derivatives, we can apply them to the Moment Generating Function. First, however, we need to define some concepts relevant to computing moments.
+\subsection{Moments}
+\begin{definition}
+    The \(n\)-th moment of a PDF \(f_X(x)\) is defined as:
+   \[
+E[X^n] = 
+\begin{cases} 
+\int_{-\infty}^{\infty} (x - c)^n f_X(x) \, dx & \text{if } f_X(x) \text{ is continuous,} \\ 
+\sum_{i} (x_i - c_ i)^n f_X(x_i) & \text{if } f_X(x) \text{ is discrete.} 
+\end{cases}
+\]
+If \(c = \mu_x\), the first moment of \(f(x)\), then our higher moments are called central moments. In our situation, we will focus on the case \(c = 0\), which is called a raw moment. We do this as the Moment Generating Function, which we will soon define, only computes raw moments of higher order. A moment of order \(n\)is said to exist, if \(E[X^n] < \infty\).
+\end{definition}
+
+\begin{proposition}\label{p: moments}
+    We can derive the following simple properties:
+    \begin{enumerate}[(i)]
+        \item If \(E[X^n]\) does not exist, then \(E[X^k]\) also does not exist, for \( k \geq n\).
+    
+    \item If \(E[X^k]\) does exist, then all its lower moments, i.e. \(E[X^n]\), for \(n \leq k\). Also exist.
+\end{enumerate}
+\end{proposition}
+
+
+\begin{proof}
+     
+    \begin{enumerate}[(i)]
+        \item If \(f(x)\) is a discrete distribution, we get: \[E[X^n] = \sum_{i} x_i^n f(x_i) = \infty, E[X^k] = \sum_{i} x_i^k f(x_i)\]
+        \[ = \sum_{i} x_i^n \cdot x^{k - n} f(x_i) \geq \sum_{i} x_i^n f(x_i) = \infty, \text{ as } k \geq n\]
+        We can prove this for continuous functions in a similar way.
+        \item This simply follows from the previous proposition, as the current proposition is just the contrapositive statement of the previous proposition.
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+   \( \textit{Let }  f_x(x) \sim C(0, 1) \textit{ where } C(x_0, y_0)\)
+   \newline
+    \(\textit{ is the cauchy distribution funtion , does the second moment exist?}\)
+    \newline
+    We use \ref{p: moments} and begin with verifying that the first moment exists:
+    \[ E[X] = \int_{-\infty}^{\infty} \frac{x}{\pi(1 + x^2)} dx.\] For large values of \(x\), the inside is equal to \(\frac{1}{x}\), splitting the integral:
+    \[ =  \int_{1}^{\infty} \frac{1}{x} dx - \int_{-\infty}^{1} \frac{1}{x} dx\] Where both integrals diverge logarithmically.
+\end{example}
+
+\subsection{Moments of negative order}
+We take a quick look at (raw) moments of negative order, and if we can define these in the same way as above, let us look at the continuous case first:
+\[E[X^-n] = \int_{-\infty}^{\infty} x^{-n} f_x(x) dx = \int_{-\infty}^{\infty} (\frac{1}{x})^n f_x(x) dx.\] We can immediately observe a rather obvious problem. This integral is not defined at \(x = 0\) and diverges for values of \(x\) in a neighbourhood of \(0\). \cite{khuri2002} have stated the following corollary for the existence of the first negative moment:
+\begin{corollary}
+    If \(f(x)\) is a continious pdf defined on \((-\infty, \infty)\), and if \[\lim_{x \to 0} \frac{f(x)}{|x|^\alpha} < \infty\], for \(\alpha > 0\), then \[E[X^{-1}] \text{exists}.\]
+\end{corollary}
+
+Not a lot of common distribution functions adhere to this corollary, however, the Gamma function does:
+
+\begin{example}\label{e: negative}
+    Let \(f_X(x) \sim \Gamma(\alpha, \lambda) =\) 
+    \[\frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)}.\] This PDF is defined on \((0, \infty)\). So the function is not defined on \(\mathbb{R}\). This, however, is not a problem, as we can just evaluate the right limit. Since the Gamma function already uses \(\alpha\) as a parameter, we will look at \(\frac{f(x)}{x^\beta}, \beta > 0\):
+    \[\lim_{x \to 0_+} \frac{f(x)}{x^\beta} = \lim_{x \to 0_+} \frac{x^{\alpha -1 - \beta} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} = \lim_{x \to 0_+} \frac{x^{\alpha -(1 + \beta)} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} .\] So for \(\alpha \geq \beta + 1, \lim_{x \to 0_+} \frac{f(x)}{x^\beta} < \infty\). So the first negative moment of the Gamma distribution should exist.
+
+    We will compute the first negative moment: 
+    \[ E[X^{-1}] = \int_{0}^{\infty} x^{-1} \frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} dx = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha - 2} e^{-\lambda x} dx\]
+    Using the substitution \( u = \lambda x, \frac{du}{dx} = \lambda, dx = \frac{du}{\lambda}\), we get:
+    \[ = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty}(\frac{u}{\lambda})^{\alpha -2} e^{-u} du = \frac{\lambda^\alpha}{\Gamma(\alpha) \lambda^{\alpha-1}} \int_{0}^{\infty}(\frac{u}{\lambda})^{\alpha -2} e^{-u} du.\] This integral is equal to \(\Gamma(\alpha - 1)\) (See \ref{s:appendices}). So we get: 
+    \[E[X^{-1}] = \frac{\lambda^\alpha \Gamma(\alpha - 1) }{\Gamma(\alpha) \lambda^{\alpha-1}} = \frac{\lambda \Gamma(\alpha - 1)}{(\alpha -1)\Gamma(\alpha - 1)} = \frac{\lambda}{(\alpha -1)}.\] So, for \(\alpha \neq 1, E[X^{-1}] = \frac{\lambda}{(\alpha -1)}\). Fortunately, this is always the case, since we had just derived that the integral is only finite when \(\alpha \geq \beta + 1, \text{ with } \beta > 0\). In other words, \(\alpha > 1\). So this holds.
+\end{example}
+\subsection{The Moment Generating Function}
+We will finally define the Moment Generating Function, one of the most significant subjects of this thesis.
+\begin{definition}
+    The Moment Generating Function (MGF) of a variable \(X\), is defined as
+    \[M_X(t) = E[e^{tX}]\] provided that \(E[e^tX] < \infty\) on some interval \((- h, h)\), which contains 0, for some \(h > 0\).
+\end{definition}
+
+\begin{remark}
+    Obtaining the expression \(M_X(t) = E[e^{tX}]\) is pretty trivial. Generally, it just requires quite a few steps of analytic evalution. This is not that interesting nor relevant to this research. We will give one explicit example on how to compute the Moment Generating Function for a specific distribution. And for later cases, when we make use of an expression of the Moment Generating Function, we will simply refer to figure \ref{d: CF}.
+\end{remark}
+
+\begin{example}
+    Let \(f_X(x) \sim \Gamma(\alpha, \lambda)\) be the Gamma distribution with PDF:
+     \[
+     f_X(x) = \frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha}{\Gamma(\alpha)}.
+     \]
+     Let \( t < \lambda\) (in any other case, the integral diverges).The moment generating function \(M_X(t)\) is given by:
+     \[
+     M_X(t) = \int_{0}^{\infty} e^{tx} f_X(x) \, dx = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha -1} e^{(t - \lambda) x} \, dx.
+     \]
+     We make use of the substitution \(u = -(t - \lambda)x\), \(\frac{du}{dx} = (\lambda - t)\), \(dx = \frac{du}{(\lambda - t)}\), so:
+     \[
+     = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} \frac{u}{(\lambda - t)}^{\alpha -1} e^{-u} \frac{du}{\lambda - t} = \frac{\lambda^\alpha}{\Gamma(\alpha) (\lambda - t)^\alpha} \int_{0}^{\infty} u^{\alpha -1} e^{-u} \, du.
+     \] This integral is just the definition of the Gamma Function, \(\Gamma(\alpha)\), so we obtain:
+     \[ = \frac{\lambda^\alpha \Gamma(\alpha)}{\Gamma(\alpha) (\lambda - t)^\alpha} = (\frac{\lambda}{\lambda - t})^\alpha = M_X(t)\]
+ \end{example}
+ 
+We will state the theorem which makes the MGF so useful.
+\begin{theorem}\label{t: mgf}
+    If \(M_X(t)\) exists on some interval \(-h, h\), as defined before, we have that:
+    \[ E[X^n] = M_X^{(n)}(0), \text{ for } n \in \mathbb{N}\]
+\end{theorem}
+
+\begin{proof}
+    The proof is fairly straightforward:
+    \[M_X^{(n)}(t) = \frac{d^n}{dt^n} \int_{-\infty}^{\infty} e^{tx} f_X(x) dx = \int_{-\infty}^{\infty} \frac{d^n}{dt^n} e^{tx} f_X(x) dx\] (We can interchange differentiation and integration since all partial derivatives of \(e^{tx} f(x)\) are continuous and the absolute value of the integral converges, as we assume the \(n\)-th moment exists, see \ref{s:appendices}).
+    \[ = \int_{-\infty}^{\infty} x^n e^{tx} f_X(x) dx, \text{evaluate at } t = 0: = \int_{-\infty}^{\infty} x^n e^{0x} f_X(x) dx\]
+    \[ = \int_{-\infty}^{\infty} x^n f_X(x) dx = E[x^n]\]
+    The proof for the case that \(f_X(x)\) is discrete is very similar. In that case, one would have to change the order of the derivative and summation, which has also been justified in \ref{s:appendices}.
+\end{proof}
+
+\begin{remark}
+    Since the validity of interchanging the order of differentiation and integration is based on characteristics of the integral and its inside, we can extend \autoref{t: mgf} to real values \(\alpha\).
+\end{remark}
+
+We introduce the following properties for the Moment Generating Function \(M_X(t)\):
+\begin{proposition}
+    For \(X, Y\) random variables, we have that:
+    \begin{enumerate}[(i)]
+        \item \(M_X^{(0)}(t) = E[e^{0X}] = 1\). This property can be used to check if a given is really a PDF.
+        \item Location scale-transform. Assuming \(M_X(t)\) exists, for constant \(\mu, \sigma\), we have that: 
+        \[M_{\mu + \sigma X}(t) = e^{\mu t} \cdot M_X(\sigma t)\]
+        \item If \(X \perp Y\), then \(M_{X+Y}(t) = M_X(t)\cdot M_Y(t)\).
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}[(i)]
+        \item This is trivial. For continuous functions of x, we get: 
+        \[ M_X^{(0)}(t) = \int_{-\infty}^{\infty} x^0 e^{t x } f_X(x) dx = \int_{-\infty}^{\infty} 1 e^{0 x } f_X(x) dx = \int_{-\infty}^{\infty} f_X(x) dx.\] Assuming that \(f(x)\) is a PDF, this integrates to 1 by definition. If this integral is not equal to 1, this implies that \(f(x)\) is not a PDF. The proof for the discrete case is the exact but with a summation instead of an integral sign.
+        \item \[M_{\mu + \sigma X}(t) = E[e^{(\mu + \sigma x)t}] = E[e^{\mu t} \cdot e^{\sigma x t}].\] Since this is the expectation of \(x\), every term that is not dependent on \(x\) can be taken out of the summation:
+        \[ = e^{\mu t} \cdot E[e^{\sigma x t}] = e^{\mu t} \cdot M_{ x}(\sigma t)\]
+        \item 
+        \[M_{X+Y}(t) = E[e^{(x + y)t}] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{(x + y)t} f_{X, Y}(x, y) dx dy\] 
+        \[= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{xt} \cdot e^{yt} f_{X, Y}(x, y) dx dy.\] 
+        \(f_{X, Y}(x, y)\) is the joint pdf for \(X, Y\). But we know that the latter is equal to \(f_X(x) \cdot f_Y(y)\), if \(X, Y\) are independent. Thus we get:
+        \[ = (\int_{-\infty}^{\infty}  e^{xt} f_X(x) dx) (\int_{-\infty}^{\infty}  e^{yt} f_Y(y) dy) = M_X(t) \cdot M_Y(t).\] 
+    \end{enumerate}
+\end{proof}
+
+To illustrate the usage of fractional derivatives with the MGF, we will give the following numerical examples. We let \(f(x) = \lambda \cdot e^{-\lambda x}\) on \(x \in [0, \infty)\). We will calculate its semi-moment using the Riemann-Liouville derivative, the Caputo-Fabrizio derivative and just the regular integral to compute moments.
+
+\begin{example}
+    \begin{enumerate}[(i)]
+        \item 
+    \end{enumerate}
+\end{example}
+
+\subsubsection{Computing negative moments using the Moment Generating Function}
+We have seen that under specific conditions, it is possible to compute negative, or so called inverse moments of distribution functions. This technique can be extended to the moment generating function. In the 20-th century, \cite{cressie1981} have published the following remarkable theorem:
+
+\begin{theorem}\label{t: negative}
+    Assuming the negative \(n\)-th raw moment exists, the negative \(n\)-th raw moment can be computed as follows: 
+    \[E[X^{-n}] = \frac{1}{\Gamma(n)} \int_{0}^{\infty} t^{n- 1} M_X(-t) dt\], where \(n\) is a positive integer.
+\end{theorem}
+The proof of this Theorem can be found in \ref{s:app_B}.
+
+Let us again compute the first inverse moment of the Gamma distribution, but now by making use of the latter theorem for Moment Generating Functions!
+
+\begin{example}
+    Let \(f_x(x) \sim \Gamma(\alpha, \lambda) =\) 
+    \[\frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)}, M_X(t) = (\frac{\lambda}{\lambda - t})^\alpha\]
+    \[E[X^{-1}] = \frac{1}{\Gamma(1)} \int_{0}^{\infty} t^{ 1 - 1} (\frac{\lambda}{\lambda - (-t)})^\alpha dt =  \int_{0}^{\infty} (\frac{\lambda}{\lambda + t})^\alpha dt\]
+    \[ = \lambda^\alpha \int_{0}^{\infty} (\lambda + t)^{-\alpha} dt, \text{ Let } u = \lambda + t, \frac{du}{dt} = 1, dt = du: \lambda^\alpha \int_{0}^{\infty} u^{-\alpha} du\]
+    \[ =  \lambda^\alpha \frac{u^{ 1-\alpha}}{1 -\alpha}\Big|_{0}^{\infty} = \lambda^\alpha \frac{(\lambda + t)^{1 -\alpha}}{1 -\alpha}\Big|_{0}^{\infty}\]
+    \[= \lambda^\alpha( 0 - \frac{\lambda^{ 1 - \alpha}}{1 -\alpha}) = \frac{-\lambda}{ 1 - \alpha} = \frac{\lambda}{\alpha - 1}.\] Which corresponds with our result from Example \ref{e: negative}.
+\end{example}
+
+\subsubsection{Laplace Transformation}
+WIP
+
+\subsubsection{Characteristic function and Fourier Transformations}
+WIP
