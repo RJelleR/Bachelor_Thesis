@@ -21,7 +21,7 @@ Other important identities, not necessarily for \(z\) an integer, are:
 We can derive the following factorial identity, which is convenient to work with analytically: \(\binom{n}{k} = \frac{n!}{k! (n - k)!}\).
 For numerically computing expressions containing the Binomial Coefficient, the following identity is computationally more efficient: \(\binom{n}{k} = \frac{(n)_k}{k!}\). With \((n)_k\) as in \ref{d: ff}.
 Since we have established in \ref{d: eg} that \(\Gamma(z) = (z - 1)!\), we can rewrite our factorial identify to:
-\[\binom{n}{k} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)} = \frac{n}{k}\frac{\Gamma(n)}{\Gamma(k) \cdot \Gamma(n - k + 1)}\]
+\[\binom{n}{k} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)} = \frac{n}{k} \cdot\frac{\Gamma(n)}{\Gamma(k) \cdot \Gamma(n - k + 1)}\]
 
 \begin{definition}
     Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\].
@@ -29,7 +29,7 @@ Since we have established in \ref{d: eg} that \(\Gamma(z) = (z - 1)!\), we can r
 A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer (\cite{askey75}).
 
 For the interchange-ability of derivatives and integrals and sums, we can apply the following two theorems:
-
+\begin{comment}
 \begin{theorem}
     Leibnitz's Rule:
     Let \(f(x, \theta), a(\theta), b(\theta)\) be differentiable with respect to \(\theta\), then we have that:
@@ -52,8 +52,44 @@ For the interchange-ability of derivatives and summations, the following theorem
     
    
 \end{theorem}
-\newpage
+\end{comment}
 \section{(Appendix): Proofs}\label{s:app_B}
+
+\subsection{Proofs section \ref{s:calculus}}
+
+\begin{proof}
+    Proof of \ref{p: calculus}
+    \begin{enumerate}[(i)]
+        \item We will proof for the Riemann-Liouville derivative, the proof for the Caputo-Fabrizio derivative is very similar and the Grünwald-Letnikov derivative is a direct consequence of the linearity of the sum.
+        \[ D^{\alpha} (a f(x) + b g(x)) = \frac{d^n}{dx^n}\frac{1}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} (a f(t) + b g(t)) dt \]
+     
+        \[= \frac{d^n}{dx^n}\left(\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt\right) \] Where we simply split the integral and put the constants in front.
+        \[= \frac{d^n}{dx^n}\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{d^n}{dx^n} \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt \] As the regular derivative operator is linear.
+        \[ = a D^{\alpha} f(x) + b D^{\alpha} g(x) \]
+        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, so just the function \(f(x)\). But for these derivatives, a little bit more effort is needed to prove this rather obvious fact.
+        \newline 
+        For the Grünwald-Letnikov derivative we get: \[D^0 f(x) = \lim_{h \to 0} \frac{1}{h^0} \sum_{k=0}^\infty (-1)^k \binom{0}{k} f(x - k h)
+        = \lim_{h \to 0} \frac{1}{1} \sum_{k=0}^\infty (-1)^k \frac{0!}{k!(0- k)!} f(x - k h).\] The factorial Identity of the binomial coefficient only holds for \(0 \leq k \leq \alpha\). Since \(\alpha = 0\) and k is always a positive integer lesser or equal to \(\alpha, k = 0\). Thus, we get:
+        \[ = \lim_{h \to 0} \sum_{k=0}^\infty (-1)^0 \frac{0!}{0!(0- 0)!} f(x - 0 h) = \lim_{h \to 0} f(x - 0 h) = f(x).\]
+        \newline
+        For the Caputo-Fabrizio derivative, we obtain the following:
+        \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp\left(\frac{0}{1 -0}(x-t)\right) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x).\]
+        \newline
+        Finally, for the Riemann-Liouville derivative, we can simply make use of \autoref{d: differintegral} and \autoref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \(D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\) by the first fundamental theorem of calculus.
+
+        \item The proof for the Riemann-Liouville derivative is given by \cite{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \cite{losada15}.For the Grünwald-Letnikov derivative, we get:
+        \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k}(  \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh))\]
+        \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the dubble sums: 
+        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \autoref{s:appendices} to obtain:
+        \[ = \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty (-1)^m \binom{\alpha + \beta}{m} f(x - mh) = D^{\alpha + \beta} f(x).\]
+        It can be shown in an exactly similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
+
+        
+    \end{enumerate}
+\end{proof}
+\begin{comment}
+\subsection{Proofs section \ref{s: moments}}
+
 \begin{proof}
     Theorem \ref{t: negative}:
 Suppose for the moment that \( X \) is a positive random variable. Since \( x f(x) \) is integrable for \( x > 0 \), we have:
@@ -89,6 +125,7 @@ E(X^{-n}) = \frac{1}{\Gamma(n)} \int_0^\infty t^{n-1} M_X(-t) \, dt.
 \]
 \cite{cressie1981}
 \end{proof}
-\newpage
+\end{comment}
+
 \section{Appendix C }\label{s: app_C}
 TODO: ADD TABLE OF COMMON DISTRIBUTIONS + SUPPORT, MGF, ETC.
