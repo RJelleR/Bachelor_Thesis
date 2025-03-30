@@ -1,18 +1,23 @@
 \section{Fractional Calculus}\label{s:calculus}
-\subsection{Fractional derivatives}
-In order to obtain the expression as mentioned in section \autoref{s:intro}, some advanced tools are required. We can find this in the field of fractional calculus.
+\subsection{Overview and applications of fractional derivatives}\label{ss:calculus_introduction}
+Although not the main topic of interest of this thesis, it is useful to have some knowledge about the history and applications of fractional derivatives. The study of fractional derivatives has been relevant as early as the year 1695 when the concept of such a derivative was implicitly discussed by Leibniz and Bernoulli \cite{katugampola2014}. Since then, numerous definitions of fractional derivatives have been developed. The best-known definition of the fractional derivative is the Riemann-Liouville derivative, its upper derivative of a function \(f(x)\) of order \(\alpha\) is denoted as 
+\[\frac{d^n}{dx^n}\frac{1}{\Gamma(n -\alpha)} \int_{a}^{x} (x-t)^{n - \alpha -1} f(t) dt, \text{ where }n = \lceil\alpha \rceil \] \cite{kilbas2006}.
+Michele \cite{caputo1967} defined a variation on this derivative, where instead of \(\frac{d^n}{dx^n}\) in front of the integral, we have \(\frac{d^n}{dt^n}\) inside the integral. Due to this adjustment, it is possible to have initial value conditions expressed as the traditional derivatives of integer-order, which made these fractional differential equation problems more intuitive. Other fractional derivatives, such as the \cite{hadamard1892} and \cite{riesz1949} derivative, have been defined to take advantage of particular beneficial properties. For example, each of the latter derivatives can be written as a Fourier transformation. As a consequence, the analytical expressions, can often be simplified. A rather unique derivative is the Grünwald-Letnikov derivative which, in contrast to all the aforementioned derivatives, is not based on integral. Instead, it generalizes the difference quotient, \(\frac{f(x+h) - f(x)}{h}\),  to fractional orders using binomial coefficients \cite{atici2021}. This variety of definitions emphasises how dependent fractional derivatives are  on different physical interpretations and practical applications.
+Beyond their theoretical significance, fractional derivatives have been of significant importance in various scientific fields since the 19th century. Examples include fractional Fourier transformations, a generalization of the regular Fourier transformations \cite{missbauer2012}, fractional diffusion equation models, describing the motion of particles in liquids as a consequence of thermal molecular motions \cite{einstein1905} and the fractional Schrödinger equation, a generalization of the Schrödinger equation, often used in quantum mechanics \cite{laskin2002}. Their applications are less common in the fields of finance or economics, as fractional derivatives are mainly used to describe natural phenomena \cite{boulaaras2023}. Yet they still offer some great potential. (Symmetric) Levy flights make use of fractional derivatives in order to solve partial differential equations which describe random walk processes in time series \cite{scalas2000}. The development of fractional derivatives also led to the notion of fractional Brownian motions, a generalization of the Brownian motion \cite{mandelbrot1968}. The latter is a continuous-time stochastic process which, similar to Levy flights, may be used to model random walk processes.
+\subsection{Formal definitions of fractional derivatives}
+In order to obtain the expressionS mentioned in \autoref{s:methodology}, some advanced tools are required. We can find these in the field of fractional calculus.
 We define the following:
 \begin{definition}
-    Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \(D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\).
+    Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \[D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\].
 \end{definition}
-In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In our case, we are interested in instances where  \(\alpha \in \mathbb{Q}, \alpha \geq 0\).
+In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In most of our cases, we are interested in the instance where  \(\alpha \in \mathbb{R}_+\).
 
-It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a function. A derivative of negative order is simply an integral of positive order. This is defined as follows:
+It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a function, provided that such an order exists. A derivative of negative order is simply an integral of positive order. This is defined as follows:
 \begin{definition}
-    Let \(I\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \((I^{\alpha} f) (x) = \frac{1}{(n-1)!}\int (x-t)^{n-1} f(t) dt\).
-\end{definition}
+    Let \(I\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \[(I^{\alpha} f) (x) = \frac{1}{(\alpha-1)!}\int (x-t)^{\alpha-1} f(t) dt\] \cite{cauchy1823}.
+\end{definition} 
 
-Combining the previous two definition, we can obtain the following definition.
+Combining the previous two definitions, we obtain the following, more general, definition.
 \begin{definition}\label{d: differintegral}
     The differintegral operator is defined as
     \begin{equation}
@@ -20,20 +25,23 @@ Combining the previous two definition, we can obtain the following definition.
             I^{|\alpha|} f(x) & \text{if } \alpha < 0 \\
             D^\alpha f(x) & \text{if } \alpha > 0 \\
             f(x) & \text{if } \alpha = 0
-        \end{cases}
+        \end{cases}, \text{ with } \alpha \in \mathbb{R}.
         \end{equation}
 \end{definition}
 
-A lot of different definition have been used to compute a fractional derivative. In this paper, we will focus on the following fractional derivatives:
+As mentioned in section \ref{ss:calculus_introduction}, quite a number of different definitions have been proposed to compute a fractional derivative. Some of these definitions are rather similar, thus, in this paper, we will focus on some of the more well known fractional derivatives. We will start with the most famous fractional derivative, which laid the foundation of the study of fractional derivatives as early as in 1832.
 \begin{definition}
-    The Riemann-Liouville fractional derivative of order \(\alpha\) is defined as:
+    The left-side Riemann-Liouville fractional derivative of order \(\alpha\) is defined as:
     \begin{equation}
-        D^{\alpha} f(x) =  \frac{d^{n}}{dx^{n}} D_{x}^{-(n - \alpha)} f(x) = \frac{d^{n}}{dx^{n}} I_{x}^{n - \alpha} f(x) = \frac{d^n}{dx^n} \frac{1}{\Gamma(n -\alpha)}  \int_{0}^{x} (x-t)^{n - \alpha-1} f(t) dt
-    \end{equation}
-    Where \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function, see section \autoref{s:appendices}.
+        D^{\alpha}_{a_+} f(x) =  \frac{d^{n}}{dx^{n}} D_{x}^{-(n - \alpha)} f(x) = \frac{d^{n}}{dx^{n}} I_{x}^{n - \alpha} f(x) = \frac{d^n}{dx^n} \frac{1}{\Gamma(n -\alpha)}  \int_{a}^{x} (x-t)^{n - \alpha-1} f(t) dt
+    \end{equation} \cite{liouville1832}.
+
+    Here, \(n = \lceil \alpha \rceil\), the ceiling function and \(\Gamma(.)\) is the Gamma function, see section \autoref{s:appendices}.
+
+    Note that we just defined the left-side Riemann-Liouville fractional derivative, suggesting that there also exists a right side derivative. In the case of the latter, we would evaluate the associated integral the other way around. Namely, \(D^{\alpha}_{b_-} f(x) = \frac{d^n}{dx^n} \frac{1}{\Gamma(n -\alpha)}  \int_{x}^{b} (x-t)^{n - \alpha-1} f(t) dt\). We intend on using the left-side derivative, as is supported by \cite{tarasov2023}. The reason is, due to the fact that many functions in probability theory, most importantly the cumulative distribution function, are defined as an integral from some constant to \(x\). 
     
     \begin{remark}\label{r: integer}
-        For values \(\alpha \in \mathbb{N}, n = \alpha\), so \(\Gamma(n - \alpha) = \Gamma(0)\), which is undefined. Thus for \(\alpha \in \mathbb{N}\), including the value \(0\), we simply define: \(D^\alpha f(x) = \frac{d^\alpha}{dx^\alpha} f(x)\)
+        For values \(\alpha \in \mathbb{N}_+, n =  \lceil \alpha \rceil = \alpha\), so \(\Gamma(n - \alpha) = \Gamma(0)\), which is undefined. Thus for \(\alpha \in \mathbb{N}_+\), we define: \(D^\alpha f(x) = \frac{d^\alpha}{dx^\alpha} f(x)\), which is simply the regular expression for derivatives of integer order.
     \end{remark}
    
 \end{definition}
@@ -41,9 +49,10 @@ A modification of the Riemann-Liouville derivative is the Caputo-Fabrizio deriva
 \begin{definition}\label{d: CF}
     The Caputo-Fabrizio fractional derivative of order \(\alpha, \alpha \in [0,1)\) is defined as:
     \begin{equation}
-        D^{\alpha} f(x) = \frac{1}{1 - \alpha}  \int_{0}^{x} \exp(\frac{-\alpha}{1 - \alpha}(x-t)) f'(t) dt
-    \end{equation}
-    
+        D^{\alpha} f(x) = \frac{1}{1 - \alpha}  \int_{a}^{x} \exp\left(\frac{-\alpha}{1 - \alpha}(x-t)\right) f'(t) dt
+    \end{equation} \cite{caputo2015}.
+    With \(a \in [-\infty, x)\).
+    The Caputo-Fabrizio is always defined as the integral from some constant to the variable \(x\). This is another reason for choosing to work with the left-side Riemann-Liouville integral. In this way, it will be more straightforward to compare the two integrals. What is more, note that for the Caputo-Fabrizio derivative, the order \(\alpha \in [0, 1)\). This does not mean, however, that one can only compute fractional derivatives of order 1 or lower. There exists a rather convenient property of the differintegral operator which allows one to combine orders of derivatives, which will be discussed in a moment.
     
 \end{definition}
 
@@ -53,69 +62,49 @@ Lastly, we will define the Grünwald-Letnikov derivative, which is defined as fo
     \begin{equation}
         D^\alpha f(x) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} f(x - k h)
     \end{equation}
-   Where \(\binom{\alpha}{k}\) is the binomial coefficient, see section \autoref{s:appendices}.
-\end{definition}
+   Where \(\binom{\alpha}{k}\) is the binomial coefficient, with \(0 \leq k \leq \alpha\), see section \autoref{s:appendices}.
+\end{definition} \cite{zhmakin2022}.
+It is immediately clear, observing the summmation symbol instead of the integral, that this derivative behaves quite differently from the two derivatives defined above. The Grünwald-Letnikov derivative is an extension on derivatives based of the concept of finite differences \cite{flajolet1995}.
 
-\begin{proposition} 
+We will consider a number of properties which come in useful when working with fractional derivatives.
+
+\begin{proposition}\label{p: calculus}
     The fractional derivatives above adhere to the following properties:
     \begin{enumerate}[(i)]
         \item Linearity: Let \(f(x), g(x)\) be functions and \(a, b, x \in \mathbb{R}\). Then we have that \(D^{\alpha} (a f(x) + b g(x)) = a D^{\alpha} f(x) + b D^{\alpha} g(x)\).
-        \item \(D^{\alpha} f(x)\) for \(\alpha = 0, = f(x)\) 
-        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = D^\alpha(D^\beta f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for \autoref{d: CF}, this only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
+        \item \(D^{\alpha} f(x) = f(x)\), for \(\alpha = 0\) 
+        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = (D^\alpha(D^\beta) f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for definition \ref{d: CF}, this property only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
     \end{enumerate}
         
     
 \end{proposition}
 
-\begin{proof}
-    \begin{enumerate}[(i)]
-        \item We will proof for the Riemann-Liouville derivative, the proof for the Caputo-Fabrizio derivative is very similar and the Grünwald-Letnikov derivative is a direct consequence of the linearity of the sum.
-        \[ D^{\alpha} (a f(x) + b g(x)) = \frac{d^n}{dx^n}\frac{1}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} (a f(t) + b g(t)) dt \]
-     
-        \[= \frac{d^n}{dx^n}(\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt) \] Where we simply split the integral and put the constants in front.
-        \[= \frac{d^n}{dx^n}\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{d^n}{dx^n} \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt \] As the regular derivative operator is just linear.
-        \[ = a D^{\alpha} f(x) + b D^{\alpha} g(x) \]
-        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, so just the function \(f(x)\). But for these derivatives, a little bit more effort is needed to prove this rather obvious fact.
-        \newline 
-        For the Grünwald-Letnikov derivative we get: \[D^0 f(x) = \lim_{h \to 0} \frac{1}{h^0} \sum_{k=0}^\infty (-1)^k \binom{0}{k} f(x - k h)
-        = \lim_{h \to 0} \frac{1}{1} \sum_{k=0}^\infty (-1)^k \frac{0!}{k!(0- k)!} f(x - k h).\] The factorial Identity of the binomial coefficient only holds for \(0 \leq k \leq \alpha\). Since \(\alpha = 0\) and k is always a positive integer lesser or equal to \(\alpha, k = 0\). Thus, we get:
-        \[ = \lim_{h \to 0} \sum_{k=0}^\infty (-1)^0 \frac{0!}{0!(0- 0)!} f(x - 0 h) = \lim_{h \to 0} f(x - 0 h) = f(x).\]
-        \newline
-        For the Caputo-Fabrizio derivative, we get the following:
-        \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp(\frac{0}{1 -0}(x-t)) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x).\]
-        \newline
-        Finally, for the Riemann-Liouville derivative, we can simply make use of \autoref{d: differintegral} and \autoref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \(D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\).
-
-        \item The proof for the Riemann-Liouville derivative is given by \cite{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \cite{losada15}.For the Grünwald-Letnikov derivative, we get:
-        \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k}(  \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh))\]
-        \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the dubble sums: 
-        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \autoref{s:appendices} to obtain:
-        \[ = \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty (-1)^m \binom{\alpha + \beta}{m} f(x - mh) = D^{\alpha + \beta} f(x).\]
-        It can be shown in an exactly similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
-
-        
-    \end{enumerate}
-\end{proof}
+The proofs of these of the properties stated in this proposition can be found in Appendix \ref{s:app_B}. Most of these proofs have been provided by myself, while some other proofs, which are outside the scope of thesis are based on other papers. Note that the third property is especially useful for the Caputo-Fabrizio derivative. This property allows one to take fractional derivatives of order greater than 1 by comparing fractional derivatives and regular integer derivatives.
 
 We will now provide a few numerical examples of these fractional derivatives. For simplicity, we will let \(a = 0\):
 \begin{example}
     \begin{enumerate}[(i)]
         \item 
     
+    We consider the Riemann-Liouville derivative of order \(\frac{3}{2}\) for some constant \(c \in \mathbb{R}\):
     \[D^{\frac{3}{2}}_{RL}(c) = \frac{d^2}{dx^2} \frac{1}{\Gamma(2 - \frac{3}{2})}  \int_{0}^{x} (x-t)^{2 - \frac{3}{2}-1} c dt\]
     \[= \frac{d^2}{dx^2} \frac{c}{\sqrt{\pi}}  \int_{0}^{x} (x-t)^{- \frac{1}{2}} dt = \frac{d^2}{dx^2} \frac{-2c}{\sqrt{\pi}} \sqrt{x - t} \Big|_{0}^{x}\]
-    \[= \frac{d^2}{dx^2} \frac{2c \sqrt{x}}{\sqrt{\pi}} = \frac{-c}{2\pi(x)^\frac{3}{2}} \neq 0.\] As stated, the fractional of a constant is not equal to zero when using the Riemann-Liouville derivative, this is also the case for the Grünwald-Letnikov derivative, but not for the Caputo-Fabrizio derivative.
-    \item \[D^{\frac{1}{2}}_{CF}(\frac{x}{2}) = \frac{1}{1 - \frac{1}{2}}  \int_{0}^{x} \exp(\frac{-\frac{1}{2}}{1 - \frac{1}{2}}(x-t)) \frac{1}{2} dt = \int_{0}^{x} \exp(t - x) dt\]
+    \[= \frac{d^2}{dx^2} \frac{2c \sqrt{x}}{\sqrt{\pi}} = \frac{-c}{2x\sqrt{\pi x}} \neq 0.\] As stated, the fractional derivative of a constant is not equal to zero when using the Riemann-Liouville derivative. This is also the case for the Grünwald-Letnikov derivative, but not for the Caputo-Fabrizio derivative.
+    \item We compute the semi-derivative of \(\frac{1}{2}\) using the Caputo-Fabrizio derivative:
+    \[D^{\frac{1}{2}}_{CF}(\frac{1}{2}) = \frac{1}{1 - \frac{1}{2}}  \int_{0}^{x} \exp\left(\frac{-\frac{1}{2}}{1 - \frac{1}{2}}(x-t)\right) \frac{1}{2} dt = \int_{0}^{x} \exp(t - x) dt\]
     \[ =  \exp(t - x) \Big|_{0}^{x} = 1 - \exp(- x).\]
     For \(x \geq 0\), this expression is equal to the CDF of the exponential distribution with \(\lambda = 1\). A remarkble result.
-    \item We will compute another famous result with the Riemann-Liouville derivative:
+    \item We will compute another famous result using the Riemann-Liouville derivative, namely, the semi-derivative of \(x\):
     \[D^{\frac{1}{2}}_{RL}(x) = \frac{d}{dx} \frac{1}{\Gamma(1 - \frac{1}{2})}  \int_{0}^{x} (x-t)^{1 - \frac{1}{2}-1} t dt\]
-    Let \( u = x - t\), such that \(\frac{du}{dt} = -1, dt = -du\):
-    \[=  \frac{d}{dx} \frac{1}{\sqrt{\pi}} \int_{0}^{x} (u)^{-\frac{1}{2}} (u - x) du =  \frac{d}{dx} \frac{1}{\sqrt{\pi}}(\int_{0}^{x} \sqrt{u} du - x\int_{0}^{x} \frac{1}{\sqrt{u}} du)\]
-    \[ = \frac{d}{dx} \frac{1}{\sqrt{\pi}}(\frac{2u^\frac{3}{2}}{3} - 2 x u^\frac{1}{2} \Big|_{0}^{x}) = \frac{d}{dx} \frac{1}{\sqrt{\pi}}(\frac{2(x - t)^\frac{3}{2}}{3} - 2 x (x - t)^\frac{1}{2} \Big|_{0}^{x})\]
-    \[=  \frac{d}{dx} \frac{-1}{\sqrt{\pi}}(\frac{2}{3}x^\frac{3}{2} - 2x^\frac{3}{2} = \frac{d}{dx} \frac{\frac{4}{3}x^\frac{2}{3}}{\sqrt{\pi}})\]
+   U-substitution: \( u = x - t\), such that \(\frac{du}{dt} = -1, dt = -du\):
+    \[=  \frac{d}{dx} \frac{1}{\sqrt{\pi}} \int_{0}^{x} (u)^{-\frac{1}{2}} (u - x) du =  \frac{d}{dx} \frac{1}{\sqrt{\pi}}\left(\int_{0}^{x} \sqrt{u} du - x\int_{0}^{x} \frac{1}{\sqrt{u}} du\right)\]
+    \[ = \frac{d}{dx} \frac{1}{\sqrt{\pi}}\left(\frac{2u^\frac{3}{2}}{3} - 2 x u^\frac{1}{2}\right) \Big|_{0}^{x} = \frac{d}{dx} \frac{1}{\sqrt{\pi}}\left(\frac{2(x - t)^\frac{3}{2}}{3} - 2 x (x - t)^\frac{1}{2}\right) \Big|_{0}^{x}\]
+    \[=  \frac{d}{dx} \frac{-1}{\sqrt{\pi}}\left(\frac{2}{3}x^\frac{3}{2} - 2x^\frac{3}{2}\right) = \frac{d}{dx} \frac{4x^\frac{2}{3}}{3\sqrt{\pi}}\]
     \[ = \frac{2\sqrt{x}}{\sqrt{\pi}}.\]
     \end{enumerate}
 \end{example}
-\subsection{Complex derivatives}
-WIP
+The observant reader might notice that no explicit examples of the Grünwald-Letnikov derivative have been provided. The latter is due to the fact that is rather difficult to obtain analytical expressions for this derivative. Thus, later on in this thesis, when computing fractional moments and their assiocated biases, the main focus for the Grünwald-Letnikov derivative will be on its numerical computations.
+\begin{remark}
+    
+As shortly mentioned in the introduction, it is possible to generalize the order of derivatives even further, extending \(\alpha\) to be in \(\mathbb{C}\) instead of \(\alpha \in \mathbb{R}\). This means that, when combining such derivatives with the moment generating function, we will obtain complex moments. Since statisical moments of complex order do almost not find any usage in applications, as they lack interpretability, they are not the main focus of this research. For the interested reader, \cite{love1971} has done some impressive research on the fundamentals of derivatives of complex order. The obtained expressions are somewhat similar to those of the fractional derivatives which have been discussed above.
+\end{remark}
