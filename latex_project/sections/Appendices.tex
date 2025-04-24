@@ -23,13 +23,18 @@ For numerically computing expressions containing the Binomial Coefficient, the f
 Since we have established in \ref{d: eg} that \(\Gamma(z) = (z - 1)!\), we can rewrite our factorial identify to:
 \[\binom{n}{k} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)} = \frac{n}{k} \cdot\frac{\Gamma(n)}{\Gamma(k) \cdot \Gamma(n - k + 1)}\]
 
+\begin{definition}\label{d: binomial}
+    The binomial series is a generalization of the binomial formula, namely:
+    \[(1 + x)^\alpha = \sum_{k = 0}^{\infty}\binom{\alpha}{k} x^k\]
+\end{definition}
+
 \begin{definition}
-    Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\].
+    Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\]
 \end{definition}
 A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer (\cite{askey75}).
 
 For the interchange-ability of derivatives and integrals and sums, we can apply the following two theorems:
-\begin{comment}
+
 \begin{theorem}
     Leibnitz's Rule:
     Let \(f(x, \theta), a(\theta), b(\theta)\) be differentiable with respect to \(\theta\), then we have that:
@@ -52,7 +57,9 @@ For the interchange-ability of derivatives and summations, the following theorem
     
    
 \end{theorem}
-\end{comment}
+
+
+\newpage
 \section{(Appendix): Proofs}\label{s:app_B}
 
 \subsection{Proofs section \ref{s:calculus}}
@@ -66,10 +73,10 @@ For the interchange-ability of derivatives and summations, the following theorem
         \[= \frac{d^n}{dx^n}\left(\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt\right) \] Where we simply split the integral and put the constants in front.
         \[= \frac{d^n}{dx^n}\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{d^n}{dx^n} \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt \] As the regular derivative operator is linear.
         \[ = a D^{\alpha} f(x) + b D^{\alpha} g(x) \]
-        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, so just the function \(f(x)\). But for these derivatives, a little bit more effort is needed to prove this rather obvious fact.
+        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, so just the function \(f(x)\). But for these derivatives, a little bit more effort is required to prove this rather obvious fact.
         \newline 
         For the Grünwald-Letnikov derivative we get: \[D^0 f(x) = \lim_{h \to 0} \frac{1}{h^0} \sum_{k=0}^\infty (-1)^k \binom{0}{k} f(x - k h)
-        = \lim_{h \to 0} \frac{1}{1} \sum_{k=0}^\infty (-1)^k \frac{0!}{k!(0- k)!} f(x - k h).\] The factorial Identity of the binomial coefficient only holds for \(0 \leq k \leq \alpha\). Since \(\alpha = 0\) and k is always a positive integer lesser or equal to \(\alpha, k = 0\). Thus, we get:
+        = \lim_{h \to 0} \frac{1}{1} \sum_{k=0}^\infty (-1)^k \frac{0!}{k!(0- k)!} f(x - k h).\] The factorial identity of the binomial coefficient only holds for \(0 \leq k \leq \alpha\). Since \(\alpha = 0\) and k is always a positive integer lesser or equal to \(\alpha, k = 0\). Thus, we get:
         \[ = \lim_{h \to 0} \sum_{k=0}^\infty (-1)^0 \frac{0!}{0!(0- 0)!} f(x - 0 h) = \lim_{h \to 0} f(x - 0 h) = f(x).\]
         \newline
         For the Caputo-Fabrizio derivative, we obtain the following:
@@ -87,45 +94,161 @@ For the interchange-ability of derivatives and summations, the following theorem
         
     \end{enumerate}
 \end{proof}
-\begin{comment}
+
 \subsection{Proofs section \ref{s: moments}}
 
 \begin{proof}
-    Theorem \ref{t: negative}:
-Suppose for the moment that \( X \) is a positive random variable. Since \( x f(x) \) is integrable for \( x > 0 \), we have:
+    Proof of proposition \ref{p: moments_1}
+     
+    \begin{enumerate}[(i)]
+        \item If \(X\) is a discrete random variable, we get: \[\mathbb{E}[X^n] = \sum_{i} x_i^n f_X(x_i) = \infty, \mathbb{E}[X^k] = \sum_{i} x_i^k f_X(x_i)\]
+        \[ = \sum_{i} x_i^n \cdot x^{k - n} f_X(x_i) \geq \sum_{i} x_i^n f_X(x_i) = \infty, \text{ as } k \geq n\]
+        We can prove this for continuous random variables in a similar manner.
+        \item This simply follows from the previous proposition, as the current proposition is just the contrapositive statement of the previous proposition.
+    \end{enumerate}
+\end{proof}
+
+\begin{proof}
+    Proof of Proposition \ref{p: moments}
+    \begin{enumerate}[(i)]
+        \item This is trivial. For \(X\) a continuous random variable, we get: 
+        \[ M_X^{(0)}(t) = \int_{-\infty}^{\infty} x^0 e^{t x } f_X(x) dx = \int_{-\infty}^{\infty} 1 e^{0 x } f_X(x) dx = \int_{-\infty}^{\infty} f_X(x) dx.\] Assuming that \(f(x)\) is a PDF, this integrates to 1 by definition. If this integral is not equal to 1, this implies that \(f(x)\) is not a PDF. The proof for the discrete case is the same but with a summation instead of an integral sign.
+        \item \[M_{\mu + \sigma X}(t) = \mathbb{E}[e^{(\mu + \sigma X)t}] = \mathbb{E}[e^{\mu t} \cdot e^{\sigma X t}].\] Since this is the expectation of \(x\), every term that is not dependent on \(x\) can be taken out of the summation:
+        \[ = e^{\mu t} \cdot \mathbb{E}[e^{\sigma X t}] = e^{\mu t} \cdot M_{ X}(\sigma t)\]
+        \item 
+        \[M_{X+Y}(t) = \mathbb{E}[e^{(X + Y)t}] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{(x + y)t} f_{X, Y}(x, y) dx dy\] 
+        \[= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{xt} \cdot e^{yt} f_{X, Y}(x, y) dx dy.\] 
+        \(f_{X, Y}(x, y)\) is the joint pdf for \(X, Y\). But we know that the latter is equal to \(f_X(x) \cdot f_Y(y)\), if \(X, Y\) are independent. Thus we get:
+        \[ = \left(\int_{-\infty}^{\infty}  e^{xt} f_X(x) dx\right) \left(\int_{-\infty}^{\infty}  e^{yt} f_Y(y) dy\right) = M_X(t) \cdot M_Y(t).\] 
+    \end{enumerate}
+\end{proof}
+
+\begin{proof}
+    Proof of Theorem \ref{t: negative}:
+Suppose for the moment that \( X \) is a positive random variable. Since \( x \cdot f_X(x) \) is integrable for \( x > 0 \), we have:
 
 \[
-E(X) = \int_0^\infty x \, dF(x) = \int_0^\infty \int_0^\infty e^{tx} \, dt \, dF(x).
+    \mathbb{E}(X) = \int_0^\infty x \, dF(x) = \int_0^\infty \int_0^\infty e^{tx} \, dt \, dF(x).
 \]
 
 We can interchange the order of integration as follows:
 
 \[
-E(X) = \int_0^\infty e^{tx} \, dF(x) \, dt = \int_0^\infty M_X(-t) \, dt.
+    \mathbb{E}(X) = \int_0^\infty e^{tx} \, dF(x) \, dt = \int_0^\infty M_X(-t) \, dt.
 \]
 
-The interchange of the order of integration is subject to \( E(e^{-tX}) \) being integrable from \( t = 0 \) to \( t = \infty \).
+The interchange of the order of integration is subject to \( \mathbb{E}(e^{-tX}) \) being integrable from \( t = 0 \) to \( t = \infty \).
 
 Finally, by substituting \( X^{-1} \) for \( X \), we find:
 
 \[
-E(X^{-1}) = \int_0^\infty M_X^{-1}(-t) \, dt.
+    \mathbb{E}(X^{-1}) = \int_0^\infty M_X^{-1}(-t) \, dt.
 \]
 
-There are two natural ways to generalize (1) to \( E(X^{-1}) \); one way gives:
+There are two natural ways to generalize (1) to \( \mathbb{E}(X^{-1}) \); one way gives:
 
 \[
-E(X^{-n}) = \int_0^\infty \int_0^\infty \cdots \int_0^\infty M_X(-t_n) \, dt_n \cdots dt_2 dt_1, \tag{2}
+    \mathbb{E}(X^{-n}) = \int_0^\infty \int_0^\infty \cdots \int_0^\infty M_X(-t_n) \, dt_n \cdots dt_2 dt_1, \tag{2}
 \]
 
 while the second way gives:
 
 \[
-E(X^{-n}) = \frac{1}{\Gamma(n)} \int_0^\infty t^{n-1} M_X(-t) \, dt.
+    \mathbb{E}(X^{-n}) = \frac{1}{\Gamma(n)} \int_0^\infty t^{n-1} M_X(-t) \, dt.
 \]
 \cite{cressie1981}
 \end{proof}
-\end{comment}
+
+\begin{proof}
+    Proof Theorem \ref{t: MGF_accurate}
+    We consider \(X\) to be a continuous variable. The three MGF expressions are accurate if \(\mathbb{E}[X^\alpha] - M_X^{(\alpha)}(0) = 0\), in other words, if 
+    \[\int_{-\infty}^{\infty} (x^\alpha - D^\alpha e^{tx}) \cdot f_X(x) dx = 0 \iff x^\alpha = D^\alpha e^{tx}\]
+    where \(D^\alpha\) the differential operator of order \(\alpha\). Note that we are of course taking derivatives w.r.t. \(t\), not \(x\). The proof will be shown for the Grünwald-left derivative.
+    \begin{enumerate}[(i)]
+        \item \[\leftindex_{GL}{M}_X^{(\alpha)} = D^\alpha_{GL}(e^{tx})  = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \exp(x(t - kh))\]
+        \[= \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \exp(-xh)^k\]
+        \[= \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (1 - \exp(-xh))^\alpha\]
+        (where we used the binomial series identity defined in \ref{d: binomial}). Now we use the Taylor expansion of \(\exp(-xh) = 1 - xh + \frac{(xh)^2}{2!} - \frac{(xh)^3}{3!} + ... - ...\). Since \(h \to 0\), we get: \(\exp(-xh) = 1 - xh + \mathcal{O}(h^2)\) (the rest of the terms are negligible).
+        Thus we get:
+        \[ \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (1 -(1 - xh + \mathcal{O}(n)))^\alpha = \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (h(x + \mathcal{O}(h)))^\alpha \]
+        \[ = \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (h^\alpha((x + \mathcal{O}(h)))^\alpha) = \exp(xt) \lim_{h \to 0} (x + \mathcal{O}(h))^\alpha\]
+        \[ = \exp(xt) x^\alpha.\]
+        Finally, we take a value of \(t\) around 0 and obtain \(\leftindex_{GL}{M}_X^{(\alpha)}(0) = x^\alpha\) 
+        \item We consider the Riemann-Liouville derivative: 
+        \[D_{RL}^\alpha(e^{tx}) = \frac{d^n}{dt^n} \frac{1}{\Gamma(n -\alpha)}  \int_{-\infty}^{t} (t-s)^{n - \alpha-1} e^{sx} ds\]
+        \cite{koning15} has shown that this derivative is equal to \(x^\alpha e^{tx}\). Thus, if we take a value of \(t\) around 0, we get: \(\leftindex_{RL}{M}_X^{(\alpha)}(0) = x^\alpha\)
+    \end{enumerate}
+
+    The proof also holds for the case when \(X\) is a discrete random variable.
+\end{proof}
+
+\begin{proof}
+    Proof of Theorem \ref{t: MGF_inaccurate}
+    We compute \[\leftindex_{CF}{M}_X^{(\alpha)} = D^\alpha_{CF}(e^{tx}) = \frac{d^n}{dt^n}\frac{1}{1 - \beta}  \int_{-\infty}^{t} \exp\left(\frac{-\beta}{1 - \beta}(t - s)\right) x \exp(xs) ds\]
+    \[= \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp(s\left(\frac{\beta }{1 - \beta} + x \right)) ds  \text{ where } \beta = \alpha - n \text{ and } n = \lfloor \alpha \rfloor.\]
+    Now let \(u = \frac{\beta}{1 - \beta} + x\), so we get:
+    \[\frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp(us) ds = \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \frac{1}{u} exp(us)\Big|_{-\infty}^{t}\]
+    \[= \frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \cdot \frac{1}{u} \cdot \exp(u t) = \frac{x \exp(xt)}{(1 - \beta)x + \beta}\]
+    Now we apply the derivative of the above expression, with respect to \(t\), \(n\) times:
+    \[\frac{d^n}{d t^n} \frac{x \exp(xt)}{(1 - \beta)x + \beta} = \frac{x^{n+1} \exp(xt)}{(1 - \beta)x + \beta}\]
+    Now we take a value of \(t\) around 0 and obtain:
+    \[\leftindex_{CF}{M}_X^{(\alpha)} = D^\alpha_{CF}(e^{tx}) = \frac{x^{n+1} }{(1 - \beta)x + \beta}.\]
+    The latter expression is not equal to \(x^\alpha\), thus the error of \(\leftindex_{CF}{M}_X^{(\alpha)}\) is:
+    \[x^\alpha - \frac{x^{n+1} }{(1 - \beta)x + \beta}\]
+
+    
+\end{proof}
+
+\newpage
 
 \section{Appendix C }\label{s: app_C}
-TODO: ADD TABLE OF COMMON DISTRIBUTIONS + SUPPORT, MGF, ETC.
+\renewcommand{\arraystretch}{1.5}
+\begin{longtable}{|p{2.5cm}|p{5.5cm}|p{4.5cm}|p{3.0cm}|}
+\hline
+\textbf{Distribution} & \textbf{PDF / PMF} & \textbf{MGF \(M_X(t)\)} & \textbf{Restrictions} \\
+\hline
+\endfirsthead
+\hline
+\textbf{Name} & \textbf{PDF / PMF} & \textbf{MGF \(M_X(t)\)} & \textbf{Restrictions} \\
+\hline
+\endhead
+
+\( \text{Bernoulli}(p) \) & \( f(x) = p^x(1-p)^{1-x} \) & \( M_X(t) = (1 - p) + pe^t \) & \( 0 \leq p \leq 1, \ x \in \{0,1\}\) \\
+\hline
+
+\( \text{Binomial}(n, p) \) & \[ f(x) = \binom{n}{x} p^x (1-p)^{n-x} \] & \( M_X(t) = (1 - p + pe^t)^n \) & \( n \in \mathbb{N},\ 0 \leq p \leq 1 \) \\
+\hline
+
+Discrete Uniform  & \( f(x) = \frac{1}{N} \) & \( M_X(t) = \frac{1}{N} \sum_{k=1}^N e^{tk} \) & \( N \in \mathbb{N} \) \\
+\hline
+
+\( \text{Geometric}(p) \) & \( f(x) = p(1-p)^{x-1}\) & \( \frac{pe^t}{1 - (1 - p)e^t},\ t < -\ln(1 - p) \) & \( 0 < p \leq 1,\ x \geq 1  \) \\
+\hline
+
+\( \text{Poisson}(\lambda) \) & \[ f(x) = \frac{\lambda^x e^{-\lambda}}{x!}\] & \( \exp(\lambda(e^t - 1)) \) & \( \lambda > 0,\ x \geq 0  \) \\
+\hline
+
+\( \text{Beta}(\alpha, \beta) \) & \[ f(x) = \frac{1}{B(\alpha, \beta)} x^{\alpha-1}(1-x)^{\beta-1}\] & Messy & \( \alpha, \beta > 0,\ x \in (0,1)  \) \\
+\hline
+
+\( \text{Chi-Squared}(p) \) & \[ f(x) = \frac{1}{2^{p/2}\Gamma(p/2)} x^{p/2 - 1} e^{-x/2}\] & \( (1 - 2t)^{-p/2},\ t < 1/2 \) & \( p > 0,\ x > 0  \) \\
+\hline
+
+\( \text{Laplace}(\mu, \sigma) \) & \[ f(x) = \frac{1}{2\sigma} e^{-\frac{|x - \mu|}{\sigma}} \] & \( \frac{e^{\mu t}}{1 - (\sigma t)^2},\ |t| < \frac{1}{\sigma} \) & \( \sigma > 0 \) \\
+\hline
+
+\( \text{Exponential}(\beta) \) & \( f(x) = \frac{1}{\beta} e^{-x/\beta} \) & \( \frac{1}{1 - \beta t},\ t < 1/\beta \) & \( \beta > 0,\ x > 0 \) \\
+\hline
+
+\( \text{Gamma}(\alpha, \beta) \) & \[ f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-x/\beta} \] & \( (1 - \beta t)^{-\alpha},\ t < 1/\beta \) & \( \alpha, \beta > 0,\ x > 0 \) \\
+\hline
+
+\( \text{Logistic}(\mu, \beta) \) & \[ f(x) = \frac{e^{-(x - \mu)/\beta}}{\beta(1 + e^{-(x - \mu)/\beta})^2} \] & \(e^{\mu t}\Gamma(1 - \beta t) \Gamma(1 + \beta t) \)& \( \beta > 0 \) \\
+\hline
+
+Normal \( \mathcal{N}(\mu, \sigma^2) \) & \[ f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} \] & \( \exp\left( \mu t + \frac{\sigma^2 t^2}{2} \right) \) & \( \sigma > 0 \) \\
+\hline
+
+\( \text{Uniform}(a, b) \) & \( f(x) = \frac{1}{b - a}\) & \( \frac{e^{tb} - e^{ta}}{t(b - a)} \), \( t \neq 0 \) & \( a < b,\ x \in [a,b]  \) \\
+\hline
+\end{longtable}\label{t: MGF_Appendix}
