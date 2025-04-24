@@ -73,15 +73,15 @@ We will consider a number of properties which come in useful when working with f
     \begin{enumerate}[(i)]
         \item Linearity: Let \(f(x), g(x)\) be functions and \(a, b, x \in \mathbb{R}\). Then we have that \(D^{\alpha} (a f(x) + b g(x)) = a D^{\alpha} f(x) + b D^{\alpha} g(x)\).
         \item \(D^{\alpha} f(x) = f(x)\), for \(\alpha = 0\) 
-        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = (D^\alpha(D^\beta) f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for definition \ref{d: CF}, this property only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
+        \item for sufficiently smooth functions f, we have that \(D^{\alpha + \beta} f(x) = D^\alpha(D^\beta f(x)) =  D^\beta(D^\alpha f(x))\), with \(\alpha, \beta \in \mathbb{R}\). Note that, for definition \ref{d: CF}, this property only holds for \(\beta \in \mathbb{N}, \alpha \in [0,1)\).
     \end{enumerate}
         
     
 \end{proposition}
 
-The proofs of these of the properties stated in this proposition can be found in Appendix \ref{s:app_B}. Most of these proofs have been provided by myself, while some other proofs, which are outside the scope of thesis are based on other papers. Note that the third property is especially useful for the Caputo-Fabrizio derivative. This property allows one to take fractional derivatives of order greater than 1 by comparing fractional derivatives and regular integer derivatives.
+The proofs of these of the properties stated in this proposition can be found in appendix \ref{s:app_B}. Most of these proofs have been provided by myself, while some other proofs, which are outside the scope of thesis are based on other papers. Note that the third property is especially useful for the Caputo-Fabrizio derivative. This property allows one to take fractional derivatives of order greater than 1 by comparing fractional derivatives and regular integer derivatives.
 
-We will now provide a few numerical examples of these fractional derivatives. For simplicity, we will let \(a = 0\):
+We will now provide two numerical examples of these fractional derivatives. For simplicity, we will let \(a = 0\):
 \begin{example}
     \begin{enumerate}[(i)]
         \item 
@@ -90,17 +90,11 @@ We will now provide a few numerical examples of these fractional derivatives. Fo
     \[D^{\frac{3}{2}}_{RL}(c) = \frac{d^2}{dx^2} \frac{1}{\Gamma(2 - \frac{3}{2})}  \int_{0}^{x} (x-t)^{2 - \frac{3}{2}-1} c dt\]
     \[= \frac{d^2}{dx^2} \frac{c}{\sqrt{\pi}}  \int_{0}^{x} (x-t)^{- \frac{1}{2}} dt = \frac{d^2}{dx^2} \frac{-2c}{\sqrt{\pi}} \sqrt{x - t} \Big|_{0}^{x}\]
     \[= \frac{d^2}{dx^2} \frac{2c \sqrt{x}}{\sqrt{\pi}} = \frac{-c}{2x\sqrt{\pi x}} \neq 0.\] As stated, the fractional derivative of a constant is not equal to zero when using the Riemann-Liouville derivative. This is also the case for the Grünwald-Letnikov derivative, but not for the Caputo-Fabrizio derivative.
-    \item We compute the semi-derivative of \(\frac{1}{2}\) using the Caputo-Fabrizio derivative:
-    \[D^{\frac{1}{2}}_{CF}(\frac{1}{2}) = \frac{1}{1 - \frac{1}{2}}  \int_{0}^{x} \exp\left(\frac{-\frac{1}{2}}{1 - \frac{1}{2}}(x-t)\right) \frac{1}{2} dt = \int_{0}^{x} \exp(t - x) dt\]
+    \item We compute the semi-derivative of \(\frac{x}{2}\) using the Caputo-Fabrizio derivative:
+    \[D^{\frac{1}{2}}_{CF}\left(\frac{x}{2}\right) = \frac{1}{1 - \frac{1}{2}}  \int_{0}^{x} \exp\left(\frac{-\frac{1}{2}}{1 - \frac{1}{2}}(x-t)\right) \frac{1}{2} dt = \int_{0}^{x} \exp(t - x) dt\]
     \[ =  \exp(t - x) \Big|_{0}^{x} = 1 - \exp(- x).\]
     For \(x \geq 0\), this expression is equal to the CDF of the exponential distribution with \(\lambda = 1\). A remarkble result.
-    \item We will compute another famous result using the Riemann-Liouville derivative, namely, the semi-derivative of \(x\):
-    \[D^{\frac{1}{2}}_{RL}(x) = \frac{d}{dx} \frac{1}{\Gamma(1 - \frac{1}{2})}  \int_{0}^{x} (x-t)^{1 - \frac{1}{2}-1} t dt\]
-   U-substitution: \( u = x - t\), such that \(\frac{du}{dt} = -1, dt = -du\):
-    \[=  \frac{d}{dx} \frac{1}{\sqrt{\pi}} \int_{0}^{x} (u)^{-\frac{1}{2}} (u - x) du =  \frac{d}{dx} \frac{1}{\sqrt{\pi}}\left(\int_{0}^{x} \sqrt{u} du - x\int_{0}^{x} \frac{1}{\sqrt{u}} du\right)\]
-    \[ = \frac{d}{dx} \frac{1}{\sqrt{\pi}}\left(\frac{2u^\frac{3}{2}}{3} - 2 x u^\frac{1}{2}\right) \Big|_{0}^{x} = \frac{d}{dx} \frac{1}{\sqrt{\pi}}\left(\frac{2(x - t)^\frac{3}{2}}{3} - 2 x (x - t)^\frac{1}{2}\right) \Big|_{0}^{x}\]
-    \[=  \frac{d}{dx} \frac{-1}{\sqrt{\pi}}\left(\frac{2}{3}x^\frac{3}{2} - 2x^\frac{3}{2}\right) = \frac{d}{dx} \frac{4x^\frac{2}{3}}{3\sqrt{\pi}}\]
-    \[ = \frac{2\sqrt{x}}{\sqrt{\pi}}.\]
+    
     \end{enumerate}
 \end{example}
 The observant reader might notice that no explicit examples of the Grünwald-Letnikov derivative have been provided. The latter is due to the fact that is rather difficult to obtain analytical expressions for this derivative. Thus, later on in this thesis, when computing fractional moments and their assiocated biases, the main focus for the Grünwald-Letnikov derivative will be on its numerical computations.
