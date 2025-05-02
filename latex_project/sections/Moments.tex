@@ -25,7 +25,7 @@ The following proposition is rather standard and well known. Yet, since we will 
     \item If \(\mathbb{E}[X^k]\) does exist, then all its lower-order moments, \(\mathbb{E}[X^n]\), for \(n \leq k\). Also exists.
 \end{enumerate}
 \end{proposition}
-The proof is rather straightforward and can be found in appendix \ref{s:app_B}.
+The proof is rather straightforward and can be found in Appendix \ref{s:app_B}.
 
 
 \subsubsection{Moments of negative order}
@@ -45,7 +45,7 @@ Most common distribution functions do not adhere to this corollary, however, the
     We will compute the first negative moment: 
     \[ \mathbb{E}[X^{-1}] = \int_{0}^{\infty} x^{-1} \frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} dx = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha - 2} e^{-\lambda x} dx\]
     Using the substitution \( u = \lambda x, \frac{du}{dx} = \lambda, dx = \frac{du}{\lambda}\), we get:
-    \[ = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty}\left(\frac{u}{\lambda}\right)^{\alpha -2} e^{-u} du = \frac{\lambda^\alpha}{\Gamma(\alpha) \lambda^{\alpha-1}} \int_{0}^{\infty}(\frac{u}{\lambda})^{\alpha -2} e^{-u} du.\] This integral is equal to \(\Gamma(\alpha - 1)\) (See appendix \ref{s:appendices}). So we get: 
+    \[ = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty}\left(\frac{u}{\lambda}\right)^{\alpha -2} e^{-u} du = \frac{\lambda^\alpha}{\Gamma(\alpha) \lambda^{\alpha-1}} \int_{0}^{\infty}(\frac{u}{\lambda})^{\alpha -2} e^{-u} du.\] This integral is equal to \(\Gamma(\alpha - 1)\) (See Appendix \ref{s:appendices}). So we get: 
     \[\mathbb{E}[X^{-1}] = \frac{\lambda^\alpha \Gamma(\alpha - 1) }{\Gamma(\alpha) \lambda^{\alpha-1}} = \frac{\lambda \Gamma(\alpha - 1)}{(\alpha -1)\Gamma(\alpha - 1)} = \frac{\lambda}{(\alpha -1)}.\] Thus, for \(\alpha \neq 1, \mathbb{E}[X^{-1}] = \frac{\lambda}{(\alpha -1)}\). Fortunately, this is always the case, since we had just derived that the integral only converges when \(\alpha \geq \beta + 1, \text{ with } \beta > 0\). In other words, \(\alpha > 1\). So this holds.
 \end{example}
 \subsection{The Moment Generating Function}
@@ -56,7 +56,7 @@ We now formally introduce the Moment Generating Function, one of the most signif
 \end{definition}
 
 \begin{remark}
-    Deriving the expression \(M_X(t) = \mathbb{E}[e^{tX}]\) is typically straightforward. Generally, it simply requires a handful of steps of analytic evaluation. This procedure is not that interesting nor relevant to this research. We provide a single explicit example on how to compute the Moment Generating Function for a specific distribution below. And for later cases, when we make use of an expression of the Moment Generating Function, we will simply refer to the distribution table in appendix \ref{t: MGF_Appendix}.
+    Deriving the expression \(M_X(t) = \mathbb{E}[e^{tX}]\) is typically straightforward. Generally, it simply requires a handful of steps of analytic evaluation. This procedure is not that interesting nor relevant to this research. We provide a single explicit example on how to compute the Moment Generating Function for a specific distribution below. And for later cases, when we make use of an expression of the Moment Generating Function, we will simply refer to the distribution table in Appendix \ref{t: MGF_Appendix}.
 \end{remark}
 
 \begin{example}
@@ -83,10 +83,10 @@ We will state the theorem which makes the MGF so useful. This theorem allows us 
 
 \begin{proof}
     The proof is important and fairly straightforward, thus it will be shown directly:
-    \[M_X^{(n)}(t) = \frac{d^n}{dt^n} \int_{-\infty}^{\infty} e^{tx} f_X(x) dx = \int_{-\infty}^{\infty} \frac{d^n}{dt^n} e^{tx} f_X(x) dx\] (We can interchange differentiation and integration since all partial derivatives of \(e^{tx} f(x)\) are continuous and the absolute value of the integral converges, as we assume the \(n\)-th moment exists, see appendix \ref{s:appendices}).
+    \[M_X^{(n)}(t) = \frac{d^n}{dt^n} \int_{-\infty}^{\infty} e^{tx} f_X(x) dx = \int_{-\infty}^{\infty} \frac{d^n}{dt^n} e^{tx} f_X(x) dx\] (We can interchange differentiation and integration since all partial derivatives of \(e^{tx} f(x)\) are continuous and the absolute value of the integral converges, as we assume the \(n\)-th moment exists, see Appendix \ref{s:appendices}).
     \[ = \int_{-\infty}^{\infty} x^n e^{tx} f_X(x) dx, \text{evaluating at } t = 0: = \int_{-\infty}^{\infty} x^n e^{0x} f_X(x) dx\]
     \[ = \int_{-\infty}^{\infty} x^n f_X(x) dx = \mathbb{E}[X^n]\]
-    The proof for the case that \(f_X(x)\) is discrete is very similar. In that case, one would have to change the order of the derivative and summation, which has also been justified in appendix \ref{s:appendices}.
+    The proof for the case that \(f_X(x)\) is discrete is very similar. In that case, one would have to change the order of the derivative and summation, which has also been justified in Appendix \ref{s:appendices}.
 \end{proof}
 
 
@@ -101,7 +101,7 @@ We introduce the following properties for the Moment Generating Function \(M_X(t
     \end{enumerate}
 \end{proposition}
 
-The proofs of the latter can be found in appendix \ref{s:app_B}.
+The proofs of the latter can be found in Appendix \ref{s:app_B}.
 
 There are several additional topics closely related to the MGF, including Fourier transforms, Laplace transforms, Wick rotations, and characteristic functions. While these subjects are relevant to the theoretical foundation of the MGF , they fall outside the scope of this paper and will therefore not be discussed. Readers interested in exploring these concepts further may find \cite{kolmogorov1999} to be a valuable resource.
 
@@ -112,7 +112,7 @@ We have seen that under specific conditions, it is possible to compute negative,
     Assuming the negative \(n\)-th raw moment exists, the negative \(n\)-th raw moment can be computed as follows: 
     \[\mathbb{E}[X^{-n}] = \frac{1}{\Gamma(n)} \int_{0}^{\infty} t^{n- 1} M_X(-t) dt\] where \(n\) is a positive integer.
 \end{theorem}
-The proof of this Theorem can be found in appendix \ref{s:app_B}.
+The proof of this Theorem can be found in Appendix \ref{s:app_B}.
 
 Since this is an extension on the regular functions of the MGF, this technique is of interest of this paper. Thus, it will be shortly be discussed. Let us again compute the first inverse moment of the Gamma distribution, but now by making use of the latter theorem for Moment Generating Functions!
 
@@ -153,32 +153,32 @@ Before stating any results about the accuracy of these new MGF expressions, we f
     \end{enumerate}
     
 \end{example}
-It is amazing and maybe even somewhat surprising that both expressions obtain the same result. Indeed, this result is actually more of a coincidence. It is important to note that this agreement of results is coincidental and specific to the chosen fractional order. If we had taken the order of the moment to be \(\alpha = \frac{1}{4}\), we hould have obtained \(\leftindex_{CF}{M}_X^{(\frac{1}{4})} = \frac{p}{3}\), while the result obtained by using the traditional approach would have stayed the same. What is more, if we were to take \[\leftindex_{RL}{M}_X^{(\frac{1}{2})}  = \frac{d}{dt} \frac{1}{\sqrt{\pi}}  \int_{-h}^{t} (t - s)^{\frac{-1}{2}} f(s) ds\] we obtain an integral which may diverge based on the choice of \(-h\) . These observations lead to the following theorem.
+It is amazing and maybe even somewhat surprising that both expressions obtain the same result. Indeed, this result is actually more of a coincidence. It is important to note that this agreement of results is coincidental and specific to the chosen distribution. Namely, all raw higher moments of a Bernoulli random variable are \(p\). If we had taken any other distribution in combination with a moment of fractional order, it becomes highly likely that the MGF returns a different value compared to the traditional method of computing moments. What is more, if we were to take \[\leftindex_{RL}{M}_X^{(\frac{1}{2})}  = \frac{d}{dt} \frac{1}{\sqrt{\pi}}  \int_{-h}^{t} (t - s)^{\frac{-1}{2}} f(s) ds\] we obtain an integral which may diverge based on the choice of \(-h\) . These observations lead to the following theorem.
 
 \begin{theorem}\label{t: MGF_accurate}
      Consider the three MGF's as defined in definition \ref{d: MGF}. Assume \(\leftindex_{RL}{M}_X^{(\alpha)}\) and \(\leftindex_{GL}{M}_X^{(\alpha)}\) are well defined on some open interval \((-h, h)\), then the moment generating function expressions \(\leftindex_{RL}{M}_X^{(\alpha)}\) and \(\leftindex_{GL}{M}_X^{(\alpha)}\) accurately obtain moments of order \(\alpha \in \mathbb{R}\)
     
 \end{theorem}
-The proof can be found in appendix \ref{s:app_B}.
+The proof can be found in Appendix \ref{s:app_B}.
 Unfortunately, this result does not hold for \(\leftindex_{CF}{M}_X^{(\alpha)}\), which leads to the following theorem.
 
 \begin{theorem}\label{t: MGF_inaccurate}
     Consider the three MGF's as defined in definition \ref{d: MGF}. Assume \(\leftindex_{CF}{M}_X^{(\alpha)}\) is well defined on some open interval \((-h, h)\), then the moment generating function expression \(\leftindex_{CF}{M}_X^{(\alpha)}\) inaccurately approximates moments of order \(\alpha \in \mathbb{R}\) with approximation error given by
     \[
 \begin{cases} 
-\int_{-\infty}^{\infty} \left(x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\right) f_X(x) \, dx & \text{if } X \text{ is continuous,} \\ 
-\sum_{i} \left(x_i^\alpha - \displaystyle \frac{x_i^{n+1} }{(1 - \beta)x_i + \beta}\right) f_X(x_i) & \text{if } X \text{ is discrete.} 
+    \displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx -  \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx & \text{if } X \text{ is continuous,} \\ 
+    \displaystyle \sum_{i} \left(x_i^\alpha -  \frac{x_i^{n+1} }{(1 - \beta)x_i + \beta}\right) f_X(x_i) & \text{if } X \text{ is discrete.} 
 \end{cases}
 \] with \(\alpha \in \mathbb{R}, \beta = \alpha - n \text{ and } n = \lfloor \alpha \rfloor.\)
     
 \end{theorem}
-The proof can be found in appendix \ref{s:app_B}.
+The proof can be found in Appendix \ref{s:app_B}.
 
 \begin{remark}
     In the case when \(\alpha \in \mathbb{N}\), we have that \(n = \alpha\), and thus \( \beta = 0\), therefore, \(\leftindex_{CF}{M}_X^{(\alpha)}\) is accurate for integer orders. This is an expected result, as the MGF for integer moments is accurate and from section \ref{s:calculus} we know that \(D_{CF}^{\alpha + \beta}f(x) = D_{CF}^\alpha(D_{CF}^\beta f(x))\), with \(\alpha \in \mathbb{N}, \beta \in [0, 1).\) In this case, let \(\beta = 0\). So we get \(D_{CF}^{\alpha + 0}f(x) = D_{CF}^{\alpha}f(x)\) which is just a regular derivative of integer order.
 \end{remark}
-\subsubsection{Analyzing the error of the Caputo-Fabrizio MGF}
-We now further inspect the error obtained in theorem \ref{t: MGF_inaccurate}. Note that in the following plots, we explicitly focus on the term \[ E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\] for simplicity. The expression we analyze, denoted \(E(x, \alpha)\) is not the same as the expression obtained in theorem\ref{t: MGF_inaccurate}. Yet, it is the part of the expression that involves the order \(\alpha\) and is thus of great interest. Errors of the Caputo-Fabrizio MGF as defined in theorem \ref{t: MGF_inaccurate} will be explicitly numerically computed in the following section of this paper, where we will assign a multitude of different distributions to the random variable \(X\). Plotting this expression for different orders of \(\alpha\), we obtain the following figure:
+\subsubsection{Analysing the error of the Caputo-Fabrizio MGF}
+We now further inspect the error obtained in theorem \ref{t: MGF_inaccurate}. Note that in the following plots, we explicitly focus on the term \[ E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\] for simplicity. The expression we analyse, denoted \(E(x, \alpha)\) is not the same as the expression obtained in theorem\ref{t: MGF_inaccurate}. Yet, it is the part of the expression that involves the order \(\alpha\) and is thus of great interest. What is more, considering the result obtained in theorem \ref{t: MGF_inaccurate}, it is easy to see that \(\leftindex_{CF}{M}_X^{(\alpha)}\) is accurate \(\iff x^\alpha = \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\). Thus, we consider the function \(E(x, \alpha)\), the function of their differences and analyse when this function is equal to 0. Errors of the Caputo-Fabrizio MGF as defined in theorem \ref{t: MGF_inaccurate} will be explicitly numerically computed in the following section of this paper, where we will consider a multitude random variables, with different distributions. Plotting this expression for different orders of \(\alpha\), we obtain the following figure:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/error_plot.pdf}
@@ -197,4 +197,4 @@ This hypothesis is indeed confirmed in the following figure, which focuses on th
 \end{figure}
 Figure \ref{fig:error_MGF_fixed_x} indeed seems to indicate that for some \(\alpha \in (a, b)\), where \(a, b \in \mathbb{Z}\) consecutive integers that \(E(x, \alpha)\) attains it maximum value for some \(\alpha\) 'slightly greater' than \(\frac{a + b}{2}\). Figure \ref{fig:error_MGF_fixed_x} also reveals that the approximation error is considerably smaller for negative fractional moments compared to the positive ones. This suggests that, when negative moments are well-defined, the Caputo-Fabrizio MGF might still offer reasonable accuracy, despite its known limitations.
 
-Note that within each integer interval, the function \(E(x, \alpha)\) appears to be concave. Thus, as is supported by figure \ref{fig:error_MGF_fixed_x}, it is only possible to obtain local maxima. Ideally, one would aim to analytically determine the optimal order \(\hat{\alpha}\) such that minimizes \(E(x, \hat{\alpha})\). However, due to the concavity of \(E(x, \hat{\alpha})\), such analyticcal minimization is not feasible. Figure \ref{fig:error_MGF_fixed_x} seems to suggest that order of \(\alpha\) near integer orders yields smaller approximation errors, which makes sensse intuitively. However, the latter is not rigorous evidence. Therefore, in the following section, we will analyze the numerical approximation errors of the Caputo-Fabrizio MGF by simulation. We will use numerical methods to try to obtain values \(\alpha\) which minimize the expression from theorem \ref{t: MGF_inaccurate}.
+Note that within each integer interval, the function \(E(x, \alpha)\) appears to be concave. Thus, as is supported by figure \ref{fig:error_MGF_fixed_x}, it is only possible to obtain local maxima. Ideally, one would aim to analytically determine the optimal order \(\hat{\alpha}\) such that minimizes \(E(x, \hat{\alpha})\). However, due to the concavity of \(E(x, \hat{\alpha})\), such analyticcal minimization is not feasible. Figure \ref{fig:error_MGF_fixed_x} seems to suggest that order of \(\alpha\) near integer orders yields smaller approximation errors, which makes sensse intuitively. However, the latter is not rigorous evidence. Therefore, in the following section, we will analyse the numerical approximation errors of the Caputo-Fabrizio MGF by simulation. We will use numerical methods to try to obtain values \(\alpha\) which minimize the expression from theorem \ref{t: MGF_inaccurate}.
