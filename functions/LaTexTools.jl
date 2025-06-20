@@ -4,7 +4,8 @@ using DataFrames, PrettyTables
 export save_latex_table
 
 function save_latex_table(df::DataFrame, title::String, file_path::String; transpose=false, row_index=true)
-    latex_dir = joinpath(@__DIR__, "latex_project")
+    base_dir = normpath(joinpath(@__DIR__, ".."))
+    latex_dir = joinpath(base_dir, "latex_project")
 
     if !isdir(latex_dir)
         error("LaTeX project directory not found at: $latex_dir")

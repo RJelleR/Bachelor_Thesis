@@ -203,5 +203,31 @@
         "latex_project/**/*.sta": true,
         "latex_project/**/*.lpz": true,
         "latex_project/**/*.xwm": true
-    }
+    },
+    "cSpell.words": [
+        "Akaike",
+        "Autoregressive",
+        "behaviour",
+        "BFGS",
+        "Caputo",
+        "Fabrizio",
+        "GARCH",
+        "Grünwald",
+        "Heteroskedasticity",
+        "Initialising",
+        "interpretability",
+        "Letnikov",
+        "Liouville",
+        "llik",
+        "loglikelihood",
+        "neighbourhood",
+        "Optim",
+        "savefig",
+        "Vandermonde",
+        "Vandermonde's",
+        "visualisation",
+        "volatilities",
+        "xlabel",
+        "ylabel"
+    ]
 }
