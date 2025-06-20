@@ -1,4 +1,26 @@
-\section{(Appendix): Relevant functions and Identities}\label{s:appendices}
+\section{Appendix: Relevant functions and Identities}\label{s:appendices}
+\begin{definition}
+    Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \[D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\]
+    \cite{samko1993}
+\end{definition}
+In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In most of our cases, we are interested in the instance where  \(\alpha \in \mathbb{R}_+\). It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a function, provided that such an order exists. A derivative of negative order is simply an integral of positive order. This is defined as follows:
+\begin{definition}
+    Let \(I\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \[(I^{\alpha} f) (x) = \frac{1}{(\alpha-1)!}\int (x-t)^{\alpha-1} f(t) dt\] \cite{cauchy1823}.
+\end{definition} 
+
+Combining the previous two definitions, we obtain the following, more general, definition.
+\begin{definition}\label{d: differintegral}
+    The differintegral operator is defined as
+    \begin{equation}
+        R^\alpha f(x) = \begin{cases}
+            I^{|\alpha|} f(x) & \text{if } \alpha < 0 \\
+            D^\alpha f(x) & \text{if } \alpha > 0 \\
+            f(x) & \text{if } \alpha = 0
+        \end{cases}, \text{ with } \alpha \in \mathbb{R}.
+        \end{equation}
+        \cite{oldham1974}
+\end{definition}
+
 We define the (Euler-)Gamma function as follows:
 \begin{definition}\label{d: eg}
     for \(\Re(z) > 0\), we have the following: \(\Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt\)
@@ -12,26 +34,21 @@ Other important identities, not necessarily for \(z\) an integer, are:
     \item \(\Gamma(\frac{1}{2}) = \sqrt{\pi}\)
 \end{itemize}
 
-\begin{definition}\label{d: ff}
-    The falling factorial is defined as follows: \((x)_n = \prod_{k = 0}^{n - 1} (x - k)\), which is a polynomial
-\end{definition}
-\begin{definition}
-    For \(0 \leq k \leq n\), the Binomial Coefficient is defined as follows: \(\binom{n}{k}\), where \(n, k \in \mathbb{N}\).
-\end{definition}
-We can derive the following factorial identity, which is convenient to work with analytically: \(\binom{n}{k} = \frac{n!}{k! (n - k)!}\).
-For numerically computing expressions containing the Binomial Coefficient, the following identity is computationally more efficient: \(\binom{n}{k} = \frac{(n)_k}{k!}\). With \((n)_k\) as in \ref{d: ff}.
-Since we have established in \ref{d: eg} that \(\Gamma(z) = (z - 1)!\), we can rewrite our factorial identify to:
-\[\binom{n}{k} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)} = \frac{n}{k} \cdot\frac{\Gamma(n)}{\Gamma(k) \cdot \Gamma(n - k + 1)}\]
 
-\begin{definition}\label{d: binomial}
-    The binomial series is a generalization of the binomial formula, namely:
-    \[(1 + x)^\alpha = \sum_{k = 0}^{\infty}\binom{\alpha}{k} x^k\]
+\begin{definition}
+    For \(0 \leq k \leq n\), the Binomial Coefficient is defined as follows: \[\binom{n}{k} = \frac{n!}{k! (n - k)!} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)}\], where \(n, k \in \mathbb{N}\) and \(\Gamma(.)\) as defined in \ref{d: eg}.
 \end{definition}
+
 
 \begin{definition}
     Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\]
 \end{definition}
-A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer (\cite{askey75}).
+A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer \cite{askey75}.
+
+\begin{definition}\label{d: binomial}
+    The binomial series is a generalization of the binomial formula, namely:
+    \[(1 + x)^\alpha = \sum_{k = 0}^{\infty}\binom{\alpha}{k} \cdot x^k\]
+\end{definition}
 
 For the interchange-ability of derivatives and integrals and sums, we can apply the following two theorems:
 
@@ -48,7 +65,7 @@ For the interchange-ability of derivatives and summations, the following theorem
     
     \begin{enumerate}[(i)]
         \item \(\frac{\partial h(\theta, x)}{\partial \theta}\) is continuous for all \(x\)
-        \item \(\sum_{x = 0}^{\infty} \frac{\partial h(\theta, x)}{\partial \theta}\) converges uniformly on every closed bounded subinterval of \((a, b)\)
+        \item \(\sum_{x = 0}^{\infty} \frac{\partial h(\theta, x)}{\partial \theta}\) converges uniformly on every closed bounded sub-interval of \((a, b)\)
     \end{enumerate}
     Then:
     \[
@@ -59,8 +76,8 @@ For the interchange-ability of derivatives and summations, the following theorem
 \end{theorem}
 
 
-\newpage
-\section{(Appendix): Proofs}\label{s:app_B}
+\clearpage
+\section{Appendix: Proofs of section \ref{s:methodology}}\label{s:app_B}
 
 \subsection{Proofs section \ref{s:calculus}}
 
@@ -68,7 +85,7 @@ For the interchange-ability of derivatives and summations, the following theorem
     Proof of \ref{p: calculus}
     \begin{enumerate}[(i)]
         \item We will proof for the Riemann-Liouville derivative, the proof for the Caputo-Fabrizio derivative is very similar and the Grünwald-Letnikov derivative is a direct consequence of the linearity of the sum.
-        \[ D^{\alpha} (a f(x) + b g(x)) = \frac{d^n}{dx^n}\frac{1}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} (a f(t) + b g(t)) dt \]
+        \[ D^{\alpha} (a f(x) + b g(x)) = \frac{d^n}{dx^n}\frac{1}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} \left(a f(t) + b g(t)\right) dt \]
      
         \[= \frac{d^n}{dx^n}\left(\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt\right) \] Where we simply split the integral and put the constants in front.
         \[= \frac{d^n}{dx^n}\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{d^n}{dx^n} \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt \] As the regular derivative operator is linear.
@@ -82,11 +99,11 @@ For the interchange-ability of derivatives and summations, the following theorem
         For the Caputo-Fabrizio derivative, we obtain the following:
         \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp\left(\frac{0}{1 -0}(x-t)\right) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x).\]
         \newline
-        Finally, for the Riemann-Liouville derivative, we can simply make use of \autoref{d: differintegral} and \autoref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \(D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\) by the first fundamental theorem of calculus.
+        Finally, for the Riemann-Liouville derivative, we can simply make use of \autoref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \( \displaystyle D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\) by the first fundamental theorem of calculus.
 
         \item The proof for the Riemann-Liouville derivative is given by \cite{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \cite{losada15}.For the Grünwald-Letnikov derivative, we get:
-        \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k}(  \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh))\]
-        \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the dubble sums: 
+        \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \left( \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh)\right)\]
+        \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the double sums: 
         \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \autoref{s:appendices} to obtain:
         \[ = \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty (-1)^m \binom{\alpha + \beta}{m} f(x - mh) = D^{\alpha + \beta} f(x).\]
         It can be shown in an exactly similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
@@ -95,24 +112,33 @@ For the interchange-ability of derivatives and summations, the following theorem
     \end{enumerate}
 \end{proof}
 
-\subsection{Proofs section \ref{s: moments}}
+\subsection{Proofs section \ref{s:MGF}}
 
-\begin{proof}
-    Proof of proposition \ref{p: moments_1}
-     
-    \begin{enumerate}[(i)]
-        \item If \(X\) is a discrete random variable, we get: \[\mathbb{E}[X^n] = \sum_{i} x_i^n f_X(x_i) = \infty, \mathbb{E}[X^k] = \sum_{i} x_i^k f_X(x_i)\]
-        \[ = \sum_{i} x_i^n \cdot x^{k - n} f_X(x_i) \geq \sum_{i} x_i^n f_X(x_i) = \infty, \text{ as } k \geq n\]
-        We can prove this for continuous random variables in a similar manner.
-        \item This simply follows from the previous proposition, as the current proposition is just the contrapositive statement of the previous proposition.
-    \end{enumerate}
+\begin{proof}\label{p:negative}
+    Let \(f_X(x) \sim \Gamma(\alpha, \lambda) =\) 
+    \[\frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)}.\] This PDF is defined on \((0, \infty)\). So the function is not defined on \(\mathbb{R}\). This, however, is not a problem, as we can just evaluate the right limit. Since the Gamma function already uses \(\alpha\) as a parameter, we will evaluate \( \displaystyle \frac{f_X(x)}{|x|^\beta}, \beta > 0\):
+    \[\lim_{x \to 0_+} \frac{f_X(x)}{|x|^\beta} = \lim_{x \to 0_+} \frac{x^{\alpha -1 - \beta} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} = \lim_{x \to 0_+} \frac{x^{\alpha -(1 + \beta)} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} .\] Thus for \(\alpha \geq \beta + 1, \lim_{x \to 0_+} \frac{f_X(x)}{|x|^\beta} < \infty\). Therefore, the first negative moment of the Gamma distribution should exist.
+
+    We compute the first negative moment: 
+    \[ \mathbb{E}[X^{-1}] = \int_{0}^{\infty} x^{-1} \frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} dx = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha - 2} e^{-\lambda x} dx\]
+    Using the substitution \(\displaystyle u = \lambda x, \frac{du}{dx} = \lambda, dx = \frac{du}{\lambda}\), we get:
+    \[ = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty}\left(\frac{u}{\lambda}\right)^{\alpha -2} e^{-u} du = \frac{\lambda^\alpha}{\Gamma(\alpha) \lambda^{\alpha-1}} \int_{0}^{\infty}(\frac{u}{\lambda})^{\alpha -2} e^{-u} du.\] This integral is equal to \(\Gamma(\alpha - 1)\) (See Appendix \ref{s:appendices}). So we get: 
+    \[\mathbb{E}[X^{-1}] = \frac{\lambda^\alpha \Gamma(\alpha - 1) }{\Gamma(\alpha) \lambda^{\alpha-1}} = \frac{\lambda \Gamma(\alpha - 1)}{(\alpha -1)\Gamma(\alpha - 1)} = \frac{\lambda}{(\alpha -1)}.\] Thus, for \(\alpha \neq 1, \mathbb{E}[X^{-1}] = \frac{\lambda}{(\alpha -1)}\). Fortunately, this is always the case, since we had just derived that the integral only converges when \(\alpha \geq \beta + 1, \text{ with } \beta > 0\). In other words, \(\alpha > 1\). So this holds.
+\end{proof}
+
+\begin{proof} Proof of Proposition \ref{t:mgf}
+
+    \[M_X^{(n)}(t) = \frac{d^n}{dt^n} \int_{-\infty}^{\infty} e^{tx} f_X(x) dx = \int_{-\infty}^{\infty} \frac{d^n}{dt^n} e^{tx} f_X(x) dx\] (We can interchange differentiation and integration since all partial derivatives of \(e^{tx} f(x)\) are continuous and the absolute value of the integral converges, as we assume the \(n\)-th moment exists, see Appendix \ref{s:appendices}).
+    \[ = \int_{-\infty}^{\infty} x^n e^{tx} f_X(x) dx, \text{evaluating at } t = 0: = \int_{-\infty}^{\infty} x^n e^{0x} f_X(x) dx\]
+    \[ = \int_{-\infty}^{\infty} x^n f_X(x) dx = \mathbb{E}[X^n]\]
+    The proof for the case that \(f_X(x)\) is discrete is very similar. In that case, one would have to change the order of the derivative and summation, which has also been justified in Appendix \ref{s:appendices}.
 \end{proof}
 
 \begin{proof}
     Proof of Proposition \ref{p: moments}
     \begin{enumerate}[(i)]
         \item This is trivial. For \(X\) a continuous random variable, we get: 
-        \[ M_X^{(0)}(t) = \int_{-\infty}^{\infty} x^0 e^{t x } f_X(x) dx = \int_{-\infty}^{\infty} 1 e^{0 x } f_X(x) dx = \int_{-\infty}^{\infty} f_X(x) dx.\] Assuming that \(f(x)\) is a PDF, this integrates to 1 by definition. If this integral is not equal to 1, this implies that \(f(x)\) is not a PDF. The proof for the discrete case is the same but with a summation instead of an integral sign.
+        \[ M_X^{(0)}(t) = \int_{-\infty}^{\infty} x^0 \cdot e^{t x } f_X(x) dx = \int_{-\infty}^{\infty} 1 \cdot e^{0 x } f_X(x) dx = \int_{-\infty}^{\infty} f_X(x) dx.\] Assuming that \(f(x)\) is a PDF, this integrates to 1 by definition. If this integral is not equal to 1, this implies that \(f(x)\) is not a PDF. The proof for the discrete case is the same but with a summation instead of an integral sign.
         \item \[M_{\mu + \sigma X}(t) = \mathbb{E}[e^{(\mu + \sigma X)t}] = \mathbb{E}[e^{\mu t} \cdot e^{\sigma X t}].\] Since this is the expectation of \(x\), every term that is not dependent on \(x\) can be taken out of the summation:
         \[ = e^{\mu t} \cdot \mathbb{E}[e^{\sigma X t}] = e^{\mu t} \cdot M_{ X}(\sigma t)\]
         \item 
@@ -163,19 +189,19 @@ while the second way gives:
     Proof Theorem \ref{t: MGF_accurate}
     We consider \(X\) to be a continuous variable. The three MGF expressions are accurate if \(\mathbb{E}[X^\alpha] - M_X^{(\alpha)}(0) = 0\), in other words, if 
     \[\int_{-\infty}^{\infty} (x^\alpha - D^\alpha e^{tx}) \cdot f_X(x) dx = 0 \iff x^\alpha = D^\alpha e^{tx}\]
-    where \(D^\alpha\) the differential operator of order \(\alpha\). Note that we are of course taking derivatives w.r.t. \(t\), not \(x\). The proof will be shown for the Grünwald-left derivative.
+    where \(D^\alpha\) the differential operator of order \(\alpha\). Note that we are taking derivatives w.r.t. \(t\), not \(x\). The proof will be shown for the Grünwald-left derivative.
     \begin{enumerate}[(i)]
         \item \[\leftindex_{GL}{M}_X^{(\alpha)} = D^\alpha_{GL}(e^{tx})  = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \exp(x(t - kh))\]
         \[= \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \exp(-xh)^k\]
         \[= \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (1 - \exp(-xh))^\alpha\]
         (where we used the binomial series identity defined in \ref{d: binomial}). Now we use the Taylor expansion of \(\exp(-xh) = 1 - xh + \frac{(xh)^2}{2!} - \frac{(xh)^3}{3!} + ... - ...\). Since \(h \to 0\), we get: \(\exp(-xh) = 1 - xh + \mathcal{O}(h^2)\) (the rest of the terms are negligible).
         Thus we get:
-        \[ \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (1 -(1 - xh + \mathcal{O}(n)))^\alpha = \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (h(x + \mathcal{O}(h)))^\alpha \]
-        \[ = \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} (h^\alpha((x + \mathcal{O}(h)))^\alpha) = \exp(xt) \lim_{h \to 0} (x + \mathcal{O}(h))^\alpha\]
-        \[ = \exp(xt) x^\alpha.\]
+        \[ \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} \left(1 -(1 - xh + \mathcal{O}(n))\right)^\alpha = \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} \left(h(x + \mathcal{O}(h))\right)^\alpha \]
+        \[ = \exp(xt) \lim_{h \to 0} \frac{1}{h^\alpha} \left(h^\alpha((x + \mathcal{O}(h)))^\alpha\right) = \exp(xt) \lim_{h \to 0} (x + \mathcal{O}(h))^\alpha\]
+        \[ = \exp(xt) \cdot x^\alpha.\]
         Finally, we take a value of \(t\) around 0 and obtain \(\leftindex_{GL}{M}_X^{(\alpha)}(0) = x^\alpha\) 
         \item We consider the Riemann-Liouville derivative: 
-        \[D_{RL}^\alpha(e^{tx}) = \frac{d^n}{dt^n} \frac{1}{\Gamma(n -\alpha)}  \int_{-\infty}^{t} (t-s)^{n - \alpha-1} e^{sx} ds\]
+        \[D_{RL}^\alpha(e^{tx}) = \frac{d^n}{dt^n} \frac{1}{\Gamma(n -\alpha)}  \int_{-\infty}^{t} (t-s)^{n - \alpha-1} \cdot e^{sx} ds\]
         \cite{koning15} has shown that this derivative is equal to \(x^\alpha e^{tx}\). Thus, if we take a value of \(t\) around 0, we get: \(\leftindex_{RL}{M}_X^{(\alpha)}(0) = x^\alpha\)
     \end{enumerate}
 
@@ -185,8 +211,8 @@ while the second way gives:
 \begin{proof}
     Proof of Theorem \ref{t: MGF_inaccurate}
     We compute \[\leftindex_{CF}{M}_X^{(\alpha)} = D^\alpha_{CF}(e^{tx}) = \frac{d^n}{dt^n}\frac{1}{1 - \beta}  \int_{-\infty}^{t} \exp\left(\frac{-\beta}{1 - \beta}(t - s)\right) x \exp(xs) ds\]
-    \[= \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp(s\left(\frac{\beta }{1 - \beta} + x \right)) ds  \text{ where } \beta = \alpha - n \text{ and } n = \lfloor \alpha \rfloor.\]
-    Now let \(u = \frac{\beta}{1 - \beta} + x\), so we get:
+    \[= \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp\left(s\left(\frac{\beta }{1 - \beta} + x \right)\right) ds  \text{ where } \beta = \alpha - n \text{ and } n = \lfloor \alpha \rfloor.\]
+    Now let \( \displaystyle u = \frac{\beta}{1 - \beta} + x\), so we get:
     \[\frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp(us) ds = \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \frac{1}{u} exp(us)\Big|_{-\infty}^{t}\]
     \[= \frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \cdot \frac{1}{u} \cdot \exp(u t) = \frac{x \exp(xt)}{(1 - \beta)x + \beta}\]
     Now we apply the derivative of the above expression, with respect to \(t\), \(n\) times:
@@ -194,61 +220,124 @@ while the second way gives:
     Now we take a value of \(t\) around 0 and obtain:
     \[\leftindex_{CF}{M}_X^{(\alpha)} = D^\alpha_{CF}(e^{tx}) = \frac{x^{n+1} }{(1 - \beta)x + \beta}.\]
     The latter expression is not equal to \(x^\alpha\), thus the error of \(\leftindex_{CF}{M}_X^{(\alpha)}\) is:
-    \[x^\alpha - \frac{x^{n+1} }{(1 - \beta)x + \beta}\]
+    \[
+    \begin{cases} 
+    \displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx -  \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx & \text{if } X \text{ is continuous,} \\ 
+    \displaystyle \sum_{i} \left(x_i^\alpha -  \frac{x_i^{n+1} }{(1 - \beta)x_i + \beta}\right) f_X(x_i) & \text{if } X \text{ is discrete.} 
+\end{cases}\]
 
-    
 \end{proof}
 
-\newpage
+\clearpage
 
-\section{Appendix C }\label{s: app_C}
+\section{Appendix: Algorithms}\label{s:app_alg}
+\begin{algorithm}[H]
+\caption{Analyze Fractional Moments}
+\label{alg:analyse_fractional_moments}
+\begin{algorithmic}[1]
+\REQUIRE Parameters: $\omega$, $\alpha$, $\beta$, list of horizons: $H\_values$, list of orders: $orders$, number of iterations: $n\_sim$
+\ENSURE DataFrame of conditional moments for each $H$ and order
+\STATE Initialize empty results DataFrame
+\FOR{each $H$ in $H\_values$}
+    \STATE $R_{H}^{2} \leftarrow$ SimulateConditionalVariance($\omega, \alpha, \beta, H, n\_sim$)
+    \STATE $pdf\_R \leftarrow$ KDE distribution from $R_H^2$
+    \FOR{each $order$ in $orders$}
+        \STATE $empirical \leftarrow \text{mean}(|R_H^2|^{order})$
+        \STATE $standard \leftarrow$ FractionalMoment($pdf\_R$, $order$, use\_abs=true)
+        \STATE $CF \leftarrow$ FractionalMomentCF($pdf\_R$, $order$, use\_abs=true)
+        \STATE Append $(H, order, empirical, standard, CF)$ to results
+    \ENDFOR
+\ENDFOR
+\RETURN results
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Simulate Conditional Variance}
+\label{alg:simulate_conditional_variance}
+\begin{algorithmic}[1]
+\REQUIRE Parameters: $\omega$, $\alpha$, $\beta$, list of horizons: $H\_values$, number of iterations: $n\_sim$
+\ENSURE Array $R_H^2$ of accumulated conditional variances
+\STATE Initialize $R_H^2$ as a zero array of length $n\_sim$
+\STATE $\sigma_0^2 \leftarrow \omega / (1 - \alpha - \beta)$
+\FOR{$i = 1$ to $n\_sim$}
+    \STATE $\sigma^2 \leftarrow \sigma_0^2$
+    \STATE $variance\_R_H \leftarrow 0$
+    \FOR{$h = 1$ to $H$}
+        \STATE $\sigma \leftarrow \sqrt{\sigma^2}$
+        \STATE $r \sim \mathcal{N}(0, \sigma)$
+        \STATE $variance\_R_H \leftarrow variance\_R_H + r^2$
+        \STATE $\sigma^2 \leftarrow \omega + \alpha r^2 + \beta \sigma^2$
+    \ENDFOR
+    \STATE $R_H^2[i] \leftarrow variance\_R_H$
+\ENDFOR
+\RETURN $R_H^2$
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+\caption{Compute $z$ from returns using GARCH and fractional moments}
+\label{alg:compute_z}
+\begin{algorithmic}[1]
+\REQUIRE Parameters: $H \gets 2$, $n_{\text{sim}} \gets 100{,}000$, $\text{window} \gets 520$, $\text{target\_length} \gets$ \texttt{nothing}, returns, fractional order $\gamma$
+\ENSURE Computed array \texttt{z}
+\STATE 
+\STATE $n \gets \text{length}(\texttt{returns})$
+\STATE $\text{max\_index} \gets n - H$
+\IF{$\text{target\_length} = \texttt{nothing}$}
+    \STATE $\text{range} \gets \text{window} : \text{max\_index}$
+\ELSE
+    \STATE $\text{range} \gets (\text{max\_index} - \text{target\_length} + 1) : \text{max\_index}$
+\ENDIF
+\STATE Initialize empty array $z$
+\FOR{each $t$ in \texttt{range}}
+    \STATE $r_{\text{window}} \gets \texttt{returns}[(t - \text{window} + 1) : t]$
+    \STATE Fit GARCH(1,1) model to $r_{\text{window}}$
+    \STATE Extract parameters $\omega, \alpha, \beta$ from model
+    \STATE $R_{H}^{2} \gets \text{simulate\_conditional\_variance}(\omega, \alpha, \beta, H, n_{\text{sim}})$
+    \STATE $\text{distribution}_R \gets \text{kde}(R_{H}^{2})$
+    \STATE $\text{pdf}_R \gets \text{KDEDistribution}(\text{distribution}_R)$
+    \STATE $\text{moment} \gets \text{fractional\_moment}(\text{pdf}_R, \gamma; \text{use\_abs} = \text{true})$
+    \STATE Append \texttt{moment} to \texttt{z}
+\ENDFOR
+\RETURN $z$
+\end{algorithmic}
+\end{algorithm}
+
+\clearpage
+\section{Appendix: Table of Common Distributions}\label{s:app_common_distributions}
+\begin{table}[ht]
 \renewcommand{\arraystretch}{1.5}
-\begin{longtable}{|p{2.5cm}|p{5.5cm}|p{4.5cm}|p{3.0cm}|}
+\begin{adjustwidth}{-.5in}{-.5in}
+\begin{center}
+    
+\begin{tabular}{|c|c|c|c|}
 \hline
 \textbf{Distribution} & \textbf{PDF / PMF} & \textbf{MGF \(M_X(t)\)} & \textbf{Restrictions} \\
 \hline
-\endfirsthead
-\hline
-\textbf{Name} & \textbf{PDF / PMF} & \textbf{MGF \(M_X(t)\)} & \textbf{Restrictions} \\
-\hline
-\endhead
 
-\( \text{Bernoulli}(p) \) & \( f(x) = p^x(1-p)^{1-x} \) & \( M_X(t) = (1 - p) + pe^t \) & \( 0 \leq p \leq 1, \ x \in \{0,1\}\) \\
+\( \text{Bernoulli}(p) \) & \(\displaystyle  f(x) = p^x(1-p)^{1-x} \) & \( M_X(t) = (1 - p) + pe^t \) & \( 0 \leq p \leq 1,\ x \in \{0,1\} \) \\
 \hline
 
-\( \text{Binomial}(n, p) \) & \[ f(x) = \binom{n}{x} p^x (1-p)^{n-x} \] & \( M_X(t) = (1 - p + pe^t)^n \) & \( n \in \mathbb{N},\ 0 \leq p \leq 1 \) \\
+\( \text{Binomial}(n, p) \) & \( \displaystyle f(x) = \binom{n}{x} p^x (1-p)^{n-x} \) & \( M_X(t) = (1 - p + pe^t)^n \) & \( n \in \mathbb{N},\ 0 \leq p \leq 1 \) \\
 \hline
 
-Discrete Uniform  & \( f(x) = \frac{1}{N} \) & \( M_X(t) = \frac{1}{N} \sum_{k=1}^N e^{tk} \) & \( N \in \mathbb{N} \) \\
+\( \text{Poisson}(\lambda) \) & \( \displaystyle f(x) = \frac{\lambda^x e^{-\lambda}}{x!} \) & \( M_X(t) = \exp(\lambda(e^t - 1)) \) & \( \lambda > 0,\ x \geq 0 \) \\
 \hline
 
-\( \text{Geometric}(p) \) & \( f(x) = p(1-p)^{x-1}\) & \( \frac{pe^t}{1 - (1 - p)e^t},\ t < -\ln(1 - p) \) & \( 0 < p \leq 1,\ x \geq 1  \) \\
+\( \text{Exponential}(\beta) \) & \( \displaystyle f(x) = \frac{1}{\beta} e^{-x/\beta} \) & \( M_X(t) = \frac{1}{1 - \beta t},\ t < 1/\beta \) & \( \beta > 0,\ x > 0 \) \\
 \hline
 
-\( \text{Poisson}(\lambda) \) & \[ f(x) = \frac{\lambda^x e^{-\lambda}}{x!}\] & \( \exp(\lambda(e^t - 1)) \) & \( \lambda > 0,\ x \geq 0  \) \\
+\( \text{Gamma}(\alpha, \beta) \) & \( \displaystyle f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-x/\beta} \) & \( M_X(t) = (1 - \beta t)^{-\alpha},\ t < 1/\beta \) & \( \alpha, \beta > 0,\ x > 0 \) \\
 \hline
 
-\( \text{Beta}(\alpha, \beta) \) & \[ f(x) = \frac{1}{B(\alpha, \beta)} x^{\alpha-1}(1-x)^{\beta-1}\] & Messy & \( \alpha, \beta > 0,\ x \in (0,1)  \) \\
+\( \mathcal{N}(\mu, \sigma^2) \) & \( \displaystyle f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} \) & \( M_X(t) = \exp\left( \mu t + \frac{\sigma^2 t^2}{2} \right) \) & \( \sigma > 0 \) \\
 \hline
 
-\( \text{Chi-Squared}(p) \) & \[ f(x) = \frac{1}{2^{p/2}\Gamma(p/2)} x^{p/2 - 1} e^{-x/2}\] & \( (1 - 2t)^{-p/2},\ t < 1/2 \) & \( p > 0,\ x > 0  \) \\
-\hline
-
-\( \text{Laplace}(\mu, \sigma) \) & \[ f(x) = \frac{1}{2\sigma} e^{-\frac{|x - \mu|}{\sigma}} \] & \( \frac{e^{\mu t}}{1 - (\sigma t)^2},\ |t| < \frac{1}{\sigma} \) & \( \sigma > 0 \) \\
-\hline
-
-\( \text{Exponential}(\beta) \) & \( f(x) = \frac{1}{\beta} e^{-x/\beta} \) & \( \frac{1}{1 - \beta t},\ t < 1/\beta \) & \( \beta > 0,\ x > 0 \) \\
-\hline
-
-\( \text{Gamma}(\alpha, \beta) \) & \[ f(x) = \frac{1}{\Gamma(\alpha)\beta^\alpha} x^{\alpha-1} e^{-x/\beta} \] & \( (1 - \beta t)^{-\alpha},\ t < 1/\beta \) & \( \alpha, \beta > 0,\ x > 0 \) \\
-\hline
-
-\( \text{Logistic}(\mu, \beta) \) & \[ f(x) = \frac{e^{-(x - \mu)/\beta}}{\beta(1 + e^{-(x - \mu)/\beta})^2} \] & \(e^{\mu t}\Gamma(1 - \beta t) \Gamma(1 + \beta t) \)& \( \beta > 0 \) \\
-\hline
-
-Normal \( \mathcal{N}(\mu, \sigma^2) \) & \[ f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}} \] & \( \exp\left( \mu t + \frac{\sigma^2 t^2}{2} \right) \) & \( \sigma > 0 \) \\
-\hline
-
-\( \text{Uniform}(a, b) \) & \( f(x) = \frac{1}{b - a}\) & \( \frac{e^{tb} - e^{ta}}{t(b - a)} \), \( t \neq 0 \) & \( a < b,\ x \in [a,b]  \) \\
-\hline
-\end{longtable}\label{t: MGF_Appendix}
+\end{tabular}
+\end{center}
+\end{adjustwidth}
+\caption{Common distributions and their moment generating functions}
+\label{t:MGFs_common}
+\end{table}

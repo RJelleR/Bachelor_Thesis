@@ -14,7 +14,7 @@
 \usepackage{leftindex}
 \usepackage{booktabs}
 \usepackage{tabularx}
-\usepackage{longtable}
+\usepackage{chngpage}
 
 %\usepackage[dutch]{babel} % when you write in dutch
 
@@ -132,46 +132,29 @@ Dr. yyyy (co-reader)
 %%%%%%%%%%%%%%%%%%%%%%% main contents %%%%%%%%%%%%%%%%%
 \setcounter{page}{1}
 
-\section*{Abstract}
-The abstract should summarize the contents of the thesis.
-It should be clear, descriptive, self-explanatory and not longer
-than a third of a page. Please avoid using mathematical
-formulas as much as possible.
-Keywords might be given.
-
-\bigskip\noindent
-\textbf{Keywords:} Fractional moments, Moment Generating Function, Fractional Calculus.
+\input{sections/Abstract.tex}
 
 \input{sections/Introduction}
-\input{sections/methodology}
-\input{sections/Calculus}
-\input{sections/Moments}
+
+\input{sections/Methodology}
 
 \input{sections/Simulation.tex}
 
+\input{sections/Practical_Case.tex}
+
+\input{sections/Conclusion.tex}
 
 
 
 
-\section{Conclusion}\label{s:con}
-The conclusion summarizes the results of your research.
-Also it gives possible directions of further research.
+
+
 
 \section*{Acknowledgements}
-Place the acknowledgments section, if needed, after the main text, 
-but before any appendices and the references. The section heading is not numbered.
-
+I would like to thank my supervisor Gabriele Mingoli for the great guidance and clear and fast communication. I would like to thank \textbf{Person A}, \textbf{Person B} for peer reviewing my paper and \textbf{Person C}, \textbf{Person D} for the feedback on language, grammar and general structure.
 \appendix
 
 \include{sections/Appendices}
-\section{Appendix}\label{s:app1}
-Place any appendices after the acknowledgments, starting on a new page.
-The appendices are numbered
-\textbf{A}, \textbf{B}, \textbf{C}, and so forth.
-The appendices contain material that you would like to share with the
-reader but that would hinder the flow of reading. For instance long
-proofs of theorems, code of algorithms, data, etc.
-
 
 %\printbibliography
 % or in case of classic bibtex:
