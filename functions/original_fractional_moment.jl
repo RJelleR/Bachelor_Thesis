@@ -11,26 +11,21 @@ function is_symmetric(dist::Distribution)
     return pdf(dist, μ + 1.0) == pdf(dist, μ - 1.0)
 end
 
-function fractional_moment(dist::Distribution, α::Real; use_abs=false, complex=false)
+function original_fractional_moment(dist::Distribution, α::Real; use_abs=false, complex=false)
     if dist isa ContinuousUnivariateDistribution
-        lower = minimum(dist)
-        upper = maximum(dist)
-        print(lower)
-        if !isfinite(lower)
-            lower = -1000
-            print(lower)
-            if lower < 0 && is_symmetric(dist)
-                lower = 0
-            end
-        elseif lower < 0 && is_symmetric(dist)
-            print("ok")
-            lower = 0
-        elseif lower < 0
-            lower = -1000
-        end
+        μ = mean(dist)
+        σ = std(dist)
 
-        if !isfinite(upper)
-            upper = 1000
+        if use_abs
+            lower = μ - 10σ
+            upper = μ + 10σ
+        else
+            if is_symmetric(dist)
+                lower = 0
+            else
+                lower = μ - 10σ
+            end
+            upper = μ + 10σ
         end
 
         integrand(x) = begin
@@ -39,7 +34,7 @@ function fractional_moment(dist::Distribution, α::Real; use_abs=false, complex=
         end
 
         moment, _ = quadgk(integrand, lower, upper)
-        return is_symmetric(dist) ? 2 * moment : moment
+        return (is_symmetric(dist) && lower ≥ 0 && !use_abs) ? 2 * moment : moment
 
     elseif dist isa DiscreteUnivariateDistribution
         support_vals = 0:1000
@@ -52,28 +47,25 @@ function fractional_moment(dist::Distribution, α::Real; use_abs=false, complex=
     end
 end
 
-function fractional_moment_CF(dist::Distribution, α::Real; use_abs=false, complex=false)
+function original_fractional_moment_CF(dist::Distribution, α::Real; use_abs=false, complex=false)
     n = floor(α)
     β = α - n
 
     if dist isa ContinuousUnivariateDistribution
-        lower = minimum(dist)
-        upper = maximum(dist)
+         μ = mean(dist)
+         σ = std(dist)
 
-        if !isfinite(lower)
-            lower = -1000
-            if lower < 0 && is_symmetric(dist)
+         if use_abs
+            lower = μ - 10σ
+            upper = μ + 10σ
+         else
+             if is_symmetric(dist)
                 lower = 0
-            end
-        elseif lower < 0 && is_symmetric(dist)
-            lower = 0
-        elseif lower < 0
-            lower = -1000
-        end
-
-        if !isfinite(upper)
-            upper = 1000
-        end
+             else
+                lower = μ - 10σ
+             end
+             upper = μ + 10σ
+         end
 
         integrand(x) = begin
             ε = 1e-10
@@ -84,8 +76,7 @@ function fractional_moment_CF(dist::Distribution, α::Real; use_abs=false, compl
         end
 
         moment, _ = quadgk(integrand, lower, upper)
-        print(moment)
-        return is_symmetric(dist) ? 2 * moment : moment
+        return (is_symmetric(dist) && lower ≥ 0 && !use_abs) ? 2 * moment : moment
     elseif dist isa DiscreteUnivariateDistribution
         support_vals = 0:1000
         return sum(begin

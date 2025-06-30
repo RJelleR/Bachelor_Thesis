@@ -2,14 +2,18 @@
 We now focus on computing the newly obtained MGF expressions numerically. To highlight the errors of the Caputo-Fabrizio MGF, moments of various orders with different parameter configurations will be computed. However, before computing these errors involving explicit distributions, we first focus on the expression \[ E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\] which is of great importance in order to fully comprehend the errors discussed in section \ref{ss:accuracy_analysis}
 
 \subsection{Analysing a particular error term of interest of the Caputo-Fabrizio MGF}
-We explicitly focus on the term \[ E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\] for simplicity. The expression we analyse, denoted \(E(x, \alpha)\) is not the same as the expression obtained in theorem \ref{t: MGF_inaccurate}. Yet, it is the part of the expression that involves the order \(\alpha\) and is thus of great interest. What is more, considering the result obtained in theorem \ref{t: MGF_inaccurate}, it is easy to see that \(\leftindex_{CF}{M}_X^{(\alpha)}\) is accurate \(\iff x^\alpha = \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\). Thus, we consider the function \(E(x, \alpha)\), to be the function of their differences and analyse when this function equals zero. Plotting this expression for different orders of \(\alpha\), we obtain the following figure:
+We explicitly focus on the term 
+\begin{equation}\label{def:error} 
+    E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}
+\end{equation}
+ for simplicity. The expression we analyse, denoted \(E(x, \alpha)\) is not the same as the expression obtained in theorem \ref{t: MGF_inaccurate}. Yet, it is the part of the expression that involves the order term \(\alpha\) and is thus of great interest. What is more, considering the result obtained in theorem \ref{t: MGF_inaccurate}, it is easy to see that \(\leftindex_{CF}{M}_X^{(\alpha)}\) is accurate \(\iff x^\alpha = \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\). Thus, we consider the function \(E(x, \alpha)\), to be the function of their differences and analyse when this function equals zero. Plotting this expression for different orders of \(\alpha\), we obtain the following figure:
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/error_plot.pdf}
     \caption{Error of Caputo-Fabrizio MGF}
     \label{fig:error_MGF}
 \end{figure}
-It can be observed from figure \ref{fig:error_MGF} above that, in general for greater orders \(\alpha\), the error tends to increase. However, the greatest order of \(\alpha\) does not provide the greatest error. Instead it is the second greatest order of \(\alpha\) that does so. This may be explained by the fact that for values of \(\alpha\), being exactly in the middle of two integers, the value of \((1 - \beta)x + \beta\) will be the greatest. As a result, the fraction becomes small, so the error tends to increase.
+It can be observed from figure \ref{fig:error_MGF} above that, in general for greater orders \(\alpha\), the error tends to increase. However, the greatest order of \(\alpha\) does not provide the greatest error. Instead it is the second greatest order of \(\alpha\) that does so. This may be explained by the fact that for values of \(\alpha\), being exactly in the middle of two integers, the value of \((1 - \beta)x + \beta\) will be the greatest. As a result, the fraction of error term \ref{def:error} becomes small, thus the error tends to increase.
 
 This hypothesis is indeed confirmed in the following figure, which focuses on the growth rate of the error, for a fixed value of \(x\) and an increasing order \(\alpha\).
 
@@ -19,31 +23,91 @@ This hypothesis is indeed confirmed in the following figure, which focuses on th
     \caption{Error of Caputo-Fabrizio MGF, for fixed x}
     \label{fig:error_MGF_fixed_x}
 \end{figure}
-Figure \ref{fig:error_MGF_fixed_x} indeed seems to indicate that for some \(\alpha \in (a, b)\), where \(a, b \in \mathbb{Z}\) are consecutive integers that \(E(x, \alpha)\) attains it maximum value for some \(\alpha\) 'slightly greater' than \(\frac{a + b}{2}\). Figure \ref{fig:error_MGF_fixed_x} also reveals that the approximation error is considerably smaller for negative fractional moments compared to the positive ones. This suggests that, when negative moments are well-defined, the Caputo-Fabrizio MGF might still offer reasonable accuracy, despite its known limitations.
+Figure \ref{fig:error_MGF_fixed_x} indeed seems to indicate that for some \(\alpha \in (a, b)\), where \(a, b \in \mathbb{Z}\) are consecutive integers that \(E(x, \alpha)\) attains it maximum value for some \(\alpha\) 'slightly greater' than \(\frac{a + b}{2}\). Figure \ref{fig:error_MGF_fixed_x} also reveals that the approximation error is considerably smaller for negative fractional moments compared to the positive ones. This suggests that, when negative moments are well-defined, the Caputo-Fabrizio MGF may still offer reasonable accuracy, despite its known limitations.
 
-Note that within each integer interval, the function \(E(x, \alpha)\) appears to be concave. Thus, as is supported by figure \ref{fig:error_MGF_fixed_x}, it is only possible to obtain local maxima. Ideally, one would aim to analytically determine the optimal order \(\hat{\alpha}\) such that minimizes \(E(x, \hat{\alpha})\). However, due to the concavity of \(E(x, \hat{\alpha})\), such analytical minimization is not feasible. Figure \ref{fig:error_MGF_fixed_x} seems to suggest that order of \(\alpha\) near integer orders yields smaller approximation errors, which makes sense intuitively. However, the latter is not rigorous evidence. Therefore, in the following section, we will analyse the numerical approximation errors of the Caputo-Fabrizio MGF by simulation. We will use numerical methods to try to obtain values \(\alpha\) which minimize the expression from theorem \ref{t: MGF_inaccurate}.
+Note that within each subsequent integer interval, the function \(E(x, \alpha)\) appears to be concave. Thus, as is supported by figure \ref{fig:error_MGF_fixed_x}, it is only possible to obtain local maxima. Ideally, one would aim to analytically determine the optimal order \(\hat{\alpha}\) such that minimizes \(E(x, \hat{\alpha})\). However, due to the concavity of \(E(x, \alpha)\), such analytical minimization is not feasible. Figure \ref{fig:error_MGF_fixed_x} seems to suggest that the order of \(\alpha\) near integer orders yields smaller approximation errors, which makes sense intuitively. However, the latter is not rigorous evidence. Therefore, in the following section, we will analyse the numerical approximation errors of the Caputo-Fabrizio MGF by computing moments of fractional order for different distributions and various orders \(\alpha\).
 
-We have seen in the previous section how the error \(E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\) changes with increasing values of \(\alpha\). Now, we focus on the entire expression, as stated in theorem \ref{t: MGF_inaccurate}.
 \subsection{Practical Issues}
-Computing these expressions poses some difficulties. In the first place, we want to compute the moment of fractional order \(\alpha\) for a random variable \(X\). Julia does not have any packages to compute raw moments of such an order, thus these methods will have to be created first. In order to accomplish the desired result, we directly compute \(\int_{-\infty}^{\infty} x^\alpha  f_X(x) dx\). If the support of the random variable is infinite, this integral is often not numerically well defined. Thus, in such cases we use a bounded support \((-1000, 1000)\) which provides a sufficient accurate approximation. What is more, for many fractional orders \(\alpha\) in combination with negative values of \(x\), \(x^\alpha\) is of complex form. To avoid such expressions, given that the distribution is symmetric, we simply integrate the PDF over its non-negative support and factor the final value by 2. In this manner, it is still possible to obtain fractional moments of distributions such as the Normal distribution. If a distribution has a negative support and is not symmetric, it is possible to compute the complex or absolute moment of fractional order, which avoids any numerical issues. This approach, however, lacks interpretability, as the intuition behind absolute and complex moments is harder to grasp. 
-\newline
-It now remains to compute the fractional moment using the Caputo-Fabrizio MGF. Unfortunately, it is rather difficult to compute the fractional derivative of an MGF expression numerically. The reason is, that programming packages often take (fractional) derivatives on a certain point \(x\) rather than over the entire function. Thus, we simply use the result obtained in theorem \ref{t: MGF_inaccurate}. That is, instead of the moment of order \(\alpha\), the Caputo-Fabrizio MGF computes the moment of order \(n+1\) divided by some variables dependent on \(\alpha\). More explicitly, we compute \(\leftindex_{CF}{M}_X^{(\alpha)}(0) = \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x)\). This integral faces the same problems as the aforementioned integral with \(x^\alpha\). What is more, for specific values of \(x\) and \(\beta\), the denominator tends to go towards zero, which is numerically unstable. Thus, in such cases, we add a rather small \(\epsilon\) in order to avoid this issue.
+Computing fractional moments of a specific distribution poses some difficulties. In the first place, we want to compute the moment of fractional order \(\alpha\) for a random variable \(X\). Official packages to compute raw moments of fractional order do not exist yet, thus these methods will have to be created first. In order to accomplish the desired result, we directly compute \(\int_{-\infty}^{\infty} x^\alpha  f_X(x) dx\). If the support of the random variable is infinite, this integral is often not numerically well defined or takes too long to compute. Thus, in such cases we use a bounded support \((-100, 100)\) which provides a sufficiently accurate approximation. What is more, for many fractional orders \(\alpha\) in combination with negative values of \(x\), \(x^\alpha\) is of complex form. If a distribution has a support which contains negative values, it is possible to compute the complex or absolute moment of fractional order, which avoids any numerical issues. This approach, however, lacks interpretability, as the intuition behind absolute and complex moments is harder to grasp.
+
+It now remains to compute the fractional moment using the Caputo-Fabrizio MGF. Unfortunately, it is rather difficult to compute fractional derivatives of an MGF expression numerically. The reason is, that programming packages often take (fractional) derivatives on a certain point \(x\) rather than over the entire function. Thus, we simply use the result obtained in theorem \ref{t: MGF_inaccurate}. That is, instead of the moment of order \(\alpha\), the Caputo-Fabrizio MGF computes the moment of order \(n+1\) divided by some variables dependent on \(\alpha\). More explicitly, we compute \(\leftindex_{CF}{M}_X^{(\alpha)}(0) = \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx\). Throughout the rest of the thesis, this is the expression that is being computed whenever values of the Caputo-Fabrizio MGF are discussed. This integral faces the same problems as the aforementioned integral including \(x^\alpha\). What is more, for specific values of \(x\) and \(\beta\), the denominator tends to go towards zero, which is numerically unstable. Thus, in such cases, we add a small \(\epsilon > 0\) in order to avoid this issue.
 
 \subsection{Accuracy Analysis}\label{ss:accuracy_analysis}
-For this accuracy analysis we consider different parameter values and orders of \(\alpha\). We set \(\alpha \in [0, 5]\) with steps of 0.01. This yields 500 errors per parameter-configuration, which provides us with a viable sample to analyse the characteristics of the errors. Whenever possible, we extend \(\alpha\) to the interval \((-1, 0)\). We consider three distributions, namely the Exponential, Normal and Poisson distribution. This selection allows us to cover both continuous and discrete distributions, distributions with negative and positive supports and symmetric distributions.
-The observant reader might notice that all of the errors in the upcoming sections are non-negative and may incorrectly conclude that these are the absolute or squared errors. This is not the case. In each case we compute the expression obtained in theorem \ref{t: MGF_inaccurate}, for a different distribution. Since the expression \(E(x, \alpha) = x^\alpha - \displaystyle \frac{x^{n+1} }{(1 - \beta)x + \beta}\) is always non-negative, it follows that \( \displaystyle x^\alpha \geq \frac{x^{n+1} }{(1 - \beta)x + \beta}\) and thus \(\displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx \geq  \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx\) for any distribution, such that the expression from theorem \ref{t: MGF_inaccurate} is always non-negative.
-\subsubsection{Exponential Distribution}
-First we consider the Exponential distribution with PDF as defined in Appendix \ref{s:app_common_distributions}.
-The support of the Exponential distribution is \([0, \infty)\), thus the integration process will avoid most numerical issues. Moreover, all relevant moments of the Exponential distribution are based on raw moments, which is precisely the kind of moments we are interested in.
-\newline
-We obtain the following figure:
+For this accuracy analysis we will compute fractional moments based on different parameter values and orders of \(\alpha\). We set \(\alpha \in [0, 5]\) with steps of 0.01. This yields 500 different fractional moments per parameter-configuration. We consider three distributions, namely the Exponential, Normal and Poisson distribution. This selection allows us to cover both continuous and discrete distributions, and distributions with negative and positive supports. 
+
+\subsubsection{Computing fractional moments for various distributions}
+Before analysing the errors of the Caputo-Fabrizio MGF, we first compare the values obtained by each method. Specifically, we compute:
+\begin{itemize}
+    \item \textbf{Theoretical values:} \(\displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx\), which has been shown to coincide with the Riemann-Liouville and Grünwald-Letnikov MGFs.
+    \item \textbf{Caputo-Fabrizio MGF:} \(\displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx\)
+    \item \textbf{Complex moment generating function (CMGF):} defined as in equation \ref{eq:hansen} in section \ref{ss:methodology_introduction}, which computation is given in algorithm \ref{alg:cmgf_dist}. In this case, \(\xi = 0\).
+    \item \textbf{Empirical values:} \(\displaystyle\mathbb{E}[|X|^\alpha] \approx \frac{1}{n} \sum_{i=1}^{n} |x_i|^\alpha\). Where \(\{x_i\}_{i=1}^{n}\) are simulated samples and \(n = 1.000.000\).
+\end{itemize}
+
+For the Poisson, Exponential and Normal distribution, we obtain the following figures: 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/error_plot_exp.pdf}
-    \caption{Approximation error for the Exponential Distribution}
-    \label{fig:error_plot_exp}
+    \includegraphics[width=1.1\textwidth]{figures/value_comparison_poisson.pdf}
+    \caption{Comparison of different fractional moments for the Poisson Distribution}
+    \label{fig:poisson_plot_values}
 \end{figure}
-From figure \ref{fig:error_plot_exp}, it is clear that for a greater parameter value \(\beta\) the approximation error increases. Namely, for moments of higher order \((\alpha \geq 3)\), the approximation error increases rapidly. For smaller orders of \(\alpha\) the approximation errors remain relatively low. In practice, moments of order \(\alpha > 4\) are oftentimes not of interest. Thus, the greatest approximation errors will be avoided.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{figures/value_comparison_exponential.pdf}
+    \caption{Comparison of different fractional moments for the Exponential Distribution}
+    \label{fig:exponential_plot_values}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth]{figures/normal_value_comparison_normal.pdf}
+    \caption{Comparison of different fractional moments for the Normal Distribution}
+    \label{fig:normal_plot_values}
+\end{figure}
+
+The figures above show fractional moment values for various orders \(\alpha\) and different parameter values as computed using the Caputo-Fabrizio MGF, the two accurate MGFs, the CMGF and the empirical method. The results are consistent across all three distributions. The values of the accurate MGFs (blue line), the CMGF (dashed purple line) and empirical values (dashed green-line) almost completely agree, confirming the accuracy and usability of these methods. The values obtained by the Caputo-Fabrizio MGF are always smaller or equal to the values of the accurate MGF expressions. This observation is in line with the result that the errors are always non-negative. Moreover, for all three distributions, an increase in the parameter values, leads to substantially larger fractional moment values. Correspondingly, the errors of the Caputo-Fabrizio MGF also increase, confirming that the approximation error grows with the distribution parameters. 
+
+We obtain the following table, including the run-time (in seconds) of these different methods:
+\begin{table}[H]
+    \centering 
+\input{tables/run_time.tex}
+\caption{Run-time of different methods} 
+\label{tab:run_time}
+\end{table}
+The run-time values reported in table \ref{tab:run_time} are averages over 1000 executions for the theoretical and Caputo-Fabrizio MGFs, 100 executions for the CMGF and 10 executions for the empirical method. Unsurprisingly, the empirical method is the least computationally efficient method, due to the requirement of one million simulated samples. The theoretical and Caputo-Fabrizio MGF methods have comparable run-times, both being highly efficient. The CMGF method is also fast, but noticeably slower than the former two, likely due to the increased complexity of the integrand. The results of the Poisson distribution somewhat differ from those of the Normal and Exponential distribution. This discrepancy may come from  the discrete nature of the Poisson distribution, which requires its moments to be computed in a slightly different numerical manner.
+
+We now focus on the errors of the Caputo-Fabrizio MGF. Specifically, for each of distribution we compute the difference between the theoretical fractional moments: \(\displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx\) and those computed by the Caputo-Fabrizio MGF: \(\displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx\) for various orders \(\alpha\). This error expression corresponds to the analytical approximation error given in theorem \ref{t: MGF_inaccurate}.
+The observant reader might notice that all of the errors in the upcoming sections are non-negative and may incorrectly conclude that these are the absolute or squared errors. This is not the case. Since the expression for the pointwise error function \(E(x, \alpha)\) as in \ref{def:error} is always non-negative, it follows that \( \displaystyle x^\alpha \geq \frac{x^{n+1} }{(1 - \beta)x + \beta}\) and thus \(\displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx \geq  \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx\) for any distribution. Thus the approximation error from theorem \ref{t: MGF_inaccurate} is guaranteed to be non-negative.
+
+
+\subsubsection{Poisson Distribution}
+First, we let \(X \sim Poisson(\lambda)\), with the probability mass function defined as in Appendix \ref{s:app_common_distributions}. The Poisson distribution has positive support, thus numerical issues will be avoided. It is not possible to obtain moments of negative order for the Poisson distribution.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\textwidth]{figures/error_plot_poisson.pdf}
+    \caption{Approximation error for the Poisson Distribution}
+    \label{fig:poisson_plot_error}
+\end{figure}
+
+
+The trend of the errors in figure \ref{fig:poisson_plot_error} is rather similar to the trend displayed in figure \ref{fig:error_MGF_fixed_x}. That is, the errors behave concavely between each interval of subsequent integers. The plots of the error trends for the Exponential distribution is also very similar. Thus, this plot will not be included. Figure \ref{fig:poisson_plot_error} offers us some additional informational. Namely, the approximation errors increase with the parameter values of the underlying distribution function, in this case the Poisson distribution.
+
+
+\begin{table}[H]
+    \centering
+\input{tables/poisson_statistics_table.tex}
+\caption{Poisson Distribution - Approximation Error Statistics} 
+\label{tab:poisson_error}
+\end{table}
+The statistics in table \ref{tab:poisson_error} further support this observation.
+Both the average and maximum of the errors increase, as the parameter \(\lambda\) grows. Moreover, the standard deviation of the errors also increases and the distribution of the errors tends to become more right-skewed as \(\lambda\) increases. For all values of \(\lambda\), the minimum error is zero, which occurs when \(\alpha \in \mathbb{N}\). In the last column, the coefficient of variation has been reported, which has been given by the formula \(\displaystyle \frac{\sigma}{\mu}\), where \(\mu\) and \(\sigma\) denote the sample mean and sample standard deviation respectively \citep{hendricks1936}. This metric of measurement allows us to objectively compare the variability of the errors of each of the parameter configurations. The lower \(c_v\), the lower the relative variability of the errors. This low variability is something we strive for, as it allows us to describe our data with greater confidence. Once more, this statistic also increases with \(\lambda\). For \(\lambda = 0.5\) we may still be able to obtain reliable results. In contrast, the other configurations are likely to be too unreliable in practice, especially for orders of \(\alpha > 3\).
+
+\subsubsection{Exponential Distribution}
+We now consider \(X \sim Exponential(\beta)\), with PDF as defined in Appendix \ref{s:app_common_distributions}.
+The support of the Exponential distribution is \([0, \infty)\), thus the integration process will avoid most numerical issues. Moreover, all relevant moments of the Exponential distribution are raw moments, which are precisely the moments we are interested in.
+\newline
 
 We obtain the following associated table with some core statistics:
 \begin{table}[H]
@@ -53,20 +117,18 @@ We obtain the following associated table with some core statistics:
 \label{tab:exp_error}
 \end{table}
 
-The results in table \ref{tab:exp_error} align with the conclusions derived in figure \ref{fig:error_plot_exp}. The greater the values of \(\beta\) and order of \(\alpha\), the greater the (average) approximation error. For all values of \(\beta\), the minimum error is zero, which occurs when \(\alpha \in \mathbb{N}\). An interesting observation is that for \(\beta = 1.5\) the average approximation error exceeds the maximum approximation error for \(\beta = 1.0\). For all values of \(\beta\), the skewness is positive, implying that the distribution of the approximation errors is right-skewed. Thus, clearly the distribution of the errors is not symmetric and therefore certainly not a Normal distribution. In the last column, the Coefficient of Variation has been reported, which has been given by the formula \(\displaystyle \frac{\sigma}{\mu}\), where \(\mu\) and \(\sigma\) denote the sample and sample standard deviation respectively \cite{hendricks1936}. This metric of measurement allows us to objectively compare the variability of the errors of each of the parameter configurations. The lower \(c_v\), the lower the variability and thus the more consistent the dataset. This consistency is something we strive for, as it allows us to describe our data with greater confidence. From table \ref{tab:exp_error}, it is clear that the Coefficient of Variation increases as the parameter \(\beta\) increases. For \(\beta = 0.5\) all result are reasonable. The Caputo-Fabrizio MGF in combination with the Exponential(0.5) could still be viable in practice. For Exponential(1), this conclusion may depend on the maximum order of \(\alpha\).
+The results in table \ref{tab:exp_error} align with the conclusions derived from table \ref{tab:poisson_error}. The greater the parameter values and order of \(\alpha\), the greater the (average) approximation error.  An interesting observation is that for \(\beta = 1.5\) the average approximation error exceeds the maximum approximation error for \(\beta = 1.0\). For all values of \(\beta\), the skewness is positive, implying that the distribution of the approximation errors is right-skewed. Thus, clearly the distribution of the errors is not symmetric and therefore certainly not a Normal distribution.  From table \ref{tab:exp_error}, it is clear that the coefficient of variation increases as the parameter \(\beta\) increases. For \(\beta = 0.5\) all result are reasonable. The Caputo-Fabrizio MGF in combination with the Exponential(0.5) could still be viable in practice. For Exponential(1), this conclusion may depend on the maximum order of \(\alpha\).
 
 \subsubsection{Normal Distribution}
-We now consider \(X\) to be Normally distributed with mean \(\mu\) and standard deviation \(\sigma\), as defined in Appendix \ref{s:app_common_distributions}. This distribution is of particular interest as it has two parameters. Thus, we can analyse the differences of effect of both parameters on the approximation error. Therefore, while raw fractional moments of the Normal distribution are not commonly used in practice, we can still obtain valuable insights from this simulation.  The Normal distribution is symmetric with domain \(x \in \mathbb{R}\). So, we integrate the PDF over the interval \((0, 1000)\) to avoid numerical issues.
-\newline
+We now consider \(X \sim \mathcal{N}(\mu, \sigma)\), with PDF as defined in Appendix \ref{s:app_common_distributions}. This distribution is of particular interest as it has two parameters. Thus, we can analyse the differences of effect of both parameters on the approximation error. Therefore, while raw fractional moments of the Normal distribution are not commonly used in practice, we can still obtain valuable insights from these computations. In order to avoid numerical issues, absolute values have been used to compute the fractional moments.
 
-We obtain the following figure:
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figures/error_plot_normal.pdf}
+    \includegraphics[width=0.675\textwidth]{figures/error_plot_normal.pdf}
     \caption{Approximation error for the Normal Distribution}
     \label{fig:normal_plot_error}
 \end{figure}
-As illustrated in figure \ref{fig:error_plot_exp}, the approximation error increases with \(\mu\) and \(\sigma\). This result is consitent with the result obtained for the Exponential distribution. However, the magnitude of the errors of the Normal distribution is considerably smaller. Furthermore, the figure also displays the errors for order \(\alpha \in (-0.95, 0)\). These errors tend to attain the same size as errors for order \(\alpha\) near 3. Interestingly, for negative orders of \(\alpha\), the effect of the parameter values seems to reverse. Larger values of \(\mu\) and \(\sigma\) are associated with smaller approximation errors.
+As illustrated in figure \ref{fig:normal_plot_error}, the approximation error increases with \(\mu\) and \(\sigma\). This result is consitent with the result obtained for the other two distributions. Moreover, this figure also displays the errors for order \(\alpha \in (-0.95, 0)\). Interestingly, for negative orders of \(\alpha\), the effect of the parameter values seems to be the reverse. Larger values of \(\mu\) and \(\sigma\) are associated with smaller approximation errors.
 \newline 
 
 We obtain the following associated table with some core statistics:
@@ -76,7 +138,7 @@ We obtain the following associated table with some core statistics:
 \caption{Normal Distribution - Approximation Error Statistics} 
 \label{tab:normal_error}
 \end{table}
-The statistics in table \ref{tab:normal_error} support the visuals conclusions drawn from figure \ref{fig:normal_plot_error}. The average of the approximation error for \(\mu = 0\) is acceptable. However, the size of its Coefficient of Variation compared to the other parameter configurations is remarkable. Indeed, configuration \((\mu, \sigma) = (0, 1)\) and configuration \((\mu, \sigma) = (0, \sqrt{2})\) have a rather similar standard deviation, however, the latter has approximately twice the average error. Except for this case, \(c_v\) again tends to increase as the parameter values increase, suggesting higher variability in approximation errors. Similar to the Exponential distribution, for all parameter-configurations, the distribution of the errors is right-skewed. Thus, the approximation errors of a Normal distribution are not Normally distributed themselves! This result is confirmed in figure \ref{fig:error_histogram}. Even in the histogram of the parameter-configuration with the greatest parameter values, more than 50 percent of the approximation errors cluster around zero, with only a small number of observations falling in the range \((40, 80)\). As before, the average errors and variability for large parameters may be too great to be reliable depending on the context of the application.
+The statistics in table \ref{tab:normal_error} support the visual conclusions drawn from figure \ref{fig:normal_plot_error}. The average of the approximation error for \(\mu = 0\) is acceptable. However, the size of its coefficient of variation compared to the other parameter configurations stands out. Indeed, configuration \((\mu, \sigma) = (0, 1)\) and configuration \((\mu, \sigma) = (0, \sqrt{2})\) have a rather similar standard deviation, however, the latter has approximately twice the average error. Except for this case, \(c_v\) again tends to increase as the parameter values increase, suggesting higher relative variability in approximation errors. Similar to the other distributions, for all parameter-configurations, the distribution of the errors is right-skewed. Thus, the approximation errors of a Normal distribution are not Normally distributed themselves! This result is confirmed in figure \ref{fig:error_histogram}. Even in the histogram of the parameter-configuration with the greatest parameter values, more than 50\% of the approximation errors cluster around zero, with only a small number of observations falling in the range \((40, 80)\). As before, the average errors and variability for large parameters may be too great to be reliable depending on the context of the application.
 
 \begin{figure}[H]
     \centering
@@ -85,43 +147,15 @@ The statistics in table \ref{tab:normal_error} support the visuals conclusions d
     \label{fig:error_histogram}
 \end{figure}
 
-\subsubsection{Poisson Distribution}
-Finally, we consider a discrete distribution to explore if these results differ from those of the continuous distributions. Specifically, we let \(X \sim Poisson(\lambda)\), with the probaility mass function defined as in Appendix \ref{s:app_common_distributions}. The Poisson distribution has positive support and its raw moments are given by: \[\mathbb{E}[X^k] = \sum_{i = 0}^{k} \lambda^i \stirlingii{k}{i}\] with \(k \in \mathbb{N}\) and where \(\{\}\) denotes the Stirling numbers of the second kind (rather similar to the binomial coefficient) \cite{haight1967}. This formula highlights that we cannot consider moment of negative order, as the expression relies on factorials and other combinatorial terms.
-
-We obtain the following figure:
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/error_plot_poisson.pdf}
-    \caption{Approximation error for the Poisson Distribution}
-    \label{fig:poisson_plot_error}
-\end{figure}
-As shown in figure \ref{fig:poisson_plot_error}, the general trend of the Caputo-Fabrizio MGF errors in the case of the Poisson distribution, is consistent with that observed for continuous functions. Larger values of \(\lambda\) lead to greater approximation errors. The magnitude of the errors is comparable to that of the Normal distribution, and increases significantly for \(\alpha \geq 3\).
 
 
-\begin{table}[H]
-    \centering
-\input{tables/poisson_statistics_table.tex}
-\caption{Poisson Distribution - Approximation Error Statistics} 
-\label{tab:poisson_error}
-\end{table}
-The statistics in table \ref{tab:poisson_error} further support this conclusion.
-As with previous distributions, the distribution of the errors is right-skewed and the Coefficient of Variation increases as the parameter, \(\lambda\), grows.
-For \(\lambda = 0.5\) and \(\lambda = 1.0\), we can still obtain reliable computations. For \(\lambda = 1.5\), the results are still potentially viable, depending on the application and the importance of higher-order fractional moments. In order to minimize its associated standard deviation, one can consider a smaller maximum order of \(\alpha\). In contrast, the configuration \(\lambda = 2.0\) is likely to be too unreliable in practice, especially for order \(\alpha > 3\).
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.0\textwidth]{figures/value_comparison.pdf}
-    \caption{Comparison of different fractional moments for the Poisson Distribution}
-    \label{fig:poisson_plot_values}
-\end{figure}
-The figure above depicts the values of fractional moments for various orders \(\alpha\) and \(\lambda \in \{0.5, 2.0\} \) as computed using the Caputo-Fabrizio MGF, the two accurate MGFs and the an empirical method. The latter takes a million random samples of the Poisson distribution and computes the mean of order \(\alpha\). The values of the accurate MGFs (blue line) and empirical values (dashed green-line) almost completely agree, confirming the accuracy and useability of the former. The values obtained by the Caputo-Fabrizio MGF are always smaller or equal to the values of the accurate MGF expressions. This observation is in line with the result that the errors are always non-negative. Note that, when the parameter \(\lambda\) becomes 4 times as great, the values of the fractional moments increase by more than 50 times their size. This again confirms that the approximation errors increase as the parameter values increase.
 
 \subsection{General results}
 Based on the three distributions analysed, we arrive at the following  general conclusions:
 \begin{itemize}
     \item As the parameter value of the underlying distribution increases, both the average and maximum approximation error tend to increase.
     \item For all distributions considered, higher parameter values, lead to greater standard deviations in the approximation errors.
-    \item Furthermore, the Coefficient of Variation also increases with larger parameter values, indicating that the standard deviation increases at a higher rate than the mean - a stronger result than the increase in the standard deviation alone.
+    \item Furthermore, the coefficient of variation also increases with larger parameter values, indicating that the standard deviation increases at a higher rate than the mean - a stronger result than the increase in the standard deviation alone.
     \item For all considered distributions and parameter values, the distribution of the approximation errors is right-skewed. Thus, we can conclude that the latter does not follow a Normal, or any other symmetric, distribution.
 \end{itemize}
-These findings raise important considerations regarding the reliability of the Caputo-Fabrizio MGF in practice. While high parameter values often result in a large Coefficient of Variation, suggesting that the quality of the approximation may behaves inconsistently, figure \ref{fig:error_histogram} offers a different perspective. Namely, in the case of the Normal distribution, at least 50 percent of the errors are clustered around zero. Most importantly, in this section, we are considering a sample of approximation errors of 500 fractional moments. When applying moments of fractional order in practice such as in \cite{hansen2024}, \cite{Mikosc2013} or \cite{gyzl2013}, one usually computes no more than five moments. Considering the latter, metrics such as the standard deviation and Coefficient of Variation may not always be relevant or decisive when evaluating the usability of the Caputo-Fabrizio MGF. Therefore, rejecting a parameter configuration solely based on its high variability may be too strict. In general, as long as the fractional order of the moment remains below 3 or is close to an integer, the Caputo-Fabrizio MGF tends to yield sufficiently accurate results. This supports its viability in practical cases, such as in \cite{hansen2024}, where only fractional moments of relatively low order are of interest.
+These findings raise important considerations regarding the reliability of the Caputo-Fabrizio MGF in practice. While high parameter values often result in a large coefficient of variation, suggesting that the quality of the approximation behaves inconsistently. Figure \ref{fig:error_histogram} offers a different perspective. Namely, in the case of the Normal distribution, at least 50\% of the errors are clustered around zero. Most importantly, in this section, we are considering a sample of approximation errors of 500 fractional moments. When applying moments of fractional order in practice such as in \citet{hansen2024} or \citet{gyzl2013}, one usually computes no more than five or ten moments. Considering the latter, metrics such as the standard deviation and coefficient of variation may not always be relevant or decisive when evaluating the usability of the Caputo-Fabrizio MGF. Therefore, rejecting a parameter configuration solely based on its high variability may be too strict. In general, as long as the fractional order of the moment remains below 3 or is close to an integer, the Caputo-Fabrizio MGF tends to yield sufficiently accurate results. This supports its viability in practical cases, such as in \citet{hansen2024}, where only fractional moments of relatively low order are of interest.

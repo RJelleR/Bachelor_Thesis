@@ -1,14 +1,28 @@
-\section{Appendix: Relevant functions and Identities}\label{s:appendices}
-\begin{definition}
-    Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then the fractional derivative of order \(\alpha\) is defined as \[D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\]
-    \cite{samko1993}
+\section{Appendix: Relevant Functions and Identities}\label{s:appendices}
+
+\begin{definition}\label{def:laplace}
+    Let \(\displaystyle F(s) = \mathcal{L}(f) = \int_{0}^{\infty}e^{-st} f(t) dt\) be the Laplace transform of \(f\). Then \(f = \mathcal{L}^{-1}(f)\) is said to be the inverse Laplace transform of \(F\). The Laplace transform can be used to convert differential equations to much simpler algebraic equations \citep{thiagarajan2022}.
 \end{definition}
-In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In most of our cases, we are interested in the instance where  \(\alpha \in \mathbb{R}_+\). It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a function, provided that such an order exists. A derivative of negative order is simply an integral of positive order. This is defined as follows:
+
+\begin{definition}\label{def:mellin}
+    The Mellin transform of some function \(f(t)\) is defined as \(\mathcal{M}\{f(t)\}(s) = \displaystyle \int_{0}^{\infty} t^{s-1} f(t) dt\). The Mellin transform is often used in computer science for the analysis of algorithms \citep{flajolet1996}.
+\end{definition}
+
+\begin{definition}\label{def:fourier}
+    The Fourier transform of some function \(f(x)\) is defined as \(\displaystyle \hat{f}(\xi) = \int_{-\infty}^{\infty} f(x) e^{-2 \pi i \xi x}dx\), \(\xi \in \mathbb{R}\). The Fourier transform can be used to simplify differential equations and finds applications in signal and image processing \citep{fourier1822}. 
+    
+\end{definition}
+
 \begin{definition}
-    Let \(I\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then the fractional integral of order \(\alpha\) is defined as \[(I^{\alpha} f) (x) = \frac{1}{(\alpha-1)!}\int (x-t)^{\alpha-1} f(t) dt\] \cite{cauchy1823}.
+    Let \(D\) be the differential operator, such that \(D f(x) = \frac{d}{dx} f(x)\). Then, as in \citet{samko1993}, the fractional derivative of order \(\alpha\) is defined as \[D^{\alpha} f(x) = \frac{d^{\alpha}}{dx^{\alpha}} f(x)\]
+    
+\end{definition}
+In this definition, \(\alpha\) can be any real number. When taking regular derivatives, \(\alpha \in \mathbb{N}\). In most of our cases, we are interested in the instance where  \(\alpha \in \mathbb{R}_+\). It is also possible to study derivatives of negative order, which can be used to obtain moments of negative order of a random variable, provided that such an order exists. A derivative of negative order is simply an integral of positive order. This is defined as follows:
+\begin{definition}
+    Let \(I\) be the integral operator, such that \(I f(x) = \int f(x) dx\). Then by \citet{cauchy1823} the fractional integral of order \(\alpha\) is defined as \[(I^{\alpha} f) (x) = \frac{1}{(\alpha-1)!}\int (x-t)^{\alpha-1} f(t) dt\]
 \end{definition} 
 
-Combining the previous two definitions, we obtain the following, more general, definition.
+Combining the previous two definitions, we obtain the following, more general, definition, as in \citet{oldham1974}.
 \begin{definition}\label{d: differintegral}
     The differintegral operator is defined as
     \begin{equation}
@@ -18,12 +32,12 @@ Combining the previous two definitions, we obtain the following, more general, d
             f(x) & \text{if } \alpha = 0
         \end{cases}, \text{ with } \alpha \in \mathbb{R}.
         \end{equation}
-        \cite{oldham1974}
+        
 \end{definition}
 
 We define the (Euler-)Gamma function as follows:
 \begin{definition}\label{d: eg}
-    for \(\Re(z) > 0\), we have the following: \(\Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt\)
+    Let \(z \in \mathbb{C}\), for \(\Re(z) > 0\), we have the following: \(\displaystyle \Gamma(z) = \int_{0}^{\infty} t^{z-1} e^{-t} dt\)
 \end{definition}
 
 The Gamma function can be seen as an extension of the factorial function, for non-integers. This function is defined for complex numbers and all there subsets (so also real numbers), as long as the condition above holds. For positive integers values \(z\), we have the following identity: \(\Gamma(z) = (z - 1)!\)
@@ -35,15 +49,15 @@ Other important identities, not necessarily for \(z\) an integer, are:
 \end{itemize}
 
 
-\begin{definition}
-    For \(0 \leq k \leq n\), the Binomial Coefficient is defined as follows: \[\binom{n}{k} = \frac{n!}{k! (n - k)!} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)}\], where \(n, k \in \mathbb{N}\) and \(\Gamma(.)\) as defined in \ref{d: eg}.
+\begin{definition}\label{def:binomial}
+    For \(0 \leq k \leq n\), the Binomial Coefficient is defined as follows: \[\binom{n}{k} = \frac{n!}{k! (n - k)!} = \frac{\Gamma(n + 1)}{\Gamma(k + 1) \cdot \Gamma( n - k  + 1)}\] where \(n, k \in \mathbb{N}\) and \(\Gamma(.)\) as defined in \ref{d: eg}.
 \end{definition}
 
 
-\begin{definition}
+\begin{definition}\label{def:vandermonde}
     Vandermonde's identity: for non-negative integers, \(k, l, m, n\), we have that \[\sum_{k = 0}^{l} \binom{m}{k} \cdot \binom{n}{l - k} = \binom{m + n}{l}\]
 \end{definition}
-A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer \cite{askey75}.
+A modification on the latter identity has been called the Chu-Vandermonde identity. This is the same identity, but it his been proven that the identities still hold for complex values \(m, n\) as long as \(l\) is a positive integer \citep{askey75}.
 
 \begin{definition}\label{d: binomial}
     The binomial series is a generalization of the binomial formula, namely:
@@ -52,15 +66,15 @@ A modification on the latter identity has been called the Chu-Vandermonde identi
 
 For the interchange-ability of derivatives and integrals and sums, we can apply the following two theorems:
 
-\begin{theorem}
-    Leibnitz's Rule:
+\begin{theorem}\label{thm:leibnitz}
+    Leibnitz's Rule ( as stated in \citet{flanders1973}):
     Let \(f(x, \theta), a(\theta), b(\theta)\) be differentiable with respect to \(\theta\), then we have that:
     \[ \frac{d}{d\theta} \int_{a(\theta)}^{b(\theta)} f(x, \theta) dx = f(b(\theta), \theta) \frac{d b(\theta)}{d\theta} - f(a(\theta), \theta) \frac{d a(\theta)}{d\theta} + \int_{a(\theta)}^{b(\theta)} \frac{\partial f(x, \theta) }{\partial \theta} dx.\] For the special case, where \(a(\theta), b(\theta)\) are constant we have that: 
     \[\frac{d}{d\theta} \int_{a}^{b} f(x, \theta) dx =  \int_{a}^{b} \frac{ \partial f(x, \theta)}{ \partial d\theta}.\]
 \end{theorem}
 
-For the interchange-ability of derivatives and summations, the following theorem has been given by \cite{casella2002}:
-\begin{theorem}
+For the interchange-ability of derivatives and summations, the following theorem has been given by \citet{casella2002}:
+\begin{theorem}\label{thm:casella}
     Suppose that the series \(\sum_{x = 0}^{\infty} h(\theta, x)\) converges for all \(\theta\) in an interval \((a, b)\) of real numbers and 
     
     \begin{enumerate}[(i)]
@@ -79,59 +93,60 @@ For the interchange-ability of derivatives and summations, the following theorem
 \clearpage
 \section{Appendix: Proofs of section \ref{s:methodology}}\label{s:app_B}
 
-\subsection{Proofs section \ref{s:calculus}}
+\subsection{Proofs section \ref{s:calculus}}\label{pf:calculus}
 
 \begin{proof}
     Proof of \ref{p: calculus}
     \begin{enumerate}[(i)]
-        \item We will proof for the Riemann-Liouville derivative, the proof for the Caputo-Fabrizio derivative is very similar and the Grünwald-Letnikov derivative is a direct consequence of the linearity of the sum.
+        \item We will prove for the Riemann-Liouville derivative, the proof for the Caputo-Fabrizio derivative is very similar and the Grünwald-Letnikov derivative is a direct consequence of the linearity of the sum.
         \[ D^{\alpha} (a f(x) + b g(x)) = \frac{d^n}{dx^n}\frac{1}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} \left(a f(t) + b g(t)\right) dt \]
      
         \[= \frac{d^n}{dx^n}\left(\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt\right) \] Where we simply split the integral and put the constants in front.
         \[= \frac{d^n}{dx^n}\frac{a}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1}  f(t)dt + \frac{d^n}{dx^n} \frac{b}{\Gamma(n - \alpha)} \int_{0}^{x} (x - t)^{n - \alpha - 1} g(t)dt \] As the regular derivative operator is linear.
         \[ = a D^{\alpha} f(x) + b D^{\alpha} g(x) \]
-        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, so just the function \(f(x)\). But for these derivatives, a little bit more effort is required to prove this rather obvious fact.
+        \item Intuitively, this makes perfect sense, as the 0-th derivative is just no derivative, thus simply the function \(f(x)\). But for these derivatives, a little bit more effort is required to prove this rather obvious fact.
         \newline 
         For the Grünwald-Letnikov derivative we get: \[D^0 f(x) = \lim_{h \to 0} \frac{1}{h^0} \sum_{k=0}^\infty (-1)^k \binom{0}{k} f(x - k h)
         = \lim_{h \to 0} \frac{1}{1} \sum_{k=0}^\infty (-1)^k \frac{0!}{k!(0- k)!} f(x - k h).\] The factorial identity of the binomial coefficient only holds for \(0 \leq k \leq \alpha\). Since \(\alpha = 0\) and k is always a positive integer lesser or equal to \(\alpha, k = 0\). Thus, we get:
         \[ = \lim_{h \to 0} \sum_{k=0}^\infty (-1)^0 \frac{0!}{0!(0- 0)!} f(x - 0 h) = \lim_{h \to 0} f(x - 0 h) = f(x).\]
         \newline
         For the Caputo-Fabrizio derivative, we obtain the following:
-        \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp\left(\frac{0}{1 -0}(x-t)\right) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x).\]
+        \[ D^{0} f(x) = \frac{1}{1 - 0}  \int_{0}^{x} \exp\left(\frac{0}{1 -0}(x-t)\right) f'(t) dt = \int_{0}^{x}f'(t) dt = f(x) .\]
+        (By the first fundamental theorem of calculus).
         \newline
-        Finally, for the Riemann-Liouville derivative, we can simply make use of \autoref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \( \displaystyle D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = {d^0}{dx^0} f(x) = f(x)\) by the first fundamental theorem of calculus.
+        Finally, for the Riemann-Liouville derivative, we can simply make use of \ref{r: integer} to note that in this context \(\alpha = 0\) is included in the natural integers. So \( \displaystyle D^\alpha = \frac{d^\alpha}{dx^\alpha} f(x) = \frac{d^0}{dx^0} f(x) = f(x)\). 
 
-        \item The proof for the Riemann-Liouville derivative is given by \cite{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \cite{losada15}.For the Grünwald-Letnikov derivative, we get:
+        \item The proof for the Riemann-Liouville derivative is given by \citet{koning15}. And the proof for the Caputo-Fabrizio derivative is given by \citet{losada15}. For the Grünwald-Letnikov derivative we get:
         \[ D^\alpha(D^\beta f(x)) = \lim_{h \to 0} \frac{1}{h^\alpha} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \left( \frac{1}{h^\beta} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - l h - kh)\right)\]
         \[= \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{k=0}^\infty (-1)^k \binom{\alpha}{k} \sum_{l=0}^\infty (-1)^l \binom{\beta}{l} f(x - (k + l)h).\] We substitute \(m = k + l\) to deal with the double sums: 
-        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of an identify from \autoref{s:appendices} to obtain:
+        \[ \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty f(x - mh)  \sum_{k=0}^m (-1)^k (-1)^{ m - k} \binom{\alpha}{k} \binom{\beta}{m - k}\] Now we make use of identify \ref{def:vandermonde} to obtain:
         \[ = \lim_{h \to 0} \frac{1}{h^{\alpha + \beta}} \sum_{m=0}^\infty (-1)^m \binom{\alpha + \beta}{m} f(x - mh) = D^{\alpha + \beta} f(x).\]
-        It can be shown in an exactly similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
+        It can be shown in a similar way that the latter expression is equal to \(D^\beta(D^\alpha f(x))\).
 
         
     \end{enumerate}
 \end{proof}
 
-\subsection{Proofs section \ref{s:MGF}}
+\subsection{Proofs section \ref{s:MGF}} \label{pf:MGF}
 
 \begin{proof}\label{p:negative}
-    Let \(f_X(x) \sim \Gamma(\alpha, \lambda) =\) 
-    \[\frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)}.\] This PDF is defined on \((0, \infty)\). So the function is not defined on \(\mathbb{R}\). This, however, is not a problem, as we can just evaluate the right limit. Since the Gamma function already uses \(\alpha\) as a parameter, we will evaluate \( \displaystyle \frac{f_X(x)}{|x|^\beta}, \beta > 0\):
+    Example: let \(f_X(x) \sim \Gamma(\alpha, \lambda) = 
+    \displaystyle \frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)}.\) This PDF is defined on \((0, \infty)\). So the function is not defined on \(\mathbb{R}\). This, however, is not a problem, as we can just evaluate the right limit. Since the Gamma function already uses \(\alpha\) as a parameter, we will evaluate \( \displaystyle \frac{f_X(x)}{|x|^\beta}, \text{ with }\beta > 0\):
     \[\lim_{x \to 0_+} \frac{f_X(x)}{|x|^\beta} = \lim_{x \to 0_+} \frac{x^{\alpha -1 - \beta} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} = \lim_{x \to 0_+} \frac{x^{\alpha -(1 + \beta)} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} .\] Thus for \(\alpha \geq \beta + 1, \lim_{x \to 0_+} \frac{f_X(x)}{|x|^\beta} < \infty\). Therefore, the first negative moment of the Gamma distribution should exist.
 
     We compute the first negative moment: 
     \[ \mathbb{E}[X^{-1}] = \int_{0}^{\infty} x^{-1} \frac{x^{\alpha -1} e^{-\lambda x} \lambda^\alpha} {\Gamma(\alpha)} dx = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty} x^{\alpha - 2} e^{-\lambda x} dx\]
     Using the substitution \(\displaystyle u = \lambda x, \frac{du}{dx} = \lambda, dx = \frac{du}{\lambda}\), we get:
-    \[ = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty}\left(\frac{u}{\lambda}\right)^{\alpha -2} e^{-u} du = \frac{\lambda^\alpha}{\Gamma(\alpha) \lambda^{\alpha-1}} \int_{0}^{\infty}(\frac{u}{\lambda})^{\alpha -2} e^{-u} du.\] This integral is equal to \(\Gamma(\alpha - 1)\) (See Appendix \ref{s:appendices}). So we get: 
+    \[ = \frac{\lambda^\alpha}{\Gamma(\alpha)} \int_{0}^{\infty}\left(\frac{u}{\lambda}\right)^{\alpha -2} e^{-u} du = \frac{\lambda^\alpha}{\Gamma(\alpha) \lambda^{\alpha-1}} \int_{0}^{\infty}\left(\frac{u}{\lambda}\right)^{\alpha -2} e^{-u} du.\] This integral is equal to \(\Gamma(\alpha - 1)\) (See definition \ref{d: eg}). So we get: 
     \[\mathbb{E}[X^{-1}] = \frac{\lambda^\alpha \Gamma(\alpha - 1) }{\Gamma(\alpha) \lambda^{\alpha-1}} = \frac{\lambda \Gamma(\alpha - 1)}{(\alpha -1)\Gamma(\alpha - 1)} = \frac{\lambda}{(\alpha -1)}.\] Thus, for \(\alpha \neq 1, \mathbb{E}[X^{-1}] = \frac{\lambda}{(\alpha -1)}\). Fortunately, this is always the case, since we had just derived that the integral only converges when \(\alpha \geq \beta + 1, \text{ with } \beta > 0\). In other words, \(\alpha > 1\). So this holds.
 \end{proof}
 
 \begin{proof} Proof of Proposition \ref{t:mgf}
 
-    \[M_X^{(n)}(t) = \frac{d^n}{dt^n} \int_{-\infty}^{\infty} e^{tx} f_X(x) dx = \int_{-\infty}^{\infty} \frac{d^n}{dt^n} e^{tx} f_X(x) dx\] (We can interchange differentiation and integration since all partial derivatives of \(e^{tx} f(x)\) are continuous and the absolute value of the integral converges, as we assume the \(n\)-th moment exists, see Appendix \ref{s:appendices}).
+    \[M_X^{(n)}(t) = \frac{d^n}{dt^n} \int_{-\infty}^{\infty} e^{tx} f_X(x) dx = \int_{-\infty}^{\infty} \frac{d^n}{dt^n} e^{tx} f_X(x) dx\] (We can interchange differentiation and integration since all partial derivatives of \(e^{tx} f(x)\) are continuous and the absolute value of the integral converges, as we assume the \(n\)-th moment exists, see Theorem \ref{thm:leibnitz}).
     \[ = \int_{-\infty}^{\infty} x^n e^{tx} f_X(x) dx, \text{evaluating at } t = 0: = \int_{-\infty}^{\infty} x^n e^{0x} f_X(x) dx\]
     \[ = \int_{-\infty}^{\infty} x^n f_X(x) dx = \mathbb{E}[X^n]\]
-    The proof for the case that \(f_X(x)\) is discrete is very similar. In that case, one would have to change the order of the derivative and summation, which has also been justified in Appendix \ref{s:appendices}.
+    The proof for the case that \(f_X(x)\) is discrete is very similar. In that case, one would have to change the order of the derivative and summation, which has been justified in Theorem \ref{thm:casella}.
 \end{proof}
 
 \begin{proof}
@@ -154,13 +169,12 @@ For the interchange-ability of derivatives and summations, the following theorem
 Suppose for the moment that \( X \) is a positive random variable. Since \( x \cdot f_X(x) \) is integrable for \( x > 0 \), we have:
 
 \[
-    \mathbb{E}(X) = \int_0^\infty x \, dF(x) = \int_0^\infty \int_0^\infty e^{tx} \, dt \, dF(x).
+    \mathbb{E}(X) = \int_0^\infty x \, dF(x) = \int_0^\infty \int_{-\infty}^0 e^{tx} \, dt \, dF(x).
 \]
 
-We can interchange the order of integration as follows:
 
 \[
-    \mathbb{E}(X) = \int_0^\infty e^{tx} \, dF(x) \, dt = \int_0^\infty M_X(-t) \, dt.
+    =  \int_{-\infty}^0 \int_0^\infty e^{tx} \, dt \, dF(x) = \int_0^\infty M_X(-t) \, dt.
 \]
 
 The interchange of the order of integration is subject to \( \mathbb{E}(e^{-tX}) \) being integrable from \( t = 0 \) to \( t = \infty \).
@@ -182,11 +196,11 @@ while the second way gives:
 \[
     \mathbb{E}(X^{-n}) = \frac{1}{\Gamma(n)} \int_0^\infty t^{n-1} M_X(-t) \, dt.
 \]
-\cite{cressie1981}
+\citep{cressie1981}
 \end{proof}
 
 \begin{proof}
-    Proof Theorem \ref{t: MGF_accurate}
+    Proof Theorem \ref{t: MGF_accurate}.
     We consider \(X\) to be a continuous variable. The three MGF expressions are accurate if \(\mathbb{E}[X^\alpha] - M_X^{(\alpha)}(0) = 0\), in other words, if 
     \[\int_{-\infty}^{\infty} (x^\alpha - D^\alpha e^{tx}) \cdot f_X(x) dx = 0 \iff x^\alpha = D^\alpha e^{tx}\]
     where \(D^\alpha\) the differential operator of order \(\alpha\). Note that we are taking derivatives w.r.t. \(t\), not \(x\). The proof will be shown for the Grünwald-left derivative.
@@ -202,19 +216,19 @@ while the second way gives:
         Finally, we take a value of \(t\) around 0 and obtain \(\leftindex_{GL}{M}_X^{(\alpha)}(0) = x^\alpha\) 
         \item We consider the Riemann-Liouville derivative: 
         \[D_{RL}^\alpha(e^{tx}) = \frac{d^n}{dt^n} \frac{1}{\Gamma(n -\alpha)}  \int_{-\infty}^{t} (t-s)^{n - \alpha-1} \cdot e^{sx} ds\]
-        \cite{koning15} has shown that this derivative is equal to \(x^\alpha e^{tx}\). Thus, if we take a value of \(t\) around 0, we get: \(\leftindex_{RL}{M}_X^{(\alpha)}(0) = x^\alpha\)
+        \citet{koning15} has shown that this derivative is equal to \(x^\alpha e^{tx}\). Thus, if we take a value of \(t\) around 0, we get: \(\leftindex_{RL}{M}_X^{(\alpha)}(0) = x^\alpha\)
     \end{enumerate}
 
     The proof also holds for the case when \(X\) is a discrete random variable.
 \end{proof}
 
 \begin{proof}
-    Proof of Theorem \ref{t: MGF_inaccurate}
+    Proof of Theorem \ref{t: MGF_inaccurate}.
     We compute \[\leftindex_{CF}{M}_X^{(\alpha)} = D^\alpha_{CF}(e^{tx}) = \frac{d^n}{dt^n}\frac{1}{1 - \beta}  \int_{-\infty}^{t} \exp\left(\frac{-\beta}{1 - \beta}(t - s)\right) x \exp(xs) ds\]
     \[= \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp\left(s\left(\frac{\beta }{1 - \beta} + x \right)\right) ds  \text{ where } \beta = \alpha - n \text{ and } n = \lfloor \alpha \rfloor.\]
     Now let \( \displaystyle u = \frac{\beta}{1 - \beta} + x\), so we get:
     \[\frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \int_{-\infty}^{t} \exp(us) ds = \frac{d^n}{dt^n}\frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \frac{1}{u} exp(us)\Big|_{-\infty}^{t}\]
-    \[= \frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right) \cdot \frac{1}{u} \cdot \exp(u t) = \frac{x \exp(xt)}{(1 - \beta)x + \beta}\]
+    \[= \frac{d^n}{dt^n} \frac{x}{1 - \beta} \exp\left(\frac{-\beta t}{1 - \beta}\right)  \frac{1}{u}  \exp(u t) = \frac{d^n}{dt^n}\frac{x \exp(xt)}{(1 - \beta)x + \beta}\]
     Now we apply the derivative of the above expression, with respect to \(t\), \(n\) times:
     \[\frac{d^n}{d t^n} \frac{x \exp(xt)}{(1 - \beta)x + \beta} = \frac{x^{n+1} \exp(xt)}{(1 - \beta)x + \beta}\]
     Now we take a value of \(t\) around 0 and obtain:
@@ -231,6 +245,30 @@ while the second way gives:
 \clearpage
 
 \section{Appendix: Algorithms}\label{s:app_alg}
+\begin{center}
+\begin{minipage}{0.9 \textwidth}
+\begin{algorithm}[H]
+\caption{Compute Fractional Moment via CMGF Method}
+\label{alg:cmgf_dist}
+\begin{algorithmic}[1]
+\REQUIRE Order $r$, location parameter $\xi$, scale parameter $s$, distribution name \texttt{dist\_name}, distribution parameters \texttt{parameters}, tolerance \texttt{tol}
+\ENSURE Approximate value of the fractional moment
+\STATE Define integrand function:
+\STATE \hspace{1em} For $t \in [0, \infty)$:
+\STATE \hspace{2em} $z \leftarrow s + it$
+\STATE \hspace{2em} $Mz \leftarrow \texttt{MGF\_DIST}(z, \texttt{parameters}, \texttt{dist\_name})$
+\STATE \hspace{2em} $M_{-z} \leftarrow \texttt{MGF\_DIST}(-z, \texttt{parameters}, \texttt{dist\_name})$
+\STATE \hspace{2em} $\text{numerator} \leftarrow e^{-\xi z} \cdot Mz + e^{\xi z} \cdot M_{-z}$
+\STATE \hspace{2em} $\text{integrand}(t) \leftarrow \Re\left(\dfrac{\text{numerator}}{z^{r+1}}\right)$
+\STATE Compute integral: $\text{integral} \leftarrow \int_0^{100} \text{integrand}(t)\,dt$ using \texttt{quadgk} with relative tolerance \texttt{tol}
+\STATE \textbf{return} $\dfrac{\Gamma(r+1)}{\pi} \cdot \text{integral}$
+\end{algorithmic}
+\end{algorithm}
+\end{minipage}
+\end{center}
+
+\begin{center}
+\begin{minipage}{0.9 \textwidth}
 \begin{algorithm}[H]
 \caption{Analyze Fractional Moments}
 \label{alg:analyse_fractional_moments}
@@ -251,8 +289,12 @@ while the second way gives:
 \RETURN results
 \end{algorithmic}
 \end{algorithm}
+\end{minipage}
+\end{center}
 
-\begin{algorithm}
+\begin{center}
+\begin{minipage}{0.9 \textwidth}
+\begin{algorithm}[H]
 \caption{Simulate Conditional Variance}
 \label{alg:simulate_conditional_variance}
 \begin{algorithmic}[1]
@@ -274,9 +316,13 @@ while the second way gives:
 \RETURN $R_H^2$
 \end{algorithmic}
 \end{algorithm}
+\end{minipage}
+\end{center}
 
 
-\begin{algorithm}
+\begin{center}
+\begin{minipage}{0.9 \textwidth}
+\begin{algorithm}[H]
 \caption{Compute $z$ from returns using GARCH and fractional moments}
 \label{alg:compute_z}
 \begin{algorithmic}[1]
@@ -304,8 +350,11 @@ while the second way gives:
 \RETURN $z$
 \end{algorithmic}
 \end{algorithm}
+\end{minipage}
+\end{center}
 
 \clearpage
+
 \section{Appendix: Table of Common Distributions}\label{s:app_common_distributions}
 \begin{table}[ht]
 \renewcommand{\arraystretch}{1.5}
