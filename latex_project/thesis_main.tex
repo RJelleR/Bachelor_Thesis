@@ -9,7 +9,6 @@
 \usepackage{enumerate}
 \usepackage{boxedminipage}
 \usepackage{url}
-\usepackage{hyperref}
 \usepackage{comment}
 \usepackage{leftindex}
 \usepackage{booktabs}
@@ -28,7 +27,6 @@
 
 %%%%%%%%%%% mathematics %%%%%%%%%%%%%%%%%%
 \usepackage{amsmath,amsfonts,amssymb}
-\newcommand{\stirlingii}{\genfrac{\{}{\}}{0pt}{}}
 
 
 %%%%%%%%%%%%% theorems %%%%%%%%%%%%%%%%
@@ -68,6 +66,14 @@
 %           maxbibnames=99,hyperref,backend=biber]{biblatex}
 %\addbibresource{bib/EORthesis.bib}
 
+\usepackage[
+    colorlinks=false,        
+    pdfborder={0 0 1},       
+    linkbordercolor={1 0 0}, 
+    citebordercolor={0 1 0}, 
+    urlbordercolor={0 0 1}   
+]{hyperref}
+
 %%%%%%%%%%%%%%%% start document %%%%%%%%%%%
 \begin{document}
 
@@ -84,7 +90,7 @@
 \begin{center}
 {\huge\bf
 \noindent
-Deriving fractional moments using the Moment Generating Function
+Deriving Fractional Moments using the Moment Generating Function
 }
 \end{center}
 
@@ -151,7 +157,7 @@ Dr. yyyy (co-reader)
 
 
 \section*{Acknowledgements}
-I would like to thank my supervisor Gabriele Mingoli for the great guidance and clear and fast communication. I would like to thank \textbf{Person A}, \textbf{Person B} for peer reviewing my paper and \textbf{Person C}, \textbf{Person D} for the feedback on language, grammar and general structure.
+I would like to thank my supervisor Gabriele Mingoli for the great guidance and clear and timely communication throughout the process. Most importantly, I am especially grateful that he gave me the freedom to explore a somewhat abstract and theoretically topic that potentially lies outside the conventional scope of econometrics topics for the bachelor thesis.
 \appendix
 
 \include{sections/Appendices}
@@ -159,6 +165,6 @@ I would like to thank my supervisor Gabriele Mingoli for the great guidance and 
 %\printbibliography
 % or in case of classic bibtex:
 \bibliographystyle{chicago}
-\bibliography{bib/bibfile}
+\bibliography{bib/bibfile.bib}
 
 \end{document}

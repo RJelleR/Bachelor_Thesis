@@ -1,76 +1,64 @@
-\subsection{The Moment Generating Function}\label{s:MGF}
-Having defined the techniques required to compute fractional derivatives, we now turn to their application to the Moment Generating Function (MGF). Before proceeding, we will briefly review some key concepts related to statistical moments.
+\subsection{The Moment Generating Function of fractional order}\label{s:MGF}
+Having defined the techniques required to compute fractional derivatives, we now try to combine them with the MGF. Before proceeding, we will briefly review the formal definition of a moment in statistics.
 \subsubsection{Moments}
-\begin{definition}
-    Let \(X\) be a random variable.
-    The \(\alpha\)-th moment of a \(X\) is defined as:
-   \[
-\mathbb{E}[X^\alpha] = 
-\begin{cases} 
-\int_{-\infty}^{\infty} (x - c)^\alpha f_X(x) \, dx & \text{if } X \text{ is continuous,} \\ 
-\sum_{i} (x_i - c_ i)^\alpha f_X(x_i) & \text{if } X \text{ is discrete.} 
-\end{cases}
-\] with, in the context of this paper \(\alpha \in \mathbb{R}\). Here \(f_X(x)\) is the probability density function if \(X\) is a continuous random variable, and the probability mass function if \(X\) is a discrete random variable \cite{feller1957}.
-\end{definition}
-
-If \(c = \mu_x\), the first moment of \(f(x)\), then our higher moments are called central moments. In the context of this research, we will focus on the case \(c = 0\), corresponding to raw moments of a random variable \(X\). This choice has been made as the Moment Generating Function, which we will soon define, only computes raw moments of higher order. A moment of order \(\alpha\) is said to exist, if \(\mathbb{E}[X^\alpha] < \infty\).
+Recall the definition of statistical moments as in definition \ref{eq:moments} of section \ref{ss:methodology_introduction}. If \(c = \mu_x\), where \(\mu_x\) denotes the expected value of \(X\), then our higher moments are called central moments. In the context of this research, we will focus on the case \(c = 0\), corresponding to raw moments of a random variable \(X\). This choice has been made as the MGF, which we will soon define, only computes raw moments of higher order. A moment of order \(\alpha\) is said to exist, if \(\mathbb{E}[X^\alpha] < \infty\).
 
 \subsubsection{The Moment Generating Function}
-We now formally introduce the Moment Generating Function, one of the most significant subjects of this thesis.
+We now formally introduce the moment Generating Function, one of the most significant subjects of this thesis.
 \begin{definition}
-    The Moment Generating Function (MGF) of a variable \(X\), is defined as
-    \[M_X(t) = \mathbb{E}[e^{tX}]\] provided that \(\mathbb{E}[e^{tX}] < \infty\), for all  \( t \in (- h, h)\), which contains 0, for some \(h > 0\) \cite{mackey1980}.
+    The moment generating function of a variable \(X\), is defined as
+    \[M_X(t) = \mathbb{E}[e^{tX}]\] provided that \(\mathbb{E}[e^{tX}] < \infty\), for all  \( t \in (- h, h)\), which contains 0, for some \(h > 0\) 
 \end{definition}
 
 \begin{remark}
-    Deriving the expression \(M_X(t) = \mathbb{E}[e^{tX}]\) is typically straightforward. Generally, it simply requires a handful of steps of analytic evaluation. This procedure is not that interesting nor relevant to this research. Thus, when making use of  expressions of the Moment Generating Function, we will simply refer to the distribution table in Appendix \ref{s:app_common_distributions}.
+    Deriving the expression \(M_X(t) = \mathbb{E}[e^{tX}]\) is typically straightforward. Generally, it simply requires a handful of steps of analytic evaluation. This procedure is not that interesting nor relevant to this research. Thus, when making use of  expressions of the MGF, we will simply refer to the distribution table in Appendix \ref{s:app_common_distributions}.
 \end{remark}
 
  
 We will state the theorem which makes the MGF so useful. This theorem allows us to compute moments of higher order by taking derivatives of the given order instead of integrals.
 \begin{theorem}\label{t:mgf}
     If \(M_X(t)\) exists on some interval \((-h, h)\), as defined before, we have that:
-    \[ \mathbb{E}[X^n] = M_X^{(n)}(0), \text{ for } n \in \mathbb{N}\]  \cite{casella2002}
+    \[ \mathbb{E}[X^n] = M_X^{(n)}(0), \text{ for } n \in \mathbb{N}\] 
 \end{theorem} 
 
 
 
 
-We introduce the following properties for the Moment Generating Function \(M_X(t)\):
+We introduce the following well-known properties for the MGF \(M_X(t)\):
 \begin{proposition}\label{p: moments}
     For \(X, Y\) random variables, we have that:
     \begin{enumerate}[(i)]
         \item \(M_X^{(0)}(t) = \mathbb{E}[e^{0X}] = 1\). This property can be used to confirm that a given function is a valid probability density function (i.e., integrates to one).
-        \item Location scale-transform. Assuming \(M_X(t)\) exists, for constant \(\mu, \sigma\), we have that: 
+        \item Location scale-transform. Assuming \(M_X(t)\) exists, for constants \(\mu, \sigma \in \mathbb{R}\), we have that: 
         \[M_{\mu + \sigma X}(t) = e^{\mu t} \cdot M_X(\sigma t)\]
         \item If \(X \perp Y\), then \(M_{X+Y}(t) = M_X(t)\cdot M_Y(t)\).
     \end{enumerate}
 \end{proposition}
-\cite{lin2022}
 
-The proofs of the latter can be found in Appendix \ref{s:app_B}.
 
-There are several additional topics closely related to the MGF, including Fourier transforms, Laplace transforms, Wick rotations, and characteristic functions. While these subjects are relevant to the theoretical foundation of the MGF , they fall outside the scope of this paper and will therefore not be discussed. Readers interested in exploring these concepts further may find \cite{kolmogorov1999} to be a valuable resource.
+The proofs of the latter can be found in Appendix \ref{pf:MGF}.
 
-\subsubsection{Computing negative moments using the Moment Generating Function}
+There are several additional topics closely related to the MGF, including Fourier transforms, Laplace transforms, Wick rotations, and characteristic functions. While these subjects are relevant to the theoretical foundation of the MGF , they fall outside the scope of this thesis and will therefore not be discussed. Readers interested in exploring these concepts further may find \citet{kolmogorov1999} to be a valuable resource.
+
+\subsubsection{Computing moments of negative order using the Moment Generating Function}
 In specific cases, as were mentioned in section \ref{s:intro}, moments of negative order can be of interest to characterize the data. Such an example was the moment of order \(-\frac{1}{2}\), which in some contexts may be used to obtain the Sharpe Ratio. Thus, it is useful to understand how to compute moments of such orders. We will consider the continuous case:
 
-\[\mathbb{E}[X^{-n}] = \int_{-\infty}^{\infty} x^{-n} f_X(x) dx = \int_{-\infty}^{\infty} \left(\frac{1}{x}\right)^n f_X(x) dx.\] We immediately observe a rather obvious problem. This integral is undefined at \(x = 0\) and diverges in a neighbourhood around zero. \cite{khuri2002} have stated the following corollary for the existence of a moment with negative first order:
+\[\mathbb{E}[X^{-n}] = \int_{-\infty}^{\infty} x^{-n} f_X(x) dx = \int_{-\infty}^{\infty} \left(\frac{1}{x}\right)^n f_X(x) dx.\] We immediately observe a rather obvious problem. This integral is undefined at \(x = 0\) and diverges in a neighbourhood around zero. \citet{khuri2002} have stated the following corollary for the existence of a moment with negative first order:
 \begin{corollary}
     If \(f_X(x)\) is a continuous pdf defined on \((-\infty, \infty)\), and if \[\lim_{x \to 0} \frac{f_X(x)}{|x|^\alpha} < \infty\] for \(\alpha > 0\), then \[\mathbb{E}[X^{-1}] \text{ exists}.\]
 \end{corollary}
 
-Most common distribution functions do not adhere to this corollary, however, the Gamma function does (see \ref{p:negative}).
+Most common distribution functions do not adhere to this corollary, however, the Gamma function does (see example \ref{p:negative}).
 
-If such a moment of negative order exists, we should be able to obtain it using the Moment Generating Function. In the 20-th century, \cite{cressie1981} have published the following remarkable theorem:
+If such a moment of negative order exists, we should be able to obtain it using the MGF. In the 20-th century, \citet{cressie1981} have published the following remarkable theorem:
 
 \begin{theorem}\label{t: negative}
     Assuming the negative \(n\)-th raw moment exists, the negative \(n\)-th raw moment can be computed as follows: 
     \[\mathbb{E}[X^{-n}] = \frac{1}{\Gamma(n)} \int_{0}^{\infty} t^{n- 1} M_X(-t) dt\] where \(n\) is a positive integer.
 \end{theorem}
-The proof of this Theorem can be found in Appendix \ref{s:app_B}.
+The proof of this Theorem can be found in Appendix \ref{pf:MGF}.
 
-Since this is an extension on the regular functions of the MGF, this technique is of interest of this paper. Thus, it will be shortly be discussed. We compute the first inverse moment of the Gamma distribution, by making use of the latter theorem for Moment Generating Functions.
+Since this is an extension on the regular functions of the MGF, this technique is of interest for this thesis. Thus, it will be shortly be discussed. We compute the first inverse moment of the Gamma distribution, by making use of the latter theorem for the MGF.
 
 \begin{example}
     Let \[f_X(x) \sim \Gamma(\alpha, \lambda) = 
@@ -82,7 +70,7 @@ Since this is an extension on the regular functions of the MGF, this technique i
     \[= \lambda^\alpha\left( 0 - \frac{\lambda^{ 1 - \alpha}}{1 -\alpha}\right) = \frac{-\lambda}{ 1 - \alpha} = \frac{\lambda}{\alpha - 1}.\] Which corresponds with our result from example \ref{p:negative}.
 \end{example}
 
-\subsubsection{Extending the MGF to fractional order}
+\subsubsection{Extending the Moment Generating Function to fractional order}
 Now that we have introduced the definitions of the MGF and discussed a number of relevant properties, we will combine these with the techniques developed in section \ref{s:calculus}. Therefore, we can at last obtain moments of fractional order using the MGF.
 
 
@@ -94,11 +82,11 @@ To avoid confusion regarding what fractional derivative is being used in combina
     The three properties mentioned in proposition \ref{p: moments} still hold for the MGF of fractional order. This is the case as the first property makes makes use of the derivative of order 0. Which has been defined to just be the original function itself as stated in the second property of proposition\ref{p: calculus}. The other two properties do not involve any derivatives of any order. Thus, they are generally applicable to the MGF, regardless of its order or kind of derivative.
 \end{remark}
 
-Before stating any results about the accuracy of these new MGF expressions, we first consider a numerical example to illustrate the interaction between fractional derivatives and the MGF. 
+Before stating any results about the accuracy of these new MGF expressions, we first consider an explicit example to illustrate the interaction between fractional derivatives and the MGF. 
 
 \begin{example}
     \begin{enumerate}[(i)]
-        \item We let \(f_X(x_i) \sim Bernoulli(p)\), with \(\mathbb{P}(X = 1) = p\) and with associated MGF expression: \(M_X(t) = (1 - p) + p \cdot\exp(t)\), now we consider \[\leftindex_{CF}{M}_X^{(\frac{1}{2})} = \frac{1}{1 - \frac{1}{2}}  \int_{-h}^{t} \exp\left(\frac{\frac{-1}{2}}{1 - \frac{1}{2}}(t-s)\right) M_X'(s) ds.\] In this case, the domain of \(M_X(t) = (-\infty, \infty)\), so we let \(-h = -\infty\), and \(M_X'(s) = p\cdot \exp(s)\), thus we obtain:
+        \item We let \(f_X(x_i) \sim Bernoulli(p)\), with \(\mathbb{P}(X = 1) = p\) and with associated MGF expression: \(M_X(t) = (1 - p) + p \cdot\exp(t)\), now we consider \[\leftindex_{CF}{M}_X^{(\frac{1}{2})} = \frac{1}{1 - \frac{1}{2}}  \int_{-h}^{t} \exp\left(\frac{-\frac{1}{2}}{1 - \frac{1}{2}}(t-s)\right) M_X'(s) ds.\] In this case, the domain of \(M_X(t) = (-\infty, \infty)\), so we let \(-h = -\infty\), and \(M_X'(s) = p\cdot \exp(s)\), thus we obtain:
         \[\leftindex_{CF}{M}_X^{(\frac{1}{2})} = 2  \int_{-\infty}^{t} \exp\left((s-t)\right) \cdot (p\cdot \exp(s)) ds.\]
         \[= 2p \cdot \exp(-t) \int_{-\infty}^{t}\exp(2s) ds\] 
         \[= p\cdot \exp(-t) \left(\exp(2s) \Big|_{-\infty}^{t}\right) = p\cdot \exp(t)\]
@@ -112,15 +100,15 @@ Before stating any results about the accuracy of these new MGF expressions, we f
 It is amazing and maybe even somewhat surprising that both expressions obtain the same result. Indeed, this result is actually more of a coincidence. It is important to note that this agreement of results is coincidental and specific to the chosen distribution. Namely, all raw higher moments of a Bernoulli random variable are \(p\). If we had taken any other distribution in combination with a moment of fractional order, it becomes highly likely that the MGF returns a different value compared to the traditional method of computing moments. What is more, if we were to take \[\leftindex_{RL}{M}_X^{(\frac{1}{2})}  = \frac{d}{dt} \frac{1}{\sqrt{\pi}}  \int_{-h}^{t} (t - s)^{\frac{-1}{2}} f(s) ds\] we obtain an integral which may diverge based on the choice of \(-h\) . These observations lead to the following theorem.
 
 \begin{theorem}\label{t: MGF_accurate}
-     Consider the three MGF's as defined in definition \ref{d: MGF}. Assume \(\leftindex_{RL}{M}_X^{(\alpha)}\) and \(\leftindex_{GL}{M}_X^{(\alpha)}\) are well defined on some open interval \((-h, h)\), then the moment generating function expressions \(\leftindex_{RL}{M}_X^{(\alpha)}\) and \(\leftindex_{GL}{M}_X^{(\alpha)}\) accurately obtain moments of order \(\alpha \in \mathbb{R}\)
+     Consider the three MGF's as defined in definition \ref{d: MGF}. Assume \(\leftindex_{RL}{M}_X^{(\alpha)}\) and \(\leftindex_{GL}{M}_X^{(\alpha)}\) are well defined on some open interval \((-h, h)\), then the MGF expressions \(\leftindex_{RL}{M}_X^{(\alpha)}\) and \(\leftindex_{GL}{M}_X^{(\alpha)}\) accurately obtain raw moments of order \(\alpha \in \mathbb{R}\)
     
 \end{theorem}
-The proof can be found in Appendix \ref{s:app_B}.
+The proof can be found in Appendix \ref{pf:MGF}.
 \newline
 Unfortunately, this result does not hold for \(\leftindex_{CF}{M}_X^{(\alpha)}\), which leads to the following theorem.
 
 \begin{theorem}\label{t: MGF_inaccurate}
-    Consider the three MGF's as defined in definition \ref{d: MGF}. Assume \(\leftindex_{CF}{M}_X^{(\alpha)}\) is well defined on some open interval \((-h, h)\), then the moment generating function expression \(\leftindex_{CF}{M}_X^{(\alpha)}\) inaccurately approximates moments of order \(\alpha \in \mathbb{R}\) with approximation error given by
+    Consider the three MGF's as defined in definition \ref{d: MGF}. Assume \(\leftindex_{CF}{M}_X^{(\alpha)}\) is well defined on some open interval \((-h, h)\), then the MGF \(\leftindex_{CF}{M}_X^{(\alpha)}\) inaccurately approximates moments of order \(\alpha \in \mathbb{R}\) with approximation error given by
     \[
 \begin{cases} 
     \displaystyle \int_{-\infty}^{\infty} x^\alpha  f_X(x) dx -  \displaystyle \int_{-\infty}^{\infty}  \frac{x^{n+1} }{(1 - \beta)x + \beta} f_X(x) dx & \text{if } X \text{ is continuous,} \\ 
@@ -129,7 +117,7 @@ Unfortunately, this result does not hold for \(\leftindex_{CF}{M}_X^{(\alpha)}\)
 \] with \(\alpha \in \mathbb{R}, \beta = \alpha - n \text{ and } n = \lfloor \alpha \rfloor.\)
     
 \end{theorem}
-The proof can be found in Appendix \ref{s:app_B}.
+The proof can be found in Appendix \ref{pf:MGF}.
 
 \begin{remark}
     In the case when \(\alpha \in \mathbb{N}\), we have that \(n = \alpha\), and thus \( \beta = 0\), therefore, \(\leftindex_{CF}{M}_X^{(\alpha)}\) is accurate for integer orders. This is an expected result, as the MGF for integer moments is accurate and from section \ref{s:calculus} we know that \(D_{CF}^{\alpha + \beta}f(x) = D_{CF}^\alpha(D_{CF}^\beta f(x))\), with \(\alpha \in \mathbb{N}, \beta \in [0, 1).\) In this case, let \(\beta = 0\). So we get \(D_{CF}^{\alpha + 0}f(x) = D_{CF}^{\alpha}f(x)\) which is just a regular derivative of integer order.

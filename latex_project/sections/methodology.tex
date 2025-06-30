@@ -1,31 +1,44 @@
 \section{Methodology}\label{s:methodology}
 In this section we present the methodological framework for computing fractional moments using different approaches. We begin by reviewing existing methods before introducing an alternative approach based on fractional calculus. The comparative structure of the analysis, both theoretical and empirical, is also outlined. 
 
-\subsection{Overview of existing methods and introduction to a novel approach}
+\subsection{Overview of existing methods and introduction to a novel approach}\label{ss:methodology_overview}
 
-In this subsection we review the traditional method of computing fractional moments and a modern alternative based on the complex moment generating function (CMGF). What is more, we also introduce the motivation for using fractional derivatives applied to the moment generating function, which forms the foundation of this thesis’ novel approach.
+In this subsection we review the traditional method of computing fractional moments and a modern alternative by \citet{hansen2024} based on the complex moment generating function (CMGF). What is more, we also introduce the motivation for using fractional derivatives applied to the moment generating function, which forms the foundation of this thesis’ novel approach.
 
 \subsubsection{Existing methods of obtaining fractional moments}\label{ss:methodology_introduction}
-The formal definition of the statistical moments mentioned in the previous section is as follows: The \(n\)-th moment of a random variable \(X\), with probability density function (PDF) \(f_X(x)\) 
-\[
-\mathbb{E}[X^n] = 
-\begin{cases} 
-\int_{-\infty}^{\infty} (x - c)^n f_X(x) \, dx & \text{if } f_X(x) \text{ is continuous,} \\ 
-\sum_{i} (x_i - c_ i)^n f_X(x_i) & \text{if } f_X(x) \text{ is discrete.} 
-\end{cases}, n \in \mathbb{N}
-\] \cite{feller1957}
+The formal definition of the statistical moments mentioned in the previous section is as follows: Let \(X\) be a random variable.
 
-The traditional method of computing fractional moments is rather straightforward. Similar to integer moments, one simply computes the summation (in the discrete case) or integral (in the continuous case) of \(x^\alpha \cdot f_x(x)\), where \(f_x(x)\) denotes the probability density function of the random variable \(X\). In the context of fractional moments, \(\alpha \in \mathbb{R}\) instead of \(\mathbb{Z}\) (assuming that negative moments exist). \cite{hansen2024} introduce an alternative approach to computing fractional moments using the complex moment generating function (CMGF), which they apply in the context of the aforementioned GARCH models. One of their expressions of importance is given by:
+The \(\alpha\)-th moment of  \(X\) is defined as:
+\begin{equation}\label{eq:moments}
+\mathbb{E}[X^\alpha] =
+\begin{cases}
+\int_{-\infty}^{\infty} (x - c)^\alpha f_X(x) \, dx & \text{if } X \text{ is continuous,} \\
+\sum_{i} (x_i - c_i)^\alpha f_X(x_i) & \text{if } X \text{ is discrete.}
+\end{cases}
+\end{equation}
+In the context of this thesis \(\alpha \in \mathbb{R}\). Here \(f_X(x)\) is the probability density function if \(X\) is a continuous random variable, and the probability mass function if \(X\) is a discrete random variable \citep{feller1957}. 
 
-\[\mathbb{E}\left| X - \xi \right|^\alpha = \frac{\Gamma(\alpha+1)}{2\pi} \int_{-\infty}^{\infty} \frac{e^{-\xi z} M_X(z) + e^{\xi z} M_X(-z)}{z^{\alpha+1}} dt\] \(\text{ where } z = s + it, s \in \mathbb{N_+}, \xi \in \mathbb{R} \) and \(\alpha\) of course the order of the moment.
+The traditional method of computing fractional moments is rather straightforward. Similar to integer moments, one simply computes the summation (in the discrete case) or integral (in the continuous case) of \(x^\alpha \cdot f_X(x)\). In the context of fractional moments, \(\alpha \in \mathbb{R}\) instead of \(\mathbb{Z}\) (assuming that negative moments exist). A disadvantage of this method is that for distributions with negative support, moments of fractional order may not be defined. \citet{hansen2024} introduce an alternative approach to computing fractional moments using the complex moment generating function (CMGF), which they apply in the context of the aforementioned GARCH models. One of their expressions of importance is given by:
 
-This formulation extends upon the traditional moment generating function (MGF) but avoids the process of taking derivatives, making it computationally efficient. The inclusion of the Gamma function is logical, as it extends the factorial function to real values, aligning well with the computation of fractional moments. Since this method relies on integration, rather than differentiation, it avoids numerical issues that might arise when computing derivatives, such as obtaining rather great approximation errors.
+\begin{equation}\label{eq:hansen}
+    \mathbb{E}\left| X - \xi \right|^\alpha = \frac{\Gamma(\alpha+1)}{2\pi} \int_{-\infty}^{\infty} \frac{e^{-\xi z} M_X(z) + e^{\xi z} M_X(-z)}{z^{\alpha+1}} dt
+\end{equation}
+ \(\text{ where } z = s + it, s \in \mathbb{N_+}, \xi \in \mathbb{R} \) and \(\alpha\) of course the order of the moment.
+
+This formulation extends upon the traditional moment generating function (MGF) but avoids the process of taking derivatives, making it computationally efficient. The inclusion of the Gamma function is logical, as it extends the factorial function to real values, aligning well with the computation of fractional moments. Since this method relies on integration, rather than differentiation, it avoids numerical issues that might arise when computing derivatives, such as obtaining rather great approximation errors. As this method computes absolute moments of fractional order, there will be no problems regarding numerical issues for negative values. The integrand expression is more complicated compared to the integrand of the traditional approach, which may lead to longer run-times.
 
 \subsubsection{Obtaining fractional moments by using the moment generating function}
-While the CMGF method provides an efficient  and elegant alternative to the traditional method, this thesis explores a different approach: computing fractional moments directly by applying fractional derivatives to the MGF. The MGF is widely used for computing integer moments by differentiation around zero. Extending this approach to fractional orders requires us to take fractional derivatives. Thus, we need to define such fractional derivative operators. These fractional derivatives have a long history and often make use of the aforementioned Gamma function in combination with some integral. This means that, for continuous random variables, where we integrate the MGF, we will have to do double integration. A consequence might be that obtaining analytical expressions of these moments may not always be possible. A great number of alternative expressions of these fractional derivatives have been created, mostly based on different interpretations of the latter in the field of physics. In this thesis, we will focus on computing the MGF using the Riemann-Liouville derivative, the Caputo-Fabrizio derivative and the Grünwald-Letnikov fractional derivative. Each of these fractional derivatives in combination with the MGF might lead to different moments expressions for the same distribution and same fractional order of the moment. Thus, it is essential to compare each of these definitions with the traditional way of computing fractional moments, to derive their accuracy and conclude which approach is most suitable for fractional moment computation. Similar to the expression of the moments of a random variable, their errors may also be hard to derive analytically, depending on its distribution.
+While the CMGF method provides a numerically stable and elegant alternative to the traditional method, this thesis explores a different approach: computing fractional moments directly by applying fractional derivatives to the MGF. The MGF is widely used for computing integer moments by differentiation around zero. Extending this approach to fractional orders requires us to take fractional derivatives. Thus, we need to define such fractional derivative operators. These fractional derivatives have a long history and often make use of the aforementioned Gamma function in combination with some integral. This means that, for continuous random variables, where we integrate the MGF, we will have to perform double integration. A consequence might be that obtaining analytical expressions of these moments may not always be possible. A great number of alternative expressions of these fractional derivatives have been created, mostly based on different interpretations of the latter in the field of physics. In this thesis, we will focus on computing the MGF using the Riemann-Liouville derivative, the Caputo-Fabrizio derivative and the Grünwald-Letnikov fractional derivative. Each of these fractional derivatives in combination with the MGF may lead to different moments expressions for the same distribution and same fractional order of the moment. Thus, it is essential to compare each of these definitions with the traditional way of computing fractional moments, to derive their accuracy and conclude which approach is most suitable for fractional moment computation. Similar to the expression of the moments of a random variable, their errors may also be hard to derive analytically, depending on its distribution.
 
-\subsubsection{Order and methods of research}
-In order to compare the aforementioned fractional derivatives, the order of research will be as follows. First, a mathematical groundwork for the fractional derivatives will be laid, in which a number of their respective properties will be discussed. Next, we will revise some basic definitions of statistical moments and the moment generating function and see how some of these properties change when considering fractional moments in combination with the moment generating function. If possible, analytical expressions of the errors for each fractional derivative in combination with the MGF will be computed, which will conclude the theoretical research of this thesis. We will conduct a simulation using the programming language Julia, which is well-known for its focus on data science and fast computations, to now obtain numerical errors instead of analytical errors. The simulation will evaluate each MGF-based method using statistical measures, including minimum, maximum, and average errors. Finally, we will consider a practical case; analyzing volatility and risk of the S\&P 500 returns using fractional moments in which all three derivatives will once again be compared.
+\subsubsection{Research design and Methodological steps}
+To compare the aforementioned fractional derivatives, the research was carried out in several stages. First, a mathematical foundation for the fractional derivatives was established, including a discussion of their respective properties. A brief historical overview of the development of fractional calculus was also provided. 
+
+Consequently, basic definitions of statistical moments and the MGF were reviewed, and their properties were re-examined in the context of fractional derivatives. Whenever possible, analytical expressions for the errors associated with each fractional derivative in combination with the MGF were derived. This completed the theoretical part of the research.
+
+Subsequently, numerical values of fractional moments were computed using the different MGF-based methods. When applicable, the corresponding errors relative to theoretical values were analyzed, including summary statistics such as the minimum, maximum, and average error. 
+
+Finally, a practical case study was conducted, analyzing the volatility and risk of S\&P 500 returns using fractional moments. The new method was evaluated in this context, serving as an empirical benchmark for the proposed methodology.
+in real-world applications.
 
 \input{sections/Calculus}
 
