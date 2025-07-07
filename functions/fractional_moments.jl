@@ -17,26 +17,21 @@ Statistics.std(d::KDEDistribution) = begin
     sqrt(sum(((d.kde.x .- mu).^2) .* d.kde.density) / sum(d.kde.density))
 end
 
-# Helper function to get good integration limits based on KDE quantiles and density cutoff
 function integration_limits(dist::KDEDistribution, μ, σ; quantile_low=0.001, quantile_high=0.999, density_threshold=1e-5)
     xs = dist.kde.x
     densities = dist.kde.density
 
-    # Quantile-based limits (cuts extreme outliers)
-    lower_q = quantile(xs, 0.005)  # tighten to 0.005 from 0.001
+    lower_q = quantile(xs, 0.005)
     upper_q = quantile(xs, 0.995)
     density_threshold = 1e-4
 
-    # Density threshold limits (ignore near-zero density tails)
     valid_idx = findall(densities .> density_threshold)
     lower_dens = minimum(xs[valid_idx])
     upper_dens = maximum(xs[valid_idx])
 
-    # Combine limits with mean±std limits, picking the tighter bounds
     lower = maximum([lower_q, lower_dens, μ - 6σ, 0.0]) # also ensure ≥ 0 for fractional moments
     upper = minimum([upper_q, upper_dens, μ + 6σ])
 
-    # Fallback if any limit is not finite
     if !isfinite(lower)
         lower = max(0.0, μ - 6σ)
     end
@@ -61,7 +56,6 @@ function fractional_moment(dist::Distribution, α::Real; use_abs=false, complex=
         if dist isa KDEDistribution
             lower, upper = integration_limits(dist, μ, σ)
         else
-            # For other continuous distributions, keep previous heuristic
             lower = max(0.0, μ - 4σ)
             upper = μ + 6σ
             if !isfinite(lower) || lower < 0
